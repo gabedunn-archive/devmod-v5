@@ -1,0 +1,44 @@
+{
+  "name": "devmod",
+  "version": "5.0.0",
+  "description": "The latest in a series of rewrites for devmod, a bot meant for moderation of discord servers, specifically devcord.",
+  "main": "src/main.js",
+  "types": "module",
+  "license": "MIT",
+  "author": {
+    "name": "Gabe Dunn",
+    "email": "gabe@gabedunn.dev",
+    "url": "https://redxte.ch"
+  },
+  "scripts": {
+    "build": "parcel build src/main.js -d dist -o devmod -t node --no-source-maps",
+    "db:test": "babel-node src/utils/dbTest.js",
+    "dev": "nodemon --exec babel-node src/main.js",
+    "lint": "eslint --ext .js src",
+    "lint:fix": "eslint --ext .js src --fix",
+    "prep": "envup",
+    "roles": "babel-node src/main.js --roles",
+    "start": "babel-node src/main.js"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.4.4",
+    "chalk": "^2.4.2",
+    "discord.js": "^11.5.1",
+    "dotenv": "^8.0.0",
+    "eslint": "^5.16.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "nedb-async-await": "^0.1.2",
+    "nodemon": "^1.19.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/node": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "eslint-plugin-import": "^2.17.3",
+    "parcel-bundler": "^1.12.3"
+  }
+}
