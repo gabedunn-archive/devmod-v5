@@ -9,26 +9,26 @@ import { join } from 'path'
 // Run dotenv init function. Populates process.env with variables from .env files.
 config()
 
-export const botToken = process.env.BOT_TOKEN                      // Discord API token for the bot.
-export const ownerID = process.env.OWNER_ID                        // Full Discord ID of the bot owner.
-export const prefix = process.env.PREFIX || '.'                    // Prefix for bot commands.
-export const msgDeleteTime = process.env.MSG_DELETE_TIME || 10     // Amount of time in seconds to wait before deleting large help messages.
+export const botToken = process.env.BOT_TOKEN // Discord API token for the bot.
+export const ownerID = process.env.OWNER_ID // Full Discord ID of the bot owner.
+export const prefix = process.env.PREFIX || '.' // Prefix for bot commands.
+export const msgDeleteTime = process.env.MSG_DELETE_TIME || 10 // Amount of time in seconds to wait before deleting large help messages.
 export const dbFile = join(
   __dirname,
   '..',
   '..',
   process.env.DB_FILE || 'devmod.db'
-)                                                                  // Absolute path for the database file.
-export const autoBan = process.env.AUTOBAN || true                 // Whether or not to enforce auto-banning after a specified number of warnings.
-export const autoBanWarns = process.env.AUTOBAN_WARNS || 3         // Amount of warnings to warrant an auto-ban if enabled.
-export const banMsgDelete = process.env.BAN_MSG_DELETE || 0        // Default number of days to delete a banned user's messages from.
+) // Absolute path for the database file.
+export const autoBan = process.env.AUTOBAN || true // Whether or not to enforce auto-banning after a specified number of warnings.
+export const autoBanWarns = process.env.AUTOBAN_WARNS || 3 // Amount of warnings to warrant an auto-ban if enabled.
+export const banMsgDelete = process.env.BAN_MSG_DELETE || 0 // Default number of days to delete a banned user's messages from.
 export const channels = {
-  warn: process.env.CHANNEL_LOG_WARN || 'warnings',                // Channel to forward all warning confirmation messages.
-  ban: process.env.CHANNEL_LOG_BAN || 'bans',                      // Channel to forward all ban confirmation messages.
-  report: process.env.CHANNEL_REPORT || 'reports',                 // Channel to forward all user report messages.
-  roles: process.env.CHANNEL_ROLES || 'roles'                      // Channel to send and listen to reactions for roles.
+  warn: process.env.CHANNEL_LOG_WARN || 'warnings', // Channel to forward all warning confirmation messages.
+  ban: process.env.CHANNEL_LOG_BAN || 'bans', // Channel to forward all ban confirmation messages.
+  report: process.env.CHANNEL_REPORT || 'reports', // Channel to forward all user report messages.
+  roles: process.env.CHANNEL_ROLES || 'roles' // Channel to send and listen to reactions for roles.
 }
-export const mutedRole = process.env.MUTED_ROLE || 'muted'         // Name of the role to apply to muted users.
-export const pointEmoji = process.env.POINTS_EMOJI || 'boye'       // Name of emoji to use for GBP.
-export const statusInterval = process.env.STATUS_INTERVAL || 5     // Amount of time in minutes between status message changes.
-export const pointsTopCount = process.env.POINTS_TOP_COUNT || 10   // Number of users to show in GBP top and bottom counts.
+export const mutedRole = process.env.MUTED_ROLE || 'muted' // Name of the role to apply to muted users.
+export const pointEmoji = process.env.POINTS_EMOJI || 'boye' // Name of emoji to use for GBP.
+export const statusInterval = process.env.STATUS_INTERVAL || 5 // Amount of time in minutes between status message changes.
+export const pointsTopCount = process.env.POINTS_TOP_COUNT || 10 // Number of users to show in GBP top and bottom counts.

@@ -3,8 +3,7 @@
  * Contains all functions that interact with the database.
  */
 
-const { Datastore } = require('nedb-async-await')
-
+import { Datastore } from 'nedb-async-await'
 import { dbFile } from './utils/config'
 
 // Create and initialize the database using auto-loading and the configured filename.
