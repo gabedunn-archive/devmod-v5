@@ -1,3 +1,8 @@
+/*
+ * Gabe Dunn 2019
+ * Constants for colours used in discord embedded messages.
+ */
+
 export const red = 0xE74C3C
 export const orange = 0xF39C12
 export const yellow = 0xF1C40F

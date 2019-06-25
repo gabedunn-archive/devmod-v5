@@ -1,4 +1,12 @@
+/*
+ * Gabe Dunn 2019
+ * List and gather all roles approved for use with automatic role assignment.
+ */
+
+// For each category of roles, make an object with a unique ID and name, a message, and an object consisting of
+// {role: {name, emoji}} groups.
 const generalRoles = {
+  id: 'general',
   name: 'General Roles',
   message: 'These are some general roles that we have for you to add.',
   roles: {
@@ -8,6 +16,7 @@ const generalRoles = {
 }
 
 const helpRoles = {
+  id: 'help',
   name: 'Help Roles',
   message: 'These are roles that you can add to yourself to say that you\'re able and willing to help in the specified area.',
   roles: {
@@ -20,6 +29,7 @@ const helpRoles = {
   }
 }
 
+// Export a list of all available roles.
 export const allRoles = [
   generalRoles,
   helpRoles

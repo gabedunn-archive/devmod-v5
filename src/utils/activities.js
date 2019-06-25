@@ -1,3 +1,8 @@
+/*
+ * Gabe Dunn 2019
+ * List of statuses for the bot to use in the sidebar.
+ */
+
 export const activities = [
   'Counting your Good Boye Points.',
   'Trying to unban SWAT SEAL.',
