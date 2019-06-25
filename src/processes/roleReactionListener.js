@@ -44,7 +44,7 @@ const roleAction = async ({ client, guildId, messageId, userId, emojiName }, rem
 }
 
 // Given some information about a reaction addition, pass the info to roleAction to decide whether to add the role or not.
-export const roleAdd = async (client, guildId, messageId, userId, emojiName) => {
+const roleAdd = async (client, guildId, messageId, userId, emojiName) => {
   try {
     // Create a context object with all of the params to pass to roleAction.
     const context = {
@@ -62,7 +62,7 @@ export const roleAdd = async (client, guildId, messageId, userId, emojiName) => 
 }
 
 // Given some information about a reaction removal, pass the info to roleAction to decide whether to remove the role or not.
-export const roleRm = async (client, guildId, messageId, userId, emojiName) => {
+const roleRm = async (client, guildId, messageId, userId, emojiName) => {
   try {
     // Create a context object with all of the params to pass to roleAction.
     const context = {
@@ -77,4 +77,37 @@ export const roleRm = async (client, guildId, messageId, userId, emojiName) => {
   } catch (e) {
     console.log(`Failed to remove role: ${e}`)
   }
+}
+
+// Given a client, add a listener for message reactions that calls the proper functions for role listening.
+export const initReactionListener = async client => {
+  // Add a listener for all events ('raw' type).
+  client.on('raw', async event => {
+    try {
+      // Save event data.
+      const { d: data } = event
+      // If the event type is a reaction addition, run the roleAdd function.
+      if (event.t === 'MESSAGE_REACTION_ADD') {
+        await roleAdd(
+          client,
+          data.guild_id,
+          data.message_id,
+          data.user_id,
+          data.emoji.name
+        )
+        // Otherwise, if the type is a reaction removal, run the roleRm function.
+      } else if (event.t === 'MESSAGE_REACTION_REMOVE') {
+        await roleRm(
+          client,
+          data.guild_id,
+          data.message_id,
+          data.user_id,
+          data.emoji.name
+        )
+      }
+    } catch (e) {
+      console.log(`Error handling reaction: ${e}`)
+    }
+  })
+
 }
