@@ -4,7 +4,7 @@
  */
 
 import { activities } from './activities'
-import { statusInterval } from './config'
+import { prefix, statusInterval } from './config'
 
 // Changes the status of the bot to the specified activities on an interval based on the config value 'statusInterval'.
 export const initActivityChanger = client => {
@@ -13,13 +13,21 @@ export const initActivityChanger = client => {
     // Choose a random activity from the activities file.
     const activity = activities[Math.floor(Math.random() * activities.length)]
 
-    // Set wait for the activity to be set.
-    await client.user.setActivity(activity)
+    // Wait for the activity to be set.
+    try {
+      await client.user.setActivity(activity)
+    } catch (err) {
+      console.error('Failed to set activity:', err)
+    }
 
     // Set a timeout to switch the activity back to '.help' after 1 minute. (60 secs * 1000 ms).
     setTimeout(async () => {
       // Set the activity back to '.help'.
-      await client.user.setActivity('.help')
+      try {
+        await client.user.setActivity(`${prefix}help`)
+      } catch (err) {
+        console.error(`Failed to set activity back to ${prefix}help:`, err)
+      }
     }, 60 * 1000)
   }, statusInterval * 60 * 1000)
 }
