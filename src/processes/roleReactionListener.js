@@ -109,5 +109,4 @@ export const initReactionListener = async client => {
       console.log(`Error handling reaction: ${e}`)
     }
   })
-
 }
