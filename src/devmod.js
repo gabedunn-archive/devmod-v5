@@ -3,9 +3,9 @@
  * Main function for the bot's operation.
  */
 
-import { blue } from 'chalk'
+import chalk from 'chalk'
 
 // TODO: remove in favour of actual function.
 export const devmod = () => {
-  console.log(blue('Hey there!'))
+  console.log(chalk.blue('Hey there!'))
 }

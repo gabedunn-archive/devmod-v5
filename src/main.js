@@ -19,6 +19,7 @@ process.on('uncaughtException', (err, p) => {
 
 // If '--roles' is provided as an argument from the command line, send the roles message(s). Otherwise run the bot.
 if (process.argv.indexOf('--roles') !== -1) {
+  // noinspection JSIgnoredPromiseFromCall
   sendRolesMessage()
 } else {
   devmod()

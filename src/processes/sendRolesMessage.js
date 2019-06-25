@@ -3,10 +3,10 @@
  * Functionality relating to sending the roles message.
  */
 
-import { blue, green } from 'chalk'
+import chalk from 'chalk'
 import discord from 'discord.js'
 
-import { blue as blu } from '../utils/colours'
+import { blue } from '../utils/colours'
 import { allRoles } from '../utils/approvedRoles'
 import { botToken, channels } from '../utils/config'
 import { setSetting } from '../db'
@@ -17,7 +17,7 @@ export const sendRolesMessage = async () => {
 
   // Handler for client being 'ready'.
   client.on('ready', async () => {
-    console.log(blue(`Logged in as ${client.user.tag}.`))
+    console.log(chalk.blue(`Logged in as ${client.user.tag}.`))
 
     // Save the array of guilds.
     const guildArray = client.guilds.array()
@@ -48,7 +48,7 @@ export const sendRolesMessage = async () => {
           // Create the discord embed to send to the channel.
           embed: {
             title: roleGroup.name,
-            color: blu,
+            color: blue,
             description: `${roleGroup.message}\n\n${roleArray.join('\n')}`
           }
         })
@@ -92,12 +92,12 @@ const finish = async (client, messageIDs) => {
     console.error('Failed to destroy the client:', err)
   }
   // Log the IDs to the console joined by ', '
-  console.log(blue(`Role Message IDs: ${messageIDs.join(', ')}.`))
+  console.log(chalk.blue(`Role Message IDs: ${messageIDs.join(', ')}.`))
 
   try {
     // Save the messageIDs to the database.
     await setSetting('reactions_message_ids', messageIDs)
-    console.log(green('Successfully sent roles message!'))
+    console.log(chalk.greenBright('Successfully sent roles message!'))
   } catch (err) {
     console.error('Error pushing messageIDs to database:', err)
   }
