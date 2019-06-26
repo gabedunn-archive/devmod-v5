@@ -4,7 +4,7 @@
  */
 
 import { commands } from '../commands'
-import { prefix } from './config'
+import { prefix } from '../utils/config'
 
 export const commandListenerInit = client => {
   try {
@@ -21,7 +21,7 @@ export const commandListenerInit = client => {
         // If the command exists, run the command function.
         if (commands.hasOwnProperty(command)) {
           // Run the command.
-          commands[command].exec(msg)
+          commands[command].exec(args, msg)
         }
       }
     })

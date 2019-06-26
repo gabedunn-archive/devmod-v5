@@ -7,7 +7,7 @@ import chalk from 'chalk'
 
 import { botToken } from './utils/config'
 import discord from "discord.js"
-import { commandListenerInit } from './utils/commandListener'
+import { commandListenerInit } from './processes/commandListener'
 
 export const devmod = async () => {
   try {

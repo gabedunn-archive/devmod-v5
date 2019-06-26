@@ -11,7 +11,7 @@ export const aboutCommand = {
   aliases: ['about', 'info'],
   category: 'utils',
   description: 'Tells a little bit about the bot.',
-  exec: async message => {
+  exec: async (args, message) => {
     try {
       // Remove the user's message.
       await message.delete()
