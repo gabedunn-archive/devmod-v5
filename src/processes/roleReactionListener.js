@@ -88,6 +88,7 @@ export const initReactionListener = async client => {
       const { d: data } = event
       // If the event type is a reaction addition, run the roleAdd function.
       if (event.t === 'MESSAGE_REACTION_ADD') {
+        // noinspection JSUnresolvedVariable
         await roleAdd(
           client,
           data.guild_id,
@@ -97,6 +98,7 @@ export const initReactionListener = async client => {
         )
         // Otherwise, if the type is a reaction removal, run the roleRm function.
       } else if (event.t === 'MESSAGE_REACTION_REMOVE') {
+        // noinspection JSUnresolvedVariable
         await roleRm(
           client,
           data.guild_id,

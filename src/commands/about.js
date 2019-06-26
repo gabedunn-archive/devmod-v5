@@ -25,6 +25,7 @@ export const aboutCommand = {
 
     try {
       // Send the about message embed.
+      // noinspection JSUnresolvedFunction
       return message.channel.send({
         embed: {
           title: 'DevMod - About the Bot',

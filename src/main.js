@@ -22,5 +22,6 @@ if (process.argv.indexOf('--roles') !== -1) {
   // noinspection JSIgnoredPromiseFromCall
   sendRolesMessage()
 } else {
+  // noinspection JSIgnoredPromiseFromCall
   devmod()
 }

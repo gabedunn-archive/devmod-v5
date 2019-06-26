@@ -16,6 +16,7 @@ export const sendErrorMessage = (title, description, message) => {
 
   // Send the error message.
   try {
+    // noinspection JSUnresolvedFunction
     return message.channel.send({
       embed: {
         title,
