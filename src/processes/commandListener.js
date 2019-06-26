@@ -7,7 +7,7 @@ import { commands } from '../commands'
 import { prefix } from '../utils/config'
 import { createErrorMessage } from '../utils/createErrorMessage'
 
-export const commandListenerInit = client => {
+export const initCommandListener = client => {
   try {
     // For each message run a function.
     client.on('message', msg => {

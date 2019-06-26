@@ -7,7 +7,9 @@ import chalk from 'chalk'
 
 import { botToken } from './utils/config'
 import discord from "discord.js"
-import { commandListenerInit } from './processes/commandListener'
+import { initCommandListener } from './processes/commandListener'
+import { initActivityChanger } from './processes/activityChanger'
+import { initReactionListener } from './processes/roleReactionListener'
 
 export const devmod = async () => {
   try {
@@ -19,13 +21,20 @@ export const devmod = async () => {
       console.log(chalk.blue(`Logged in as ${client.user.tag}.`))
     })
 
-    commandListenerInit(client)
-
+    // Log the bot in.
     try {
       await client.login(botToken)
     } catch (err) {
       console.error('Bot failed to log in:', err)
     }
+
+    // Initialize the command listener.
+    initCommandListener(client)
+    // Initialize the role reaction listener.
+    // await initReactionListener(client)
+    // Initialize the activity changer.
+    await initActivityChanger(client)
+
   } catch (err) {
     console.error('Error running bot:', err)
   }
