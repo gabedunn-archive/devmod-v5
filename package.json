@@ -12,13 +12,14 @@
   },
   "scripts": {
     "build": "parcel build src/main.js -d dist -o devmod -t node --no-source-maps",
-    "db:test": "babel-node src/utils/dbTest.js",
     "dev": "nodemon --exec babel-node src/main.js",
     "lint": "eslint --ext .js src",
     "lint:fix": "eslint --ext .js src --fix",
     "prep": "envup",
     "roles": "babel-node src/main.js --roles",
-    "start": "babel-node src/main.js"
+    "start": "babel-node src/main.js",
+    "test": "babel-node src/utils/test.js",
+    "test:db": "babel-node src/utils/dbTest.js"
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
