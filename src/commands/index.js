@@ -4,10 +4,13 @@
  */
 
 import { expandCommands } from '../utils/expandCommands'
+
 import { aboutCommand } from './about'
+import { pruneCommand} from './prune'
 
 export const commandsArray = [
-  aboutCommand
+  aboutCommand,
+  pruneCommand
 ]
 
 export const commands = expandCommands(commandsArray)
