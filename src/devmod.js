@@ -6,7 +6,7 @@
 import chalk from 'chalk'
 
 import { botToken } from './utils/config'
-import discord from "discord.js"
+import discord from 'discord.js'
 import { initCommandListener } from './processes/commandListener'
 import { initActivityChanger } from './processes/activityChanger'
 import { initReactionListener } from './processes/roleReactionListener'
@@ -28,12 +28,17 @@ export const devmod = async () => {
       console.error('Bot failed to log in:', err)
     }
 
-    // Initialize the command listener.
-    initCommandListener(client)
-    // Initialize the role reaction listener.
-    await initReactionListener(client)
-    // Initialize the activity changer.
-    await initActivityChanger(client)
+    // Save all the processes to an array.
+    const processes = [
+      initCommandListener,
+      initReactionListener,
+      initActivityChanger
+    ]
+
+    // For each process, run it asynchronously.
+    for (const process of processes) {
+      process(client)
+    }
 
   } catch (err) {
     console.error('Error running bot:', err)
