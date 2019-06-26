@@ -31,7 +31,7 @@ export const sendRolesMessage = async () => {
     const guild = guildArray[0]
 
     // Initialize empty variables.
-    const messageIDs = []
+    const messageIDs = {}
     let count = 0
 
     // For each group of roles in allRoles, send a message.
@@ -54,7 +54,7 @@ export const sendRolesMessage = async () => {
         })
 
         // Save the message ID.
-        messageIDs.push(message.id)
+        messageIDs[roleGroup.id] = message.id
 
         // Add each reaction to the roles message.
         for (const reaction of Object.values(roleGroup.roles)) {
@@ -92,7 +92,7 @@ const finish = async (client, messageIDs) => {
     console.error('Failed to destroy the client:', err)
   }
   // Log the IDs to the console joined by ', '
-  console.log(chalk.blue(`Role Message IDs: ${messageIDs.join(', ')}.`))
+  console.log(chalk.blue(`Role Message IDs: ${Object.values(messageIDs).join(', ')}.`))
 
   try {
     // Save the messageIDs to the database.

@@ -19,7 +19,7 @@ const roleAction = async ({ client, guildId, messageId, userId, emojiName }, rem
   // Run a function for each message ID in the list of reaction role messages.
   for (const key of Object.keys(reactionMessageIDs)) {
     // If the message ID is equal the ID from the loop, continue.
-    if (reactionMessageIDs[key].id === messageId) {
+    if (reactionMessageIDs[key] === messageId) {
       // For each group of roles in the approved roles list, run a function.
       for (const roleGroup of allRoles) {
         // If the current key (from the message) is equal to a role group ID, continue.
@@ -27,11 +27,11 @@ const roleAction = async ({ client, guildId, messageId, userId, emojiName }, rem
           // For each role in the current role group, run a function.
           for (const roleEntry of Object.keys(roleGroup.roles)) {
             // If the reaction emoji is equal to the emoji of the current role, continue.
-            if (roleGroup[roleEntry].emoji === emojiName) {
+            if (roleGroup.roles[roleEntry].emoji === emojiName) {
               // If the role exists, find the role and either add or remove the role from the user based on the params.
-              if (roleGroup[roleEntry] !== null) {
+              if (roleGroup.roles[roleEntry] !== null && roleGroup.roles[roleEntry] !== undefined) {
                 // Find the role from the guild's list of roles.
-                const role = roles.find(r => r.name === roleGroup[roleEntry])
+                const role = roles.find(r => r.name === roleEntry)
                 // If remove is true, remove the role from the user. Otherwise, add the role to the user.
                 remove ? await member.removeRole(role) : await member.addRole(role)
               }

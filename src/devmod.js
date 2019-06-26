@@ -9,7 +9,7 @@ import { botToken } from './utils/config'
 import discord from "discord.js"
 import { initCommandListener } from './processes/commandListener'
 import { initActivityChanger } from './processes/activityChanger'
-// import { initReactionListener } from './processes/roleReactionListener'
+import { initReactionListener } from './processes/roleReactionListener'
 
 export const devmod = async () => {
   try {
@@ -31,7 +31,7 @@ export const devmod = async () => {
     // Initialize the command listener.
     initCommandListener(client)
     // Initialize the role reaction listener.
-    // await initReactionListener(client)
+    await initReactionListener(client)
     // Initialize the activity changer.
     await initActivityChanger(client)
 
