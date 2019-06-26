@@ -5,6 +5,7 @@
 
 import { commands } from '../commands'
 import { prefix } from '../utils/config'
+import { createErrorMessage } from '../utils/createErrorMessage'
 
 export const commandListenerInit = client => {
   try {
@@ -18,10 +19,22 @@ export const commandListenerInit = client => {
         // Set the command to the first argument and remove it from the args array.
         const command = args.shift()
 
-        // If the command exists, run the command function.
+        // If the command exists, test for permissions and run the command function.
         if (commands.hasOwnProperty(command)) {
-          // Run the command.
-          commands[command].exec(args, msg)
+          // Save the command to a variable.
+          const cmd = commands[command]
+          // Test that the users has the proper permissions to run the command.
+          if (msg.member.permissions.has(cmd.permissions)) {
+            // Run the command.
+            cmd.exec(args, msg)
+          } else {
+            // Send error message.
+            createErrorMessage(
+              'Insufficient Permissions',
+              'You do not have permission to use that command.',
+              msg
+            )
+          }
         }
       }
     })
