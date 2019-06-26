@@ -3,8 +3,8 @@
  * Functionality relating to changing the bot's activity in the sidebar.
  */
 
-import { activities } from './activities'
-import { prefix, statusInterval } from './config'
+import { activities } from '../utils/activities'
+import { prefix, statusInterval } from '../utils/config'
 
 // Changes the status of the bot to the specified activities on an interval based on the config value 'statusInterval'.
 export const initActivityChanger = client => {

@@ -6,9 +6,9 @@
 import chalk from 'chalk'
 import discord from 'discord.js'
 
-import { blue } from '../utils/colours'
-import { allRoles } from '../utils/approvedRoles'
-import { botToken, channels } from '../utils/config'
+import { blue } from './colours'
+import { allRoles } from './approvedRoles'
+import { botToken, channels } from './config'
 import { setSetting } from '../db'
 
 export const sendRolesMessage = async () => {

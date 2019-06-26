@@ -3,7 +3,7 @@
  * File to run to confirm database is working fine.
  */
 
-import { setSetting, getSetting } from '../db'
+import { setSetting, getSetting } from '../../db'
 
 // Main function to utilize await for db functions.
 const test = async () => {

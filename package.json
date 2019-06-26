@@ -18,8 +18,8 @@
     "prep": "envup",
     "roles": "babel-node src/main.js --roles",
     "start": "babel-node src/main.js",
-    "test": "babel-node src/utils/test.js",
-    "test:db": "babel-node src/utils/dbTest.js"
+    "test": "babel-node src/utils/tests/test.js",
+    "test:db": "babel-node src/utils/tests/dbTest.js"
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",

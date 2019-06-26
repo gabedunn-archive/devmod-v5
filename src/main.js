@@ -4,7 +4,7 @@
  */
 
 import { devmod } from './devmod'
-import { sendRolesMessage } from './processes/sendRolesMessage'
+import { sendRolesMessage } from './utils/sendRolesMessage'
 
 // If an unhandled rejection occurs, log it and exit the program.
 process.on('unhandledRejection', (err, p) => {
