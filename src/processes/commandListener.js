@@ -5,7 +5,7 @@
 
 import { commands } from '../commands'
 import { prefix } from '../utils/config'
-import { createErrorMessage } from '../utils/createErrorMessage'
+import { sendErrorMessage } from '../utils/sendErrorMessage'
 
 export const initCommandListener = client => {
   try {
@@ -29,7 +29,7 @@ export const initCommandListener = client => {
             cmd.exec(args, msg)
           } else {
             // Send error message.
-            createErrorMessage(
+            sendErrorMessage(
               'Insufficient Permissions',
               'You do not have permission to use that command.',
               msg

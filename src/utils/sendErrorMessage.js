@@ -6,7 +6,7 @@
 import { red } from './colours'
 
 // Given a title and a description, return the object for a Discord embedded error message.
-export const createErrorMessage = (title, description, message) => {
+export const sendErrorMessage = (title, description, message) => {
   // React to the message with an X emoji.
   try {
     message.react('❌')
