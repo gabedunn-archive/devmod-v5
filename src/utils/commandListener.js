@@ -19,10 +19,9 @@ export const commandListenerInit = client => {
         const command = args.shift()
 
         // If the command exists, run the command function.
-        // TODO: user a loop and .some?
         if (commands.hasOwnProperty(command)) {
-          // TODO: run the command function.
-          console.log(commands[command])
+          // Run the command.
+          commands[command].exec(msg)
         }
       }
     })

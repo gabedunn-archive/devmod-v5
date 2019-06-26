@@ -3,6 +3,11 @@
  * Object containing all commands and their functions.
  */
 
-export const commands = {
-  test: 'hey'
-}
+import { expandCommands } from '../utils/expandCommands'
+import { aboutCommand } from './about'
+
+export const commandsArray = [
+  aboutCommand
+]
+
+export const commands = expandCommands(commandsArray)
