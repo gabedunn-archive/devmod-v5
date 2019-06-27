@@ -12,6 +12,7 @@ export const aboutCommand = {
   category: 'utils',
   description: 'Tells a little bit about the bot.',
   permissions: ['SEND_MESSAGES'],
+  usage: 'about',
   exec: async (args, message) => {
     try {
       // Remove the user's message.

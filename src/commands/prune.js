@@ -10,6 +10,7 @@ export const pruneCommand = {
   category: 'utils',
   description: 'Removes specified number of messages from the channel.',
   permissions: ['MANAGE_MESSAGES'],
+  usage: 'prune [<messages>]',
   exec: async (args, message) => {
     try {
       // Remove the user's message.
