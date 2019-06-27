@@ -18,6 +18,7 @@ export const pruneCommand = {
       console.error('Failed to delete message:', err)
     }
 
+    // Save the amount arg. If it doesn't exist, default to 5.
     const amount = args.length > 0 ? parseInt(args[0]) : 5
 
     try {
