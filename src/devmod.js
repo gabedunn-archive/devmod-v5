@@ -10,6 +10,7 @@ import discord from 'discord.js'
 import { initCommandListener } from './processes/commandListener'
 import { initActivityChanger } from './processes/activityChanger'
 import { initReactionListener } from './processes/roleReactionListener'
+import { initTorielsAntiBotCrusade } from './processes/torielsAntiBotCrusade'
 
 export const devmod = async () => {
   try {
@@ -32,7 +33,8 @@ export const devmod = async () => {
     const processes = [
       initCommandListener,
       initReactionListener,
-      initActivityChanger
+      initActivityChanger,
+      initTorielsAntiBotCrusade
     ]
 
     // For each process, run it asynchronously.

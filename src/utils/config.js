@@ -26,7 +26,8 @@ export const channels = {
   warn: process.env.CHANNEL_LOG_WARN || 'warnings', // Channel to forward all warning confirmation messages.
   ban: process.env.CHANNEL_LOG_BAN || 'bans', // Channel to forward all ban confirmation messages.
   report: process.env.CHANNEL_REPORT || 'reports', // Channel to forward all user report messages.
-  roles: process.env.CHANNEL_ROLES || 'roles' // Channel to send and listen to reactions for roles.
+  roles: process.env.CHANNEL_ROLES || 'roles', // Channel to send and listen to reactions for roles.
+  crusade: process.env.CHANNEL_CRUSADE || 'reports' // Channel to send notifications that the anti bot crusade has deleted a message.
 }
 export const mutedRole = process.env.MUTED_ROLE || 'muted' // Name of the role to apply to muted users.
 export const pointEmoji = process.env.POINTS_EMOJI || 'boye' // Name of emoji to use for GBP.
