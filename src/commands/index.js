@@ -3,7 +3,7 @@
  * Object containing all commands and their functions.
  */
 
-// TODO: clearWarns, gbp, prune, report, role, roles, stats, tag, unban, unmute, users, warn, warnList
+// TODO: clearWarns, gbp, report, role, roles, tag, unban, unmute, users, warn, warnList
 
 import { expandCommands } from '../utils/expandCommands'
 
@@ -14,6 +14,7 @@ import { lmgtfyCommand } from './lmgtfy'
 import { muteCommand } from './mute'
 import { pingCommand } from './ping'
 import { pruneCommand } from './prune'
+import { statsCommand } from './stats'
 
 // Export an array with all of the commands.
 export const commandsArray = [
@@ -23,7 +24,8 @@ export const commandsArray = [
   lmgtfyCommand,
   muteCommand,
   pingCommand,
-  pruneCommand
+  pruneCommand,
+  statsCommand
 ]
 
 // Export an array with all of the commands' aliases as keys.
