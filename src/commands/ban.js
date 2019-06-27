@@ -5,7 +5,7 @@
 
 import { sendErrorMessage } from '../utils/sendErrorMessage'
 import { red } from '../utils/colours'
-import { channels } from '../utils/config'
+import { banMsgDelete, channels } from '../utils/config'
 
 // Export an object with command info and the function to execute.
 export const banCommand = {
@@ -35,12 +35,12 @@ export const banCommand = {
       )
     }
 
-    // Save the days arg. If it doesn't exist, default to 0. If it isn't an int, default to 0.
+    // Save the days arg. If it doesn't exist, default to 0. If it isn't an int, default to the amount specified in the config.
     const days = args.length > 1
       ? isNaN(parseInt(args[1]))
         ? 0
         : parseInt(args[1])
-      : 0
+      : banMsgDelete
 
     // Save the args remaining after the first two. If there aren't more than two args, default to 'Banned by devmod.'.
     const reason = args.length > 2 ? args.slice(2).join(' ') : 'Banned by devmod.'

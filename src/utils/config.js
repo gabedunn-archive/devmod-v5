@@ -10,7 +10,6 @@ import { join } from 'path'
 config()
 
 export const botToken = process.env.BOT_TOKEN // Discord API token for the bot.
-export const ownerID = process.env.OWNER_ID // Full Discord ID of the bot owner.
 export const prefix = process.env.PREFIX || '.' // Prefix for bot commands.
 export const msgDeleteTime = process.env.MSG_DELETE_TIME || 10 // Amount of time in seconds to wait before deleting large help messages.
 export const dbFile = join(
