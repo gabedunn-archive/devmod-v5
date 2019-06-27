@@ -1,6 +1,6 @@
 /*
 * Gabe Dunn 2018
-* Command that mutes a user.
+* Command that unmutes a user.
 */
 
 import { orange } from '../utils/colours'
@@ -8,21 +8,21 @@ import { sendErrorMessage } from '../utils/sendErrorMessage'
 import { mutedRole } from '../utils/config'
 
 // Export an object with command info and the function to execute.
-export const muteCommand = {
-  name: 'Mute',
-  aliases: ['mute', 'silence'],
+export const unmuteCommand = {
+  name: 'Unmute',
+  aliases: ['unmute'],
   category: 'moderation',
-  description: 'Applied a muted role to a user.',
+  description: 'Remove a muted role from a user.',
   permissions: ['KICK_MEMBERS'],
-  usage: 'mute <user>',
+  usage: 'unmute <user>',
   exec: async (args, message) => {
     // If a user isn't specified send an error message and terminate the command.
     if (args.length < 1) {
       await message.react('❌')
-      return sendErrorMessage('User Not Specified', 'You didn\'t specify a user to mute.', message)
+      return sendErrorMessage('User Not Specified', 'You didn\'t specify a user to unmute.', message)
     }
 
-    // Save the user object of the member to be muted.
+    // Save the user object of the member to be unmuted.
     const member = message.mentions.members.first()
 
     // If the user doesn't exist send an error message and terminate the command.
@@ -50,8 +50,8 @@ export const muteCommand = {
       console.error('Failed to delete message:', err)
     }
 
-    // Add the muted role to the member.
-    await member.addRole(muted)
+    // Remove the muted role from the member.
+    await member.removeRole(muted)
 
     // Save the user to a variable.
     const user = member.user
@@ -64,13 +64,13 @@ export const muteCommand = {
     const staffUser = staffMember.user
     const staffName = staffMember.nickname ? staffMember.nickname : staffUser.username
 
-    // Log the mute to the current channel.
+    // Log the unmute to the current channel.
     // noinspection JSUnresolvedFunction
     await message.channel.send({
       embed: {
         color: orange,
-        title: 'Mute',
-        description: `${name} (${user.tag}) has been muted.`,
+        title: 'Unmute',
+        description: `${name} (${user.tag}) has been unmuted.`,
         author: {
           name: `${staffName} (${staffUser.tag})`,
           icon_url: staffUser.avatarURL
