@@ -43,7 +43,7 @@ export const helpCommand = {
       }
     }
 
-    // Get the member tagged in the args.
+    // Get the member who sent the message.
     const member = message.member
 
     // Save the user object of the member
@@ -69,7 +69,6 @@ export const helpCommand = {
             sent.delete(1)
           }, msgDeleteTime * 1000)
         }
-
       }
     }
 
