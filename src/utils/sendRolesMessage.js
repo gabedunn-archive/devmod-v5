@@ -9,7 +9,7 @@ import discord from 'discord.js'
 import { blue } from './colours'
 import { allRoles } from './approvedRoles'
 import { botToken, channels } from './config'
-import { setSetting } from '../db'
+import { getSetting, setSetting } from '../db'
 
 export const sendRolesMessage = async () => {
   // Initiate the discord.js client.
@@ -30,6 +30,21 @@ export const sendRolesMessage = async () => {
     // Save the current guild.
     const guild = guildArray[0]
 
+    // Save the previous roles messages.
+    const previousRolesMessages = await getSetting('reactions_message_ids')
+
+    // Save the roles channel.
+    const rolesChannel = guild.channels.find(c => c.name === channels.roles)
+
+    // If the roles channel exists, find and delete the previous messages.
+    if (rolesChannel !== null) {
+      // Delete the previous roles messages if they exist.
+      for (const messageID of Object.values(previousRolesMessages)) {
+        const message = await rolesChannel.fetchMessage(messageID)
+        await message.delete()
+      }
+    }
+
     // Initialize empty variables.
     const messageIDs = {}
     let count = 0
@@ -44,7 +59,8 @@ export const sendRolesMessage = async () => {
 
       try {
         // Find the roles channel, send the roles message, and save the ID.
-        const message = await guild.channels.find(c => c.name === channels.roles).send({
+        // noinspection JSObjectNullOrUndefined
+        const message = await rolesChannel.send({
           // Create the discord embed to send to the channel.
           embed: {
             title: roleGroup.name,

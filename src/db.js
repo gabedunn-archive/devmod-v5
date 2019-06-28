@@ -15,7 +15,8 @@ const db = new Datastore({
 // Object containing default values to return if there isn't an entry in the database.
 const defaultDBValues = {
   owner: 'RedXTech#3076',
-  test: 'default value'
+  test: 'default value',
+  reactions_message_ids: {}
 }
 
 // Given a key and a value, sets the 'key' document in the database to have a value of 'value'.
