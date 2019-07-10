@@ -42,7 +42,7 @@ export const rebuildRolesCommand = {
         embed: {
           title: 'Rebuilt Roles Message',
           color: blue,
-          description: `The roles message has been rebuilt and is live in the <#${rolesChannel}>.`,
+          description: `The roles message has been rebuilt and is live in <#${rolesChannel}>.`,
           author: {
             name: user.username,
             icon_url: user.avatarURL
