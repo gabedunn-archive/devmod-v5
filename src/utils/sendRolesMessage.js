@@ -17,7 +17,7 @@ export const sendRolesMessage = async () => {
 
   // Handler for client being 'ready'.
   client.on('ready', async () => {
-    console.log(chalk.blue(`Logged in as ${client.user.tag}.`))
+    console.log(`${chalk.greenBright('[Roles]')} ${chalk.blue(`Logged in as ${client.user.tag}.`)}`)
 
     // Save the array of guilds.
     const guildArray = client.guilds.array()

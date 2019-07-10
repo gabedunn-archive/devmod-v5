@@ -14,6 +14,7 @@ import { lmgtfyCommand } from './lmgtfy'
 import { muteCommand } from './mute'
 import { pingCommand } from './ping'
 import { pruneCommand } from './prune'
+import { rebuildRolesCommand } from './rebuildRoles'
 import { statsCommand } from './stats'
 import { unmuteCommand } from './unmute'
 import { usersCommand } from './users'
@@ -27,6 +28,7 @@ export const commandsArray = [
   muteCommand,
   pingCommand,
   pruneCommand,
+  rebuildRolesCommand,
   statsCommand,
   unmuteCommand,
   usersCommand

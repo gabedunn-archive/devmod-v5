@@ -19,7 +19,7 @@ export const devmod = async () => {
 
     // Set a listener for the ready event to log that the bot is ready.
     client.on('ready', () => {
-      console.log(chalk.blue(`Logged in as ${client.user.tag}.`))
+      console.log(`${chalk.greenBright('[Main]')} ${chalk.blue(`Logged in as ${client.user.tag}.`)}`)
     })
 
     // Log the bot in.
