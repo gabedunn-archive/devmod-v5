@@ -3,7 +3,7 @@
  * Object containing all commands and their functions.
  */
 
-// TODO: clearWarns, gbp, role, tag, unban, warn, warnList
+// TODO: clearWarns, gbp, tag, unban, warn, warnList
 
 import { expandCommands } from '../utils/expandCommands'
 
@@ -16,6 +16,7 @@ import { pingCommand } from './ping'
 import { pruneCommand } from './prune'
 import { rebuildRolesCommand } from './rebuildRoles'
 import { reportCommand } from './report'
+import { roleCommand } from './role'
 import { rolesCommand } from './roles'
 import { statsCommand } from './stats'
 import { unmuteCommand } from './unmute'
@@ -32,6 +33,7 @@ export const commandsArray = [
   pruneCommand,
   rebuildRolesCommand,
   reportCommand,
+  roleCommand,
   rolesCommand,
   statsCommand,
   unmuteCommand,
