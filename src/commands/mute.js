@@ -23,6 +23,7 @@ export const muteCommand = {
     }
 
     // Save the user object of the member to be muted.
+    // noinspection DuplicatedCode
     const member = message.mentions.members.first()
 
     // If the user doesn't exist send an error message and terminate the command.

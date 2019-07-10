@@ -32,7 +32,7 @@ export const helpCommand = {
       // Save the embed field.
       const field = {
         name: command.name,
-        value: `Usage: ${prefix}${command.usage || command.aliases[0]}\n${command.description}`
+        value: `Usage: \`${prefix}${command.usage || command.aliases[0]}\`\n${command.description}`
       }
 
       // If the category exists, push the field. Otherwise, initialize the category with the field as it's first element.
