@@ -49,7 +49,9 @@ export const banCommand = {
       // Remove the user's message.
       await message.delete()
     } catch (err) {
-      console.error('Failed to delete message:', err)
+      if (err.message !== 'Unknown Message') {
+        console.error('Failed to delete message:', err)
+      }
     }
 
     // Save the user object of the member
@@ -74,7 +76,7 @@ export const banCommand = {
           }
         ],
         footer: {
-          text: `Your messages from the past ${days === 1 ? 'day' : `${days}s`} have been deleted.`
+          text: `Your messages from the past ${days === 1 ? ' day' : `${days} days`} have been deleted.`
         }
       }
     })
@@ -99,7 +101,7 @@ export const banCommand = {
           ],
           footer: {
             icon_url: user.avatarURL,
-            text: `${name}'s (${user.tag}'s) messages from the past ${days === 1 ? 'day' : `${days}s`} have been deleted.`
+            text: `${name}'s (${user.tag}'s) messages from the past ${days === 1 ? ' day' : `${days} days`} have been deleted.`
           },
           timestamp: new Date()
         }

@@ -16,7 +16,8 @@ const db = new Datastore({
 const defaultDBValues = {
   owner: 'RedXTech#3076',
   test: 'default value',
-  reactions_message_ids: {}
+  reactions_message_ids: {},
+  warnings: {}
 }
 
 // Given a key and a value, sets the 'key' document in the database to have a value of 'value'.
@@ -42,5 +43,43 @@ export const getSetting = async key => {
     }
   } catch (err) {
     console.error(`getSetting: ${key} Failed:`, err)
+  }
+}
+
+// Given a user, reason, and staff member, pushes a warning into the database.
+export const addWarning = async (user, reason, staff) => {
+  // Create the warning object.
+  const warning = { reason, staff, timestamp: new Date() }
+
+  // Create the push object and add the warning to it.
+  const $push = {}
+  $push[user] = warning
+
+  try {
+    // Update the database by pushing the warning to the user.
+    await db.update({ key: 'warnings' }, { $push }, { upsert: true })
+  } catch (err) {
+    console.error('addWarning Failed:', err)
+  }
+}
+
+// Given a user, returns a list of warnings from the database.
+export const getWarnings = async user => {
+  try {
+    // Pull the warnings from the database.
+    const warnings = await db.findOne({ key: 'warnings' })
+    // If warnings isn't null, continue.
+    if (warnings !== null) {
+      // If warnings has the property 'user', return the property.
+      if (warnings.hasOwnProperty(user)) {
+        return warnings[user]
+      } else {
+        return []
+      }
+    } else {
+      return []
+    }
+  } catch (err) {
+    console.error('getWarning Failed:', err)
   }
 }
