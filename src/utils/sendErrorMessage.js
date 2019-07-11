@@ -4,19 +4,20 @@
  */
 
 import { red } from './colours'
+import { logError } from './log'
 
 // Given a title and a description, return the object for a Discord embedded error message.
 export const sendErrorMessage = (title, description, message) => {
-  // React to the message with an X emoji.
   try {
+    // React to the message with an X emoji.
     message.react('❌')
   } catch (err) {
-    console.error('Failed to react to message:', err)
+    logError('Function', 'Failed to react to message', err)
   }
 
-  // Send the error message.
   try {
-    // noinspection JSUnresolvedFunction
+    // Send the error message.
+    // noinspection JSUnresolvedFunction,JSCheckFunctionSignatures
     return message.channel.send({
       embed: {
         title,
@@ -25,6 +26,6 @@ export const sendErrorMessage = (title, description, message) => {
       }
     })
   } catch (err) {
-    console.error('Failed to send error message:', err)
+    logError('Function', 'Failed to send error message', err)
   }
 }

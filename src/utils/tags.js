@@ -2,7 +2,7 @@
  * Gabe Dunn 2018
  * List of available tags.
  */
-import { blue, green, red, orange, purple, yellow }  from './colours'
+import { blue, green, orange, purple, red, yellow } from './colours'
 
 export default {
   bot: {
@@ -325,7 +325,7 @@ export default {
       },
       {
         name: 'Flexbox Defense',
-        value: '[Blast enemies into nothingness with defensive towers postioned by flexbox!](http://www.flexboxdefense.com/)'
+        value: '[Blast enemies into nothingness with defensive towers positioned by flexbox!](http://www.flexboxdefense.com/)'
       }
     ]
   },
@@ -349,7 +349,7 @@ export default {
         value: '[A tutorial that shows how to use fetch to get data from an API.](https://scotch.io/tutorials/how-to-use-the-javascript-fetch-api-to-get-data)'
       },
       {
-        name: 'MDN fetch useage example',
+        name: 'MDN fetch usage example',
         value: '[A very in depth write up write-up on how to use fetch.](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch_)'
       }
     ]
