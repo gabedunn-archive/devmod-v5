@@ -5,6 +5,7 @@
 
 import { Datastore } from 'nedb-async-await'
 import { dbFile } from './utils/config'
+import { logError } from './utils/log'
 
 // Create and initialize the database using auto-loading and the configured filename.
 const db = new Datastore({
@@ -27,7 +28,7 @@ export const setSetting = async (key, value) => {
     // Update database entries with a key of 'key' with the new values. Upsert: create new document if one doesn't already exist.
     await db.update({ key }, { key, value }, { upsert: true })
   } catch (err) {
-    console.error(`setSetting: ${key}:${value}  Failed:`, err)
+    logError('DB', `setSetting: ${key}:${value} failed`, err)
   }
 }
 
@@ -43,24 +44,24 @@ export const getSetting = async key => {
       return defaultDBValues[key]
     }
   } catch (err) {
-    console.error(`getSetting: ${key} Failed:`, err)
+    logError('DB', `getSetting: ${key} failed`, err)
   }
 }
 
 // Given a user, reason, and staff member, pushes a warning into the database.
 export const addWarning = async (user, reason, staff) => {
-  // Create the warning object.
-  const warning = { reason, staff, timestamp: new Date() }
-
-  // Create the push object and add the warning to it.
-  const $push = {}
-  $push[user] = warning
-
   try {
+    // Create the warning object.
+    const warning = { reason, staff, timestamp: new Date() }
+
+    // Create the push object and add the warning to it.
+    const $push = {}
+    $push[user] = warning
+
     // Update the database by pushing the warning to the user.
     await db.update({ key: 'warnings' }, { $push }, { upsert: true })
   } catch (err) {
-    console.error('addWarning Failed:', err)
+    logError('DB', 'addWarning failed:', err)
   }
 }
 
@@ -81,20 +82,20 @@ export const getWarnings = async user => {
       return []
     }
   } catch (err) {
-    console.error('getWarning Failed:', err)
+    logError('DB', 'getWarning failed', err)
   }
 }
 
 // Given a user, removes all warnings from the database.
 export const clearWarnings = async user => {
-  // Set the set object to an empty array.
-  const $set = {}
-  $set[user] = []
-
   try {
+    // Set the set object to an empty array.
+    const $set = {}
+    $set[user] = []
+
     // Update the database by setting the user's warnings to an empty array.
     await db.update({ key: 'warnings' }, { $set }, { upsert: true })
   } catch (err) {
-    console.error('clearWarning Failed:', err)
+    console.error('DB', 'clearWarning failed', err)
   }
 }
