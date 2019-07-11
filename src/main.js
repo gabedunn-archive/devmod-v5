@@ -4,7 +4,7 @@
  */
 
 import { devmod } from './devmod'
-import { logError } from './utils/logError'
+import { logError } from './utils/log'
 
 // If an unhandled rejection occurs, log it and exit the program.
 process.on('unhandledRejection', err => {
