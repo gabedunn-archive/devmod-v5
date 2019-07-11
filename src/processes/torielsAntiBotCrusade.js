@@ -6,6 +6,7 @@
 // Export a function to initialize the anti bot process.
 import { orange } from '../utils/colours'
 import { channels } from '../utils/config'
+import { logError } from '../utils/log'
 
 export const initTorielsAntiBotCrusade = async client => {
   try {
@@ -13,41 +14,43 @@ export const initTorielsAntiBotCrusade = async client => {
     const spamBotUrls = [
       'privatepage.vip',
       'nakedphotos.club'
-    ];
+    ]
 
     // On each message check to see if it contains the link.
     client.on('message', async message => {
-      // If the message is from a bot, a staff/trusted member, ignore it.
-      if (!message.author.bot && !message.member.roles.some(role => ['Staff', 'MVP'].includes(role.name)) ) {
-        // If the message content includes one of the spam bot urls.
-        if (spamBotUrls.some(spam => message.content.includes(spam)) ) {
-          try {
-            // Send a message to the reports channel detailing the removal.
-            await client.channels.find(c => c.name === channels.crusade).send({
-              embed: {
-                color: orange,
-                author: {
-                  name: `${client.user.username}'s (${client.user.tag})`,
-                  icon_url: client.user.avatarURL
-                },
-                fields: [{
-                  name: `**Deleted message from ${message.author.username}#${message.author.discriminator}** *(ID ${message.author.id})*`,
-                  value: `**Message:** ${message.content}`,
-                  inline: false
-                }]
-              }
-            });
-
-            // Delete the message.
-            await message.delete();
-
-          } catch(err) {
-            console.log(`Failed to delete spam message from ${message.author.username}:`, err);
+      try {
+        // If the message is from a bot, a staff/trusted member, ignore it.
+        if (!message.author.bot && !message.member.roles.some(role => ['Staff', 'MVP'].includes(role.name))) {
+          // If the message content includes one of the spam bot urls.
+          if (spamBotUrls.some(spam => message.content.includes(spam))) {
+            try {
+              // Send a message to the reports channel detailing the removal.
+              await client.channels.find(c => c.name === channels.crusade).send({
+                embed: {
+                  color: orange,
+                  author: {
+                    name: `${client.user.username}'s (${client.user.tag})`,
+                    icon_url: client.user.avatarURL
+                  },
+                  fields: [{
+                    name: `**Deleted message from ${message.author.username}#${message.author.discriminator}** *(ID ${message.author.id})*`,
+                    value: `**Message:** ${message.content}`,
+                    inline: false
+                  }]
+                }
+              })
+              // Delete the message.
+              await message.delete()
+            } catch (err) {
+              logError('AntiBot', `Failed to delete spam message from ${message.author.username}`, err)
+            }
           }
         }
+      } catch (err) {
+        logError('AntiBot', 'Failed to handle the message', err)
       }
-    });
+    })
   } catch (err) {
-    console.error('Failed to initialize the anti bot crusade:', err)
+    logError('AntiBot', 'Failed to initialize the anti bot crusade', err)
   }
 }

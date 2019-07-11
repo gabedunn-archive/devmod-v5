@@ -6,6 +6,7 @@
 import { commands } from '../commands'
 import { prefix } from '../utils/config'
 import { sendErrorMessage } from '../utils/sendErrorMessage'
+import { logError } from '../utils/log'
 
 export const initCommandListener = client => {
   try {
@@ -23,22 +24,34 @@ export const initCommandListener = client => {
         if (commands.hasOwnProperty(command)) {
           // Save the command to a variable.
           const cmd = commands[command]
-          // Test that the users has the proper permissions to run the command.
-          if (msg.member.permissions.has(cmd.permissions)) {
-            // Run the command.
-            cmd.exec(args, msg)
-          } else {
-            // Send error message.
-            sendErrorMessage(
-              'Insufficient Permissions',
-              'You do not have permission to use that command.',
-              msg
-            )
+          try {
+            // Test that the users has the proper permissions to run the command.
+            if (msg.member.permissions.has(cmd.permissions)) {
+              try {
+                // Run the command.
+                cmd.exec(args, msg)
+              } catch (err) {
+                logError('CommandListener', 'Failed to execute command', err)
+              }
+            } else {
+              try {
+                // Send error message.
+                sendErrorMessage(
+                  'Insufficient Permissions',
+                  'You do not have permission to use that command.',
+                  msg
+                )
+              } catch (err) {
+                logError('CommandListener', 'Failed to send error message', err)
+              }
+            }
+          } catch (err) {
+            logError('CommandListener', 'Failed to test for permissions', err)
           }
         }
       }
     })
   } catch (err) {
-    console.error('Failed to initialize the command listener:', err)
+    logError('CommandListener', 'Failed to initialize the command listener', err)
   }
 }
