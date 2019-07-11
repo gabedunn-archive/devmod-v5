@@ -66,6 +66,10 @@ export const warnsCommand = {
           icon_url: user.avatarURL
         },
         fields: [],
+        footer: {
+          icon_url: member.user.avatarURL,
+          text: `${name}'s (${member.user.tag}'s) warnings.`
+        },
         timestamp: new Date()
       }
 

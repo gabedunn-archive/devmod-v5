@@ -10,7 +10,7 @@ import { channels } from '../utils/config'
 // Export an object with command info and the function to execute.
 export const rebuildRolesCommand = {
   name: 'Rebuild Roles',
-  aliases: ['rebuild-roles'],
+  aliases: ['rebuildRoles', 'rebuild-roles'],
   category: 'admin',
   description: 'Rebuilds the messages in the roles channel.',
   permissions: ['ADMINISTRATOR'],

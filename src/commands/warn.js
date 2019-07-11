@@ -88,6 +88,10 @@ export const warnCommand = {
             name: `${staffName} (${staffUser.tag})`,
             icon_url: staffUser.avatarURL
           },
+          footer: {
+            icon_url: user.avatarURL,
+            text: `${name}'s (${user.tag}'s) has been warned.`
+          },
           timestamp: new Date()
         }
       })
