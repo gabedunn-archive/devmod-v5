@@ -4,17 +4,22 @@
  */
 
 import { devmod } from './devmod'
+import { logError } from './utils/logError'
 
 // If an unhandled rejection occurs, log it and exit the program.
-process.on('unhandledRejection', (err, p) => {
-  console.error('Unhandled Rejection:', err.stack, p)
+process.on('unhandledRejection', err => {
+  logError('Main', 'Unhandled Rejection', err)
   process.exit(1)
 })
 // Same thing but for uncaught exception.
-process.on('uncaughtException', (err, p) => {
-  console.error('Uncaught Exception:', err.stack, p)
+process.on('uncaughtException', err => {
+  logError('Main', 'Uncaught Exception', err)
   process.exit(1)
 })
 
+try {
 // noinspection JSIgnoredPromiseFromCall
-devmod()
+  devmod()
+} catch (err) {
+  logError('Main', 'Something has failed', err)
+}
