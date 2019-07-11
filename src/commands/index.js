@@ -3,12 +3,13 @@
  * Object containing all commands and their functions.
  */
 
-// TODO: clearWarns, gbp
+// TODO: gbp
 
 import { expandCommands } from '../utils/expandCommands'
 
 import { aboutCommand } from './about'
 import { banCommand } from './ban'
+import { clearWarnsCommand } from './clearWarns'
 import { helpCommand } from './help'
 import { lmgtfyCommand } from './lmgtfy'
 import { muteCommand } from './mute'
@@ -31,6 +32,7 @@ import { warnsCommand } from './warns'
 export const commandsArray = [
   aboutCommand,
   banCommand,
+  clearWarnsCommand,
   helpCommand,
   lmgtfyCommand,
   muteCommand,

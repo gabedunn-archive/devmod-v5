@@ -83,3 +83,17 @@ export const getWarnings = async user => {
     console.error('getWarning Failed:', err)
   }
 }
+
+// Given a user, removes all warnings from the database.
+export const clearWarnings = async user => {
+  // Set the set object to an empty array.
+  const $set = {}
+  $set[user] = []
+
+  try {
+    // Update the database by setting the user's warnings to an empty array.
+    await db.update({ key: 'warnings' }, { $set }, { upsert: true })
+  } catch (err) {
+    console.error('clearWarning Failed:', err)
+  }
+}
