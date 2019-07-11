@@ -4,7 +4,6 @@
  */
 
 import { devmod } from './devmod'
-import { sendRolesMessage } from './utils/sendRolesMessage'
 
 // If an unhandled rejection occurs, log it and exit the program.
 process.on('unhandledRejection', (err, p) => {
@@ -17,11 +16,5 @@ process.on('uncaughtException', (err, p) => {
   process.exit(1)
 })
 
-// If '--roles' is provided as an argument from the command line, send the roles message(s). Otherwise run the bot.
-if (process.argv.indexOf('--roles') !== -1) {
-  // noinspection JSIgnoredPromiseFromCall
-  sendRolesMessage()
-} else {
-  // noinspection JSIgnoredPromiseFromCall
-  devmod()
-}
+// noinspection JSIgnoredPromiseFromCall
+devmod()

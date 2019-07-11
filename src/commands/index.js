@@ -10,13 +10,13 @@ import { expandCommands } from '../utils/expandCommands'
 import { aboutCommand } from './about'
 import { banCommand } from './ban'
 import { buildInfoCommand } from './buildInfo'
+import { buildRolesCommand } from './buildRoles'
 import { clearWarnsCommand } from './clearWarns'
 import { helpCommand } from './help'
 import { lmgtfyCommand } from './lmgtfy'
 import { muteCommand } from './mute'
 import { pingCommand } from './ping'
 import { pruneCommand } from './prune'
-import { rebuildRolesCommand } from './rebuildRoles'
 import { reportCommand } from './report'
 import { roleCommand } from './role'
 import { rolesCommand } from './roles'
@@ -34,13 +34,13 @@ export const commandsArray = [
   aboutCommand,
   banCommand,
   buildInfoCommand,
+  buildRolesCommand,
   clearWarnsCommand,
   helpCommand,
   lmgtfyCommand,
   muteCommand,
   pingCommand,
   pruneCommand,
-  rebuildRolesCommand,
   reportCommand,
   roleCommand,
   rolesCommand,
