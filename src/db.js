@@ -17,6 +17,7 @@ const defaultDBValues = {
   owner: 'RedXTech#3076',
   test: 'default value',
   reactions_message_ids: {},
+  info_message_ids: [],
   warnings: {}
 }
 

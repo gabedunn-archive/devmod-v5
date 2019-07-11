@@ -9,6 +9,7 @@ import { expandCommands } from '../utils/expandCommands'
 
 import { aboutCommand } from './about'
 import { banCommand } from './ban'
+import { buildInfoCommand } from './buildInfo'
 import { clearWarnsCommand } from './clearWarns'
 import { helpCommand } from './help'
 import { lmgtfyCommand } from './lmgtfy'
@@ -32,6 +33,7 @@ import { warnsCommand } from './warns'
 export const commandsArray = [
   aboutCommand,
   banCommand,
+  buildInfoCommand,
   clearWarnsCommand,
   helpCommand,
   lmgtfyCommand,
