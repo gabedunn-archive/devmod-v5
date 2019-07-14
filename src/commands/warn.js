@@ -8,6 +8,7 @@ import { sendErrorMessage } from '../utils/sendErrorMessage'
 import { autoBan, autoBanWarns, banMsgDelete, channels } from '../utils/config'
 import { addWarning, getWarnings } from '../db'
 import { banCommand } from './ban'
+import { logError } from '../utils/log'
 
 // Export an object with command info and the function to execute.
 export const warnCommand = {
@@ -18,111 +19,132 @@ export const warnCommand = {
   permissions: ['KICK_MEMBERS'],
   usage: 'warn <user> [<reason>]',
   exec: async (args, message) => {
-    // If a user isn't specified send an error message and terminate the command.
-    if (args.length < 1) {
-      await message.react('❌')
-      return sendErrorMessage('User Not Specified', 'You didn\'t specify a user to warn.', message)
-    }
-
-    // Save the user object of the member to be warned.
-    // noinspection DuplicatedCode
-    const member = message.mentions.members.first()
-
-    // If the user doesn't exist send an error message and terminate the command.
-    if (member === null) {
-      await message.react('❌')
-      return sendErrorMessage('Not a User', 'The user you specified either doesn\'t exist or isn\'t a user.', message)
-    }
-
-    // If the specified user is able to kick members (read: moderator) terminate the command.
-    if (member.hasPermission('KICK_MEMBERS')) {
-      await message.react('❌')
-      return sendErrorMessage(
-        'Can\'t Warn Member',
-        'You are not allowed to warn that member.',
-        message
-      )
-    }
-
     try {
-      // Remove the user's message.
-      await message.delete()
-    } catch (err) {
-      console.error('Failed to delete message:', err)
-    }
+      // If a user isn't specified send an error message and terminate the command.
+      if (args.length < 1) {
+        return await sendErrorMessage('User Not Specified', 'You didn\'t specify a user to warn.', message)
+      }
 
-    const reason = args.length > 1 ? args.slice(1).join(' ') : 'warned by devmod'
+      // Save the user object of the member to be warned.
+      // noinspection DuplicatedCode
+      const member = message.mentions.members.first()
 
-    // Save some information about the user.
-    const user = member.user
-    const name = member.nickname ? member.nickname : user.username
+      // If the user doesn't exist send an error message and terminate the command.
+      if (member === null) {
+        return await sendErrorMessage('Not a User', 'The user you specified either doesn\'t exist or isn\'t a user.', message)
+      }
 
-    // Save some info about the staff member.
-    const staffMember = message.member
-    const staffUser = staffMember.user
-    const staffName = staffMember.nickname ? staffMember.nickname : staffUser.username
-
-    // Pull current warnings from the database.
-    const currentWarnings = await getWarnings(user.id)
-
-    // Log the warning to the database.
-    await addWarning(user.id, reason, staffUser.id)
-
-    // Select the colour based on the number of previous warnings.
-    const colour = currentWarnings.length < 1
-      ? yellow
-      : currentWarnings.length < 2
-        ? orange
-        : red
-
-    // Log the warn to the current channel.
-    // noinspection JSUnresolvedFunction
-    await message.guild.channels
-      .find(c => c.name === channels.warn)
-      .send({
-        embed: {
-          color: colour,
-          title: `Warning #${currentWarnings.length + 1}`,
-          description: `${name} (${user.tag}) has been warned for: ${reason}.`,
-          author: {
-            name: `${staffName} (${staffUser.tag})`,
-            icon_url: staffUser.avatarURL
-          },
-          footer: {
-            icon_url: user.avatarURL,
-            text: `${name}'s (${user.tag}'s) has been warned.`
-          },
-          timestamp: new Date()
+      try {
+        // If the specified user is able to kick members (read: moderator) terminate the command.
+        if (member.hasPermission('KICK_MEMBERS')) {
+          return await sendErrorMessage(
+            'Can\'t Warn Member',
+            'You are not allowed to warn that member.',
+            message
+          )
         }
-      })
+      } catch (err) {
+        logError('Warn', 'Failed to check user permissions', err, message)
+      }
 
-    // Create a dm channel to the user.
-    const dm = await user.createDM()
+      const reason = args.length > 1 ? args.slice(1).join(' ') : 'warned by devmod'
 
-    // Send a dm to the user letting them know they've been warned.
-    await dm.send({
-      embed: {
-        title: `You have received a warning on ${message.guild.name}.`,
-        color: colour,
-        thumbnail: {
-          url: message.guild.iconURL
-        },
-        fields: [
-          {
-            name: 'Reason:',
-            value: reason
+      // Save some information about the user.
+      const user = member.user
+      const name = member.nickname ? member.nickname : user.username
+
+      // Save some info about the staff member.
+      const staffMember = message.member
+      const staffUser = staffMember.user
+      const staffName = staffMember.nickname ? staffMember.nickname : staffUser.username
+
+      // Pull current warnings from the database.
+      const currentWarnings = await getWarnings(user.id)
+
+      try {
+        // Log the warning to the database.
+        await addWarning(user.id, reason, staffUser.id)
+      } catch (err) {
+        logError('Warn', 'Failed to log warning', err, message)
+      }
+
+      // Select the colour based on the number of previous warnings.
+      const colour = currentWarnings.length < 1
+        ? yellow
+        : currentWarnings.length < 2
+          ? orange
+          : red
+
+      try {
+        // Log the warn to the current channel.
+        // noinspection JSUnresolvedFunction
+        await message.guild.channels
+          .find(c => c.name === channels.warn)
+          .send({
+            embed: {
+              color: colour,
+              title: `Warning #${currentWarnings.length + 1}`,
+              description: `${name} (${user.tag}) has been warned for: ${reason}.`,
+              author: {
+                name: `${staffName} (${staffUser.tag})`,
+                icon_url: staffUser.avatarURL
+              },
+              footer: {
+                icon_url: user.avatarURL,
+                text: `${name}'s (${user.tag}'s) has been warned.`
+              },
+              timestamp: new Date()
+            }
+          })
+      } catch (err) {
+        logError('Warn', 'Failed to log warn', err, message)
+      }
+
+      try {
+        // Create a dm channel to the user.
+        const dm = await user.createDM()
+
+        // Send a dm to the user letting them know they've been warned.
+        await dm.send({
+          embed: {
+            title: `You have received a warning on ${message.guild.name}.`,
+            color: colour,
+            thumbnail: {
+              url: message.guild.iconURL
+            },
+            fields: [
+              {
+                name: 'Reason:',
+                value: reason
+              }
+            ]
           }
-        ]
+        })
+      } catch (err) {
+        logError('Warn', 'Failed to DM user', err, message)
       }
-    })
 
-    // If autoban is enabled, see if the user should be banned.
-    if (autoBan) {
-      // If the number of warnings passes the specified threshold, ban the user.
-      if (currentWarnings.length + 1 >= autoBanWarns) {
-        // Run the ban command.
-        await banCommand.exec([args[0], banMsgDelete, ...'Exceeded maximum warnings'.split(' ')], message)
+      // If autoban is enabled, see if the user should be banned.
+      if (autoBan) {
+        // If the number of warnings passes the specified threshold, ban the user.
+        if (currentWarnings.length + 1 >= autoBanWarns) {
+          try {
+            // Run the ban command.
+            await banCommand.exec([args[0], banMsgDelete, ...'Exceeded maximum warnings'.split(' ')], message)
+          } catch (err) {
+            logError('Warn', 'Failed to autoban user', err, message)
+          }
+        }
       }
+
+      try {
+        // Remove the user's message.
+        await message.delete()
+      } catch (err) {
+        logError('Warn', 'Failed to delete message', err, message)
+      }
+    } catch (err) {
+      logError('Warn', 'Failed to run command', err, message)
     }
   }
 }

@@ -4,6 +4,7 @@
 */
 
 import { blue } from '../utils/colours'
+import { logError } from '../utils/log'
 
 // Export an object with command info and the function to execute.
 export const aboutCommand = {
@@ -15,16 +16,16 @@ export const aboutCommand = {
   usage: 'about',
   exec: async (args, message) => {
     try {
-      // Remove the user's message.
-      await message.delete()
-    } catch (err) {
-      console.error('Failed to delete message:', err)
-    }
+      // Save the user who sent the message. 'member.user' if 'member' exists, otherwise 'author'.
+      const user = message.member ? message.member.user : message.author
 
-    // Save the user who sent the message. 'member.user' if 'member' exists, otherwise 'author'.
-    const user = message.member ? message.member.user : message.author
+      try {
+        // Remove the user's message.
+        await message.delete()
+      } catch (err) {
+        logError('About', 'Failed to delete message', err, message)
+      }
 
-    try {
       // Send the about message embed.
       // noinspection JSUnresolvedFunction
       return message.channel.send({
@@ -56,7 +57,7 @@ export const aboutCommand = {
         }
       })
     } catch (err) {
-      console.error('Failed to send message:', err)
+      logError('About', 'Failed to send message', err, message)
     }
   }
 }

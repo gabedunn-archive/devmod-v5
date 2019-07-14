@@ -4,6 +4,7 @@
 */
 
 import { blue } from '../utils/colours'
+import { logError } from '../utils/log'
 
 // Export an object with command info and the function to execute.
 export const pingCommand = {
@@ -15,38 +16,44 @@ export const pingCommand = {
   usage: 'ping',
   exec: async (args, message) => {
     try {
-      // Remove the user's message.
-      await message.delete()
-    } catch (err) {
-      console.error('Failed to delete message:', err)
-    }
-
-    // Create the initial embed to send.
-    const embed = {
-      title: 'Pong!',
-      color: blue
-    }
-    // noinspection JSUnresolvedFunction
-    const sent = await message.channel.send({ embed })
-    try {
-      // Calculate difference in time between when message was send & when it was edited.
-      const timeDiff = (sent.createdAt) - (message.createdAt)
-      // Create fields for the embed.
-      embed.fields = [
-        {
-          name: 'Round Trip Time:',
-          value: `${timeDiff}ms.`
-        },
-        {
+      // Create the initial embed to send.
+      const embed = {
+        title: 'Pong!',
+        color: blue,
+        fields: [{
           name: 'Ping:',
           value: `${Math.round(message.client.ping)}ms.`
+        }]
+      }
+
+      try {
+        // noinspection JSUnresolvedFunction,JSCheckFunctionSignatures
+        const sent = await message.channel.send({ embed })
+        try {
+          // Calculate difference in time between when message was send & when it was edited.
+          const timeDiff = (sent.createdAt) - (message.createdAt)
+          // Create fields for the embed.
+          embed.fields.push({
+            name: 'Round Trip Time:',
+            value: `${timeDiff}ms.`
+          })
+          // Edit the message.
+          return await sent.edit({ embed })
+        } catch (err) {
+          logError('Ping', 'Error updating message', err, message)
+          return null
         }
-      ]
-      // Edit the message.
-      return await sent.edit({ embed })
-    } catch (e) {
-      console.log(`Error updating message: ${e}`)
-      return null
+      } catch (err) {
+        logError('Ping', 'Failed to send message', err, message)
+      }
+      try {
+        // Remove the user's message.
+        await message.delete()
+      } catch (err) {
+        logError('Ping', 'Failed to delete message', err, message)
+      }
+    } catch (err) {
+      logError('Ping', 'Failed to run command', err, message)
     }
   }
 }

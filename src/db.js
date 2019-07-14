@@ -96,6 +96,6 @@ export const clearWarnings = async user => {
     // Update the database by setting the user's warnings to an empty array.
     await db.update({ key: 'warnings' }, { $set }, { upsert: true })
   } catch (err) {
-    console.error('DB', 'clearWarning failed', err)
+    logError('DB', 'clearWarning failed', err)
   }
 }

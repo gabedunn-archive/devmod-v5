@@ -4,6 +4,8 @@
 */
 
 // Export an object with command info and the function to execute.
+import { logError } from '../utils/log'
+
 export const pruneCommand = {
   name: 'Prune',
   aliases: ['prune', 'purge'],
@@ -13,26 +15,34 @@ export const pruneCommand = {
   usage: 'prune [<messages>]',
   exec: async (args, message) => {
     try {
-      // Remove the user's message.
-      await message.delete()
+      try {
+        // Remove the user's message.
+        await message.delete()
+      } catch (err) {
+        logError('Prune', 'Failed to delete message', err, message)
+      }
+
+      // Save the amount arg. If it doesn't exist, default to 5.
+      const amount = args.length > 0 ? parseInt(args[0]) : 5
+
+      try {
+        // Limit amount of messages to delete to 50.
+        const actualAmount = amount > 50 ? 50 : amount
+
+        // Fetch the last 'amount' of messages form the current channel.
+        const messages = await message.channel.fetchMessages({ limit: actualAmount })
+
+        try {
+          // Delete all of the messages selected with the previous command.
+          messages.deleteAll()
+        } catch (err) {
+          logError('Prune', 'Failed to delete messages', err, message)
+        }
+      } catch (err) {
+        logError('Prune', 'Failed to fetch messages', err, message)
+      }
     } catch (err) {
-      console.error('Failed to delete message:', err)
-    }
-
-    // Save the amount arg. If it doesn't exist, default to 5.
-    const amount = args.length > 0 ? parseInt(args[0]) : 5
-
-    try {
-      // Limit amount of messages to delete to 50.
-      const actualAmount = amount > 50 ? 50 : amount
-
-      // Fetch the last 'amount' of messages form the current channel.
-      const messages = await message.channel.fetchMessages({ limit: actualAmount })
-
-      // Delete all of the messages selected with the previous command.
-      messages.deleteAll()
-    } catch (err) {
-      console.log('Error deleting messages:', err)
+      logError('Prune', 'Failed to run command', err, message)
     }
   }
 }

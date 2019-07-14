@@ -7,6 +7,7 @@ import { green, orange, red, yellow } from '../utils/colours'
 import { sendErrorMessage } from '../utils/sendErrorMessage'
 import { getWarnings } from '../db'
 import { autoBanWarns } from '../utils/config'
+import { logError } from '../utils/log'
 
 // Export an object with command info and the function to execute.
 export const warnsCommand = {
@@ -17,46 +18,37 @@ export const warnsCommand = {
   permissions: ['KICK_MEMBERS'],
   usage: 'warns <user>',
   exec: async (args, message) => {
-    // If a user isn't specified send an error message and terminate the command.
-    if (args.length < 1) {
-      await message.react('❌')
-      return sendErrorMessage('User Not Specified', 'You didn\'t specify a user to list the warnings for.', message)
-    }
-
-    // Save the user object of the member to be warned.
-    // noinspection DuplicatedCode
-    const member = message.mentions.members.first()
-
-    // If the user doesn't exist send an error message and terminate the command.
-    if (member === null) {
-      await message.react('❌')
-      return sendErrorMessage('Not a User', 'The user you specified either doesn\'t exist or isn\'t a user.', message)
-    }
-
     try {
-      // Remove the user's message.
-      await message.delete()
-    } catch (err) {
-      console.error('Failed to delete message:', err)
-    }
+      // If a user isn't specified send an error message and terminate the command.
+      if (args.length < 1) {
+        return await sendErrorMessage('User Not Specified', 'You didn\'t specify a user to list the warnings for.', message)
+      }
 
-    // Save the user's nickname.
-    const name = member.nickname ? member.nickname : member.user.username
+      // Save the user object of the member to be warned.
+      // noinspection DuplicatedCode
+      const member = message.mentions.members.first()
 
-    // Save the user who sent the message. 'member.user' if 'member' exists, otherwise 'author'.
-    const user = message.member ? message.member.user : message.author
+      // If the user doesn't exist send an error message and terminate the command.
+      if (member === null) {
+        return await sendErrorMessage('Not a User', 'The user you specified either doesn\'t exist or isn\'t a user.', message)
+      }
 
-    // Pull current warnings from the database.
-    const currentWarnings = await getWarnings(member.user.id)
+      // Save the user's nickname.
+      const name = member.nickname ? member.nickname : member.user.username
 
-    // Select the colour based on the number of previous warnings.
-    const colour = currentWarnings.length === 1
-      ? yellow
-      : currentWarnings.length < autoBanWarns
-        ? orange
-        : red
+      // Save the user who sent the message. 'member.user' if 'member' exists, otherwise 'author'.
+      const user = message.member ? message.member.user : message.author
 
-    try {
+      // Pull current warnings from the database.
+      const currentWarnings = await getWarnings(member.user.id)
+
+      // Select the colour based on the number of previous warnings.
+      const colour = currentWarnings.length === 1
+        ? yellow
+        : currentWarnings.length < autoBanWarns
+          ? orange
+          : red
+
       // Create the initial embed.
       const embed = {
         title: `Warnings for ${name} (${member.user.tag})`,
@@ -96,13 +88,22 @@ export const warnsCommand = {
         ]
       }
 
-      // Send the embed.
-      // noinspection JSCheckFunctionSignatures
-      return await message.channel.send({ embed })
+      try {
+        // Remove the user's message.
+        await message.delete()
+      } catch (err) {
+        logError('Warns', 'Failed to delete message', err, message)
+      }
 
-      // Return a timeout that deletes the message after x seconds (x seconds * 1000 ms where x = msgDeleteTime).
+      try {
+        // Send the embed.
+        // noinspection JSCheckFunctionSignatures
+        return await message.channel.send({ embed })
+      } catch (err) {
+        logError('Warns', 'Failed to send message', err, message)
+      }
     } catch (err) {
-      console.error('Failed to send message:', err)
+      logError('Warns', 'Failed to run command', err, message)
     }
   }
 }

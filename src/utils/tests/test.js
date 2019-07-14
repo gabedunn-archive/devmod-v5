@@ -4,6 +4,8 @@
  */
 
 // Main function to utilize await for db functions.
+import { log } from '../log'
+
 const test = async () => {
   const array = [
     {
@@ -21,7 +23,7 @@ const test = async () => {
     return previousArray
   }, [])
 
-  console.log(newArray)
+  log('Test', newArray)
 }
 
 test()

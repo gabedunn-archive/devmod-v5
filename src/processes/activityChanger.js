@@ -33,7 +33,7 @@ export const initActivityChanger = async client => {
         // Set the activity back to '.help'.
         await client.user.setActivity(`${prefix}help`)
       } catch (err) {
-        console.error(`Failed to set activity back to ${prefix}help:`, err)
+        logError('Activity', `Failed to set activity back to ${prefix}help:`, err)
       }
     }, 60 * 1000)
   }, statusInterval * 60 * 1000)

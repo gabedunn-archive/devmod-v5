@@ -3,7 +3,8 @@
  * File to run to confirm database is working fine.
  */
 
-import { setSetting, getSetting } from '../../db'
+import { getSetting, setSetting } from '../../db'
+import { log } from '../log'
 
 // Main function to utilize await for db functions.
 const test = async () => {
@@ -13,7 +14,7 @@ const test = async () => {
   // Retrieve the value of key 'test' and log it to confirm it is accurate.
   const val = await getSetting('test')
 
-  console.log(val)
+  log('DBTest', val)
 }
 
 test()

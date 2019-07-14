@@ -4,6 +4,7 @@
 */
 
 import { blue } from '../utils/colours'
+import { logError } from '../utils/log'
 
 // Export an object with command info and the function to execute.
 export const usersCommand = {
@@ -15,28 +16,36 @@ export const usersCommand = {
   usage: 'users',
   exec: async (args, message) => {
     try {
-      // Remove the user's message.
-      await message.delete()
-    } catch (err) {
-      console.error('Failed to delete message:', err)
-    }
-
-    // Save some info about the server and bot.
-    const guild = message.guild
-
-    // Send the stats message.
-    // noinspection JSUnresolvedFunction
-    return message.channel.send({
-      embed: {
-        title: 'Users',
-        color: blue,
-        description: `There are currently ${guild.memberCount} users in this discord server (${guild.members.array().filter(
-          m => m.presence.status !== 'offline').length} currently online).`,
-        author: {
-          name: message.member.user.username,
-          icon_url: message.member.user.avatarURL
-        }
+      try {
+        // Remove the user's message.
+        await message.delete()
+      } catch (err) {
+        logError('Users', 'Failed to delete message', err, message)
       }
-    })
+
+      // Save some info about the server and bot.
+      const guild = message.guild
+
+      try {
+        // Send the stats message.
+        // noinspection JSUnresolvedFunction
+        return message.channel.send({
+          embed: {
+            title: 'Users',
+            color: blue,
+            description: `There are currently ${guild.memberCount} users in this discord server (${guild.members.array().filter(
+              m => m.presence.status !== 'offline').length} currently online).`,
+            author: {
+              name: message.member.user.username,
+              icon_url: message.member.user.avatarURL
+            }
+          }
+        })
+      } catch (err) {
+        logError('Users', 'Failed to send message', err, message)
+      }
+    } catch (err) {
+      logError('Users', 'Failed to run command', err, message)
+    }
   }
 }
