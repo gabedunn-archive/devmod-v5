@@ -2,6 +2,9 @@
  * Gabe Dunn 2019
  * Main file to import all main functions and run them.
  * TODO: go through entire project and user proper naming for user & member
+ * TODO: test every case of each command
+ * TODO: more extensively check for non-existent instances of classes
+ * TODO: add universal logging error generators
  */
 
 import { devmod } from './devmod'
