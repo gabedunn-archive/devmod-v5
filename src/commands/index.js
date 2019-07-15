@@ -3,8 +3,6 @@
  * Object containing all commands and their functions.
  */
 
-// TODO: gbp
-
 import { expandCommands } from '../utils/expandCommands'
 
 import { aboutCommand } from './about'
@@ -18,6 +16,7 @@ import { muteCommand } from './mute'
 import { pingCommand } from './ping'
 import { pruneCommand } from './prune'
 import { reportCommand } from './report'
+import { reputationCommand } from './reputation'
 import { roleCommand } from './role'
 import { rolesCommand } from './roles'
 import { statsCommand } from './stats'
@@ -42,6 +41,7 @@ export const commandsArray = [
   pingCommand,
   pruneCommand,
   reportCommand,
+  reputationCommand,
   roleCommand,
   rolesCommand,
   statsCommand,
