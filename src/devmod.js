@@ -12,6 +12,7 @@ import { initActivityChanger } from './processes/activityChanger'
 import { initReactionListener } from './processes/roleReactionListener'
 import { initInfoReactionListener } from './processes/infoReactionListener'
 import { initTorielsAntiBotCrusade } from './processes/torielsAntiBotCrusade'
+import { initThanksListener } from './processes/thanksListener'
 
 export const devmod = async () => {
   // Initialize the client.
@@ -35,7 +36,8 @@ export const devmod = async () => {
     initReactionListener,
     initInfoReactionListener,
     initActivityChanger,
-    initTorielsAntiBotCrusade
+    initTorielsAntiBotCrusade,
+    initThanksListener
   ]
 
   // For each process, run it asynchronously.

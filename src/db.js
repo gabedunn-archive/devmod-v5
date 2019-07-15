@@ -18,8 +18,7 @@ const defaultDBValues = {
   owner: 'RedXTech#3076',
   test: 'default value',
   reactions_message_ids: {},
-  info_message_ids: [],
-  warnings: {}
+  info_message_ids: []
 }
 
 // Given a key and a value, sets the 'key' document in the database to have a value of 'value'.
@@ -61,7 +60,7 @@ export const addWarning = async (user, reason, staff) => {
     // Update the database by pushing the warning to the user.
     await db.update({ key: 'warnings' }, { $push }, { upsert: true })
   } catch (err) {
-    logError('DB', 'addWarning failed:', err)
+    logError('DB', 'addWarning failed', err)
   }
 }
 
@@ -97,5 +96,47 @@ export const clearWarnings = async user => {
     await db.update({ key: 'warnings' }, { $set }, { upsert: true })
   } catch (err) {
     logError('DB', 'clearWarning failed', err)
+  }
+}
+
+// Given two users, add the second user to the list of thanks on the first.
+export const incrementThanks = async (thankee, thanker) => {
+  try {
+    // Create the push object and add the thanker ID to it.
+    const $push = {}
+    $push[thankee] = thanker
+
+    // Update the database by pushing the thanks to the user.
+    await db.update({ key: 'thanks' }, { $push }, { upsert: true })
+
+    try {
+      // Return the number of thanks.
+      return (await getThanks(thankee)).length
+    } catch (err) {
+      logError('DB', 'Failed to get number of thanks', err)
+    }
+  } catch (err) {
+    logError('DB', 'incrementThanks failed', err)
+  }
+}
+
+// Given a user, returns a list of thanks from the database.
+export const getThanks = async user => {
+  try {
+    // Pull the thanks from the database.
+    const thanks = await db.findOne({ key: 'thanks' })
+    // If thanks isn't null, continue.
+    if (thanks !== null) {
+      // If thanks has the property 'user', return the property.
+      if (thanks.hasOwnProperty(user)) {
+        return thanks[user]
+      } else {
+        return []
+      }
+    } else {
+      return []
+    }
+  } catch (err) {
+    logError('DB', 'getThanks failed', err)
   }
 }

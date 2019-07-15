@@ -3,51 +3,58 @@
  * Functionality relating to listening and logging thanks.
  */
 
-import { commands } from '../commands'
-import { sendErrorMessage } from '../utils/sendErrorMessage'
-import { logError } from '../utils/log'
+import { log, logError } from '../utils/log'
+import { incrementThanks } from '../db'
+import { green } from '../utils/colours'
 
 export const initThanksListener = client => {
   try {
     // For each message run a function.
-    client.on('message', msg => {
-      // If the message isn't a dm, it contains the word 'thank', and the author isn't a bot, continue.
-      if (msg.channel.type !== 'dm' && ['thank'].some(t => msg.includes(t)) && !msg.author.bot) {
-        // Separate the entire command after the prefix into args.
-        const args = msg.content.substr(1).split(' ')
+    client.on('message', async message => {
+      try {
+        // If the message isn't a dm, the author isn't a bot, and it contains the word 'thank' or 'kudos', continue.
+        if (message.channel.type !== 'dm' && !message.author.bot && ['thank', 'kudos'].some(t => message.content.includes(t))) {
 
-        // Set the command to the first argument and remove it from the args array.
-        const command = args.shift()
+          // Get the member thanked.
+          const thankee = message.mentions.members.first()
 
-        // If the command exists, test for permissions and run the command function.
-        if (commands.hasOwnProperty(command)) {
-          // Save the command to a variable.
-          const cmd = commands[command]
-          try {
-            // Test that the users has the proper permissions to run the command.
-            if (msg.member.permissions.has(cmd.permissions)) {
+          // If the member exists, continue.
+          if (thankee !== undefined) {
+            // Save the thanker.
+            const thanker = message.member
+            try {
+              // Increment the thanks for the user.
+              const thanks = await incrementThanks(thankee.id, thanker.id)
               try {
-                // Run the command.
-                cmd.exec(args, msg)
+                // Send a confirmation message.
+                return message.channel.send({
+                  embed: {
+                    title: 'Thanks Received!',
+                    color: green,
+                    description: `${thankee} has been thanked by ${thanker}!\n\nThey now have ${thanks} rep.`,
+                    author: {
+                      name: thanker.nickname ? thanker.nickname : thanker.user.username,
+                      icon_url: thanker.user.avatarURL
+                    },
+                    footer: {
+                      icon_url: thankee.user.avatarURL,
+                      text: `${thankee.nickname ? thankee.nickname : thankee.user.username} has been thanked.`
+                    },
+                    timestamp: new Date()
+                  }
+                })
               } catch (err) {
-                logError('CommandListener', 'Failed to execute command', err)
+                logError('Thanks', 'Failed to send message', err)
               }
-            } else {
-              try {
-                // Send error message.
-                sendErrorMessage(
-                  'Insufficient Permissions',
-                  'You do not have permission to use that command.',
-                  msg
-                )
-              } catch (err) {
-                logError('CommandListener', 'Failed to send error message', err)
-              }
+            } catch (err) {
+              logError('Thanks', 'Failed to log the thanks', err)
             }
-          } catch (err) {
-            logError('CommandListener', 'Failed to test for permissions', err)
+
+            log('Thanks', thanker.id)
           }
         }
+      } catch (err) {
+        logError('Thanks', 'Failed to run listener', err)
       }
     })
   } catch (err) {
