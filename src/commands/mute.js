@@ -5,8 +5,9 @@
 
 import { orange } from '../utils/colours'
 import { sendErrorMessage } from '../utils/sendErrorMessage'
-import { mutedRole } from '../utils/config'
+import { channels, mutedRole } from '../utils/config'
 import { logError } from '../utils/log'
+import { getAuthor, getName } from '../utils/user'
 
 // Export an object with command info and the function to execute.
 export const muteCommand = {
@@ -24,7 +25,6 @@ export const muteCommand = {
       }
 
       // Save the user object of the member to be muted.
-      // noinspection DuplicatedCode
       const member = message.mentions.members.first()
 
       // If the user doesn't exist send an error message and terminate the command.
@@ -57,29 +57,21 @@ export const muteCommand = {
         logError('Mute', 'Failed to add muted role', err, message)
       }
 
-      // Save the user to a variable.
-      const user = member.user
-
-      // Save the user's name.
-      const name = member.nickname ? member.nickname : user.username
-
       // Save some info about the staff member.
       const staffMember = message.member
-      const staffUser = staffMember.user
-      const staffName = staffMember.nickname ? staffMember.nickname : staffUser.username
+
+      // Save the warnings channel.
+      const channel = guild.channels.find(c => c.name === channels.warn)
 
       try {
-        // Log the mute to the current channel.
+        // Log the mute to the warnings channel.
         // noinspection JSUnresolvedFunction,JSCheckFunctionSignatures
-        return message.channel.send({
+        return channel.send({
           embed: {
             color: orange,
             title: 'Mute',
-            description: `${name} (${user.tag}) has been muted.`,
-            author: {
-              name: `${staffName} (${staffUser.tag})`,
-              icon_url: staffUser.avatarURL
-            },
+            description: `${getName(member)} (${member.user.tag} - ${member}) has been muted.`,
+            author: getAuthor(staffMember),
             timestamp: new Date()
           }
         })

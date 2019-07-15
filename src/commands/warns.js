@@ -8,6 +8,7 @@ import { sendErrorMessage } from '../utils/sendErrorMessage'
 import { getWarnings } from '../db'
 import { autoBanWarns } from '../utils/config'
 import { logError } from '../utils/log'
+import { getAuthor, getName } from '../utils/user'
 
 // Export an object with command info and the function to execute.
 export const warnsCommand = {
@@ -29,15 +30,9 @@ export const warnsCommand = {
       const member = message.mentions.members.first()
 
       // If the user doesn't exist send an error message and terminate the command.
-      if (member === null) {
+      if (member === undefined) {
         return await sendErrorMessage('Not a User', 'The user you specified either doesn\'t exist or isn\'t a user.', message)
       }
-
-      // Save the user's nickname.
-      const name = member.nickname ? member.nickname : member.user.username
-
-      // Save the user who sent the message. 'member.user' if 'member' exists, otherwise 'author'.
-      const user = message.member ? message.member.user : message.author
 
       // Pull current warnings from the database.
       const currentWarnings = await getWarnings(member.user.id)
@@ -51,16 +46,13 @@ export const warnsCommand = {
 
       // Create the initial embed.
       const embed = {
-        title: `Warnings for ${name} (${member.user.tag})`,
+        title: `Warnings for ${getName(member)} (${member.user.tag})`,
         color: colour,
-        author: {
-          name: user.username,
-          icon_url: user.avatarURL
-        },
+        author: getAuthor(member),
         fields: [],
         footer: {
           icon_url: member.user.avatarURL,
-          text: `${name}'s (${member.user.tag}'s) warnings.`
+          text: `${getName(member)}'s (${member.user.tag}'s) warnings.`
         },
         timestamp: new Date()
       }

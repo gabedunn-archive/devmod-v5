@@ -7,6 +7,7 @@ import { blue } from '../utils/colours'
 import { sendErrorMessage } from '../utils/sendErrorMessage'
 import { getThanks } from '../db'
 import { logError } from '../utils/log'
+import { getAuthor, getName } from '../utils/user'
 
 // Export an object with command info and the function to execute.
 export const reputationCommand = {
@@ -32,27 +33,18 @@ export const reputationCommand = {
         return await sendErrorMessage('Not a User', 'The user you specified either doesn\'t exist or isn\'t a user.', message)
       }
 
-      // Save the user's nickname.
-      const name = member.nickname ? member.nickname : member.user.username
-
-      // Save the user who sent the message. 'member.user' if 'member' exists, otherwise 'author'.
-      const user = message.member ? message.member.user : message.author
-
       // Pull current thanks count from the database.
       const reputation = (await getThanks(member.user.id)).length
 
       // Create the initial embed.
       const embed = {
-        title: `Reputation for ${name} (${member.user.tag})`,
+        title: `Reputation for ${getName(member)} (${member.user.tag})`,
         color: blue,
         description: `${member} has ${reputation} reputation.`,
-        author: {
-          name: user.username,
-          icon_url: user.avatarURL
-        },
+        author: getAuthor(message.member),
         footer: {
           icon_url: member.user.avatarURL,
-          text: `${name}'s (${member.user.tag}'s) reputation.`
+          text: `${getName(member)}'s (${member.user.tag}'s) reputation.`
         },
         timestamp: new Date()
       }

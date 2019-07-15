@@ -6,6 +6,7 @@
 import { blue } from '../utils/colours'
 import { sendErrorMessage } from '../utils/sendErrorMessage'
 import { logError } from '../utils/log'
+import { getAuthor } from '../utils/user'
 
 // Export an object with command info and the function to execute.
 export const lmgtfyCommand = {
@@ -33,17 +34,14 @@ export const lmgtfyCommand = {
 
       try {
         // Send a let me google that for you link in an embedded message.
-        // noinspection JSUnresolvedFunction
+        // noinspection JSUnresolvedFunction,JSCheckFunctionSignatures
         return message.channel.send({
           embed: {
             title: args.join(' '),
             color: blue,
             url: `https://lmgtfy.com/?q=${args.join('+')}`,
             description: 'Here you go!',
-            author: {
-              name: message.member.user.username,
-              icon_url: message.member.user.avatarURL
-            }
+            author: getAuthor(message.member)
           }
         })
       } catch (err) {

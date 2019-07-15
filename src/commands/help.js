@@ -8,6 +8,7 @@ import { commandsArray } from './index'
 import { msgDeleteTime, prefix } from '../utils/config'
 import { capitalize } from '../utils/capitalize'
 import { logError } from '../utils/log'
+import { getAuthor } from '../utils/user'
 
 // Export an object with command info and the function to execute.
 export const helpCommand = {
@@ -40,15 +41,6 @@ export const helpCommand = {
         }
       }
 
-      // Get the member who sent the message.
-      const member = message.member
-
-      // Save the user object of the member
-      const user = member.user
-
-      // Save the member's nickname if they have one, otherwise save name.
-      const name = member.nickname ? member.nickname : user.username
-
       try {
         // If a member is tagged, tag them.
         if (args.length > 0) {
@@ -77,16 +69,13 @@ export const helpCommand = {
       for (const category of Object.keys(categories)) {
         try {
           // Send the message.
-          // noinspection JSUnresolvedFunction
+          // noinspection JSUnresolvedFunction,JSCheckFunctionSignatures
           const sent = await message.channel.send({
             embed: {
               title: capitalize(category),
               color: blue,
               fields: categories[category],
-              author: {
-                name: `${name} (${user.tag})`,
-                icon_url: user.avatarURL
-              }
+              author: getAuthor(message.member)
             }
           })
 

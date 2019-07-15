@@ -7,6 +7,7 @@ import { blue, orange } from '../utils/colours'
 import { channels } from '../utils/config'
 import { sendErrorMessage } from '../utils/sendErrorMessage'
 import { logError } from '../utils/log'
+import { getAuthor } from '../utils/user'
 
 // Export an object with command info and the function to execute.
 export const reportCommand = {
@@ -33,12 +34,9 @@ export const reportCommand = {
       // Save the args remaining after the first two. If there aren't more than two args, default to 'Banned by devmod.'.
       const reason = args.slice(1).join(' ')
 
-      // Save the user who sent the message. 'member.user' if 'member' exists, otherwise 'author'.
-      const user = message.member ? message.member.user : message.author
-
       try {
         // Create a DM channel to send a message to.
-        const dmChannel = await user.createDM()
+        const dmChannel = await message.member.user.createDM()
 
         try {
           // Send the user a DM thanking them for reporting the user.
@@ -46,7 +44,8 @@ export const reportCommand = {
             embed: {
               title: 'Thanks for the Report!',
               color: blue,
-              description: `Thanks for reporting <@${memberReported.id}> for reason: \`${reason}\`. The staff have been notified.`,
+              description: `Thanks for reporting ${memberReported} for reason: \`${reason}\`.\nThe staff have been notified.`,
+              author: getAuthor(message.client.user),
               timestamp: new Date()
             }
           })
@@ -81,22 +80,19 @@ export const reportCommand = {
             fields: [
               {
                 name: 'Member Reported:',
-                value: `<@${memberReported.id}>`,
+                value: `${memberReported}`,
                 inline: true
               },
               {
                 name: 'Channel:',
-                value: `<#${message.channel.id}>`,
+                value: `${message.channel}`,
                 inline: true
               }
             ],
-            author: {
-              name: user.username,
-              icon_url: user.avatarURL
-            },
+            author: getAuthor(message.member),
             footer: {
-              icon_url: user.avatarURL,
-              text: `${memberReported.user.tag} reported from #${message.channel.name} by ${user.tag}.`
+              icon_url: memberReported.user.avatarURL,
+              text: `${memberReported.user.tag} reported from #${message.channel.name} by ${message.member.user.tag}.`
             },
             timestamp: new Date()
           }

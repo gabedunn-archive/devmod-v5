@@ -6,6 +6,8 @@
 import { sendErrorMessage } from '../utils/sendErrorMessage'
 import { green } from '../utils/colours'
 import { logError } from '../utils/log'
+import { getAuthor, getName } from '../utils/user'
+import { channels } from '../utils/config'
 
 // Export an object with command info and the function to execute.
 export const unbanCommand = {
@@ -22,8 +24,10 @@ export const unbanCommand = {
         return await sendErrorMessage('User Not Specified', 'You didn\'t specify a user to unban.', message)
       }
 
+      const tagged = message.mentions.members.first()
+
       // Get the member tagged in the args.
-      const member = args[0]
+      const member = tagged ? tagged : args[0]
 
       // Save the server.
       const guild = message.guild
@@ -36,34 +40,28 @@ export const unbanCommand = {
       const memberToUnban = bans.find(m => `${m.user.username}#${m.user.discriminator}` === member || m.user.id === member)
 
       // If there isn't a banned member with that name, send an error message and terminate the command.
-      if (memberToUnban === null) {
+      if (memberToUnban === undefined) {
         return await sendErrorMessage('User Not Banned', 'The specified user either doesn\'t exist or isn\'t banned.', message)
       }
-
-      // Save the user's name.
-      const name = `${memberToUnban.user.username}#${memberToUnban.user.discriminator}`
 
       // Save the banned reason.
       const reason = memberToUnban.reason
 
-      // Save the user who unbanned the member.
-      const user = message.member.user
+      // Save the ban channel.
+      const channel = guild.channels.find(c => c.name === channels.ban)
 
       try {
         // Log the unban to the current channel.
         // noinspection JSCheckFunctionSignatures
-        await message.channel.send({
+        await channel.send({
           embed: {
             color: green,
             title: 'Unban',
-            description: `${name} has been unbanned.\nThey were previously banned for reason: ${reason}`,
-            author: {
-              name: `${user.username} (${user.tag})`,
-              icon_url: user.avatarURL
-            },
+            description: `${getName(memberToUnban)} has been unbanned.\nThey were previously banned for reason: ${reason}`,
+            author: getAuthor(message.member),
             footer: {
               icon_url: memberToUnban.user.avatarURL,
-              text: `${name} has been unbanned.`
+              text: `${getName(memberToUnban)} has been unbanned.`
             },
             timestamp: new Date()
           }

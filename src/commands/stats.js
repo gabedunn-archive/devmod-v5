@@ -7,6 +7,7 @@ import moment from 'moment'
 
 import { blue } from '../utils/colours'
 import { logError } from '../utils/log'
+import { getAuthor } from '../utils/user'
 
 // Export an object with command info and the function to execute.
 export const statsCommand = {
@@ -36,10 +37,7 @@ export const statsCommand = {
           embed: {
             title: 'Server Stats',
             color: blue,
-            author: {
-              name: message.member.user.username,
-              icon_url: message.member.user.avatarURL
-            },
+            author: getAuthor(message.member),
             fields: [
               {
                 name: `${guild.name}:`,

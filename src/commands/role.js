@@ -7,6 +7,7 @@ import { green, red } from '../utils/colours'
 import { allRoles } from '../utils/approvedRoles'
 import { sendErrorMessage } from '../utils/sendErrorMessage'
 import { logError } from '../utils/log'
+import { getAuthor } from '../utils/user'
 
 // Export an object with command info and the function to execute.
 export const roleCommand = {
@@ -82,11 +83,8 @@ export const roleCommand = {
                 embed: {
                   title: 'Role Added',
                   color: green,
-                  description: `Added ${role} to ${member.user.tag}`,
-                  author: {
-                    name: member.user.username,
-                    icon_url: member.user.avatarURL
-                  }
+                  description: `Added ${guildRole} to ${member}.`,
+                  author: getAuthor(member)
                 }
               })
             } catch (err) {
@@ -115,11 +113,8 @@ export const roleCommand = {
                 embed: {
                   title: 'Role Removed',
                   color: red,
-                  description: `Removed ${role} from ${member.user.tag}`,
-                  author: {
-                    name: member.user.username,
-                    icon_url: member.user.avatarURL
-                  }
+                  description: `Removed ${guildRole} from ${member}.`,
+                  author: getAuthor(member)
                 }
               })
             } catch (err) {

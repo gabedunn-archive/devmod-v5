@@ -15,7 +15,7 @@ export const logError = (area, message, err, msg = false) => {
   console.error(`${chalk.greenBright(`[${area}]`)} ${chalk.redBright(`${message}:`)}`, err)
   if (msg) {
     try {
-      message.react('❌')
+      msg.react('❌')
     } catch (err) {
       console.error(`${chalk.greenBright('[Log]')} ${chalk.redBright('Failed to add failure reaction:')}`, err)
     }

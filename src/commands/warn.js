@@ -9,6 +9,7 @@ import { autoBan, autoBanWarns, banMsgDelete, channels } from '../utils/config'
 import { addWarning, getWarnings } from '../db'
 import { banCommand } from './ban'
 import { logError } from '../utils/log'
+import { getAuthor, getName } from '../utils/user'
 
 // Export an object with command info and the function to execute.
 export const warnCommand = {
@@ -30,7 +31,7 @@ export const warnCommand = {
       const member = message.mentions.members.first()
 
       // If the user doesn't exist send an error message and terminate the command.
-      if (member === null) {
+      if (member === undefined) {
         return await sendErrorMessage('Not a User', 'The user you specified either doesn\'t exist or isn\'t a user.', message)
       }
 
@@ -49,21 +50,15 @@ export const warnCommand = {
 
       const reason = args.length > 1 ? args.slice(1).join(' ') : 'warned by devmod'
 
-      // Save some information about the user.
-      const user = member.user
-      const name = member.nickname ? member.nickname : user.username
-
       // Save some info about the staff member.
       const staffMember = message.member
-      const staffUser = staffMember.user
-      const staffName = staffMember.nickname ? staffMember.nickname : staffUser.username
 
       // Pull current warnings from the database.
-      const currentWarnings = await getWarnings(user.id)
+      const currentWarnings = await getWarnings(member.user.id)
 
       try {
         // Log the warning to the database.
-        await addWarning(user.id, reason, staffUser.id)
+        await addWarning(member.user.id, reason, staffMember.user.id)
       } catch (err) {
         logError('Warn', 'Failed to log warning', err, message)
       }
@@ -84,14 +79,11 @@ export const warnCommand = {
             embed: {
               color: colour,
               title: `Warning #${currentWarnings.length + 1}`,
-              description: `${name} (${user.tag}) has been warned for: ${reason}.`,
-              author: {
-                name: `${staffName} (${staffUser.tag})`,
-                icon_url: staffUser.avatarURL
-              },
+              description: `${getName(member)} (${member.user.tag} - ${member}) has been warned for: ${reason}.`,
+              author: getAuthor(staffMember),
               footer: {
-                icon_url: user.avatarURL,
-                text: `${name}'s (${user.tag}'s) has been warned.`
+                icon_url: member.user.avatarURL,
+                text: `${getName(member)}'s (${member.user.tag}'s) has been warned.`
               },
               timestamp: new Date()
             }
@@ -102,13 +94,14 @@ export const warnCommand = {
 
       try {
         // Create a dm channel to the user.
-        const dm = await user.createDM()
+        const dm = await member.user.createDM()
 
         // Send a dm to the user letting them know they've been warned.
         await dm.send({
           embed: {
             title: `You have received a warning on ${message.guild.name}.`,
             color: colour,
+            author: getAuthor(member.client.user),
             thumbnail: {
               url: message.guild.iconURL
             },

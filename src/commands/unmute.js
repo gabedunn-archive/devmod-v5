@@ -3,10 +3,11 @@
 * Command that unmutes a user.
 */
 
-import { orange } from '../utils/colours'
+import { green } from '../utils/colours'
 import { sendErrorMessage } from '../utils/sendErrorMessage'
-import { mutedRole } from '../utils/config'
+import { channels, mutedRole } from '../utils/config'
 import { logError } from '../utils/log'
+import { getAuthor, getName } from '../utils/user'
 
 // Export an object with command info and the function to execute.
 export const unmuteCommand = {
@@ -27,7 +28,7 @@ export const unmuteCommand = {
       const member = message.mentions.members.first()
 
       // If the user doesn't exist send an error message and terminate the command.
-      if (member === null) {
+      if (member === undefined) {
         return await sendErrorMessage('Not a User', 'The user you specified either doesn\'t exist or isn\'t a user.', message)
       }
 
@@ -38,7 +39,7 @@ export const unmuteCommand = {
       const muted = guild.roles.find(r => r.name === mutedRole)
 
       // If the muted role doesn't exist, send an error message and terminate the command.
-      if (muted === null) {
+      if (muted === undefined) {
         return await sendErrorMessage('Muted Role Doesn\'t Exist', 'The muted role specified in the config does not exist.', message)
       }
 
@@ -46,16 +47,8 @@ export const unmuteCommand = {
         // Remove the muted role from the member.
         await member.removeRole(muted)
 
-        // Save the user to a variable.
-        const user = member.user
-
-        // Save the user's name.
-        const name = member.nickname ? member.nickname : user.username
-
-        // Save some info about the staff member.
-        const staffMember = message.member
-        const staffUser = staffMember.user
-        const staffName = staffMember.nickname ? staffMember.nickname : staffUser.username
+        // Save the warnings channel.
+        const channel = guild.channels.find(c => c.name === channels.warn)
 
         try {
           // Remove the user's message.
@@ -65,17 +58,14 @@ export const unmuteCommand = {
         }
 
         try {
-          // Log the unmute to the current channel.
+          // Log the unmute to the warnings channel.
           // noinspection JSUnresolvedFunction
-          return message.channel.send({
+          return channel.send({
             embed: {
-              color: orange,
+              color: green,
               title: 'Unmute',
-              description: `${name} (${user.tag}) has been unmuted.`,
-              author: {
-                name: `${staffName} (${staffUser.tag})`,
-                icon_url: staffUser.avatarURL
-              },
+              description: `${getName(member)} (${member.user.tag} - ${member}) has been unmuted.`,
+              author: getAuthor(message.member),
               timestamp: new Date()
             }
           })

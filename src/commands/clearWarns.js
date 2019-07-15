@@ -7,6 +7,7 @@ import { blue } from '../utils/colours'
 import { sendErrorMessage } from '../utils/sendErrorMessage'
 import { clearWarnings } from '../db'
 import { logError } from '../utils/log'
+import { getAuthor, getName } from '../utils/user'
 
 // Export an object with command info and the function to execute.
 export const clearWarnsCommand = {
@@ -28,25 +29,16 @@ export const clearWarnsCommand = {
       const member = message.mentions.members.first()
 
       // If the user doesn't exist send an error message and terminate the command.
-      if (member === null) {
+      if (member === undefined) {
         return await sendErrorMessage('Not a User', 'The user you specified either doesn\'t exist or isn\'t a user.', message)
       }
 
-      // Save some information about the user.
-      const user = member.user
-      const name = member.nickname ? member.nickname : user.username
-
       try {
         // Clear the warnings from the database.
-        await clearWarnings(user.id)
+        await clearWarnings(member.user.id)
       } catch (err) {
         logError('ClearWarns', 'Failed to clear warnings', err, message)
       }
-
-      // Save some info about the staff member.
-      const staffMember = message.member
-      const staffUser = staffMember.user
-      const staffName = staffMember.nickname ? staffMember.nickname : staffUser.username
 
       try {
         // Remove the user's message.
@@ -55,6 +47,9 @@ export const clearWarnsCommand = {
         logError('ClearWarns', 'Failed to delete message', err, message)
       }
 
+      // Save some info about the staff member.
+      const staffMember = message.member
+
       try {
         // Send a confirmation message.
         // noinspection JSUnresolvedFunction,JSCheckFunctionSignatures
@@ -62,14 +57,11 @@ export const clearWarnsCommand = {
           embed: {
             color: blue,
             title: 'Warnings Cleared',
-            description: `${name}'s (${user.tag}'s) warnings have been cleared.`,
-            author: {
-              name: `${staffName} (${staffUser.tag})`,
-              icon_url: staffUser.avatarURL
-            },
+            description: `${getName(member)}'s (${member.user.tag}'s) warnings have been cleared.`,
+            author: getAuthor(staffMember),
             footer: {
-              icon_url: user.avatarURL,
-              text: `${name}'s (${user.tag}'s) warnings have been cleared.`
+              icon_url: member.user.avatarURL,
+              text: `${getName(member)}'s (${member.user.tag}'s) warnings have been cleared.`
             },
             timestamp: new Date()
           }

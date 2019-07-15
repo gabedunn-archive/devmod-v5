@@ -8,6 +8,7 @@ import { channels } from '../utils/config'
 import { getSetting, setSetting } from '../db'
 import { allRoles } from '../utils/approvedRoles'
 import { log, logError } from '../utils/log'
+import { getAuthor } from '../utils/user'
 
 // Export an object with command info and the function to execute.
 export const buildRolesCommand = {
@@ -18,9 +19,6 @@ export const buildRolesCommand = {
   permissions: ['ADMINISTRATOR'],
   exec: async (args, message) => {
     try {
-      // Save the user who sent the message. 'member.user' if 'member' exists, otherwise 'author'.
-      const user = message.member ? message.member.user : message.author
-
       // Save the previous roles messages.
       const previousRolesMessages = await getSetting('reactions_message_ids')
 
@@ -32,6 +30,7 @@ export const buildRolesCommand = {
         // Delete the previous roles messages if they exist.
         for (const messageID of Object.values(previousRolesMessages)) {
           try {
+            // noinspection JSCheckFunctionSignatures
             const roleMessage = await rolesChannel.fetchMessage(messageID)
             await roleMessage.delete()
           } catch (err) {
@@ -109,11 +108,8 @@ export const buildRolesCommand = {
           embed: {
             title: 'Built Roles Message',
             color: blue,
-            description: `The roles message has been built and is live in <#${rolesChannel.id}>.`,
-            author: {
-              name: user.username,
-              icon_url: user.avatarURL
-            },
+            description: `The roles message has been built and is live in ${rolesChannel}.`,
+            author: getAuthor(message.member),
             timestamp: new Date()
           }
         })

@@ -1,6 +1,7 @@
 /*
  * Gabe Dunn 2019
  * Main file to import all main functions and run them.
+ * TODO: go through entire project and user proper naming for user & member
  */
 
 import { devmod } from './devmod'

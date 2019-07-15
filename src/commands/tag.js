@@ -6,6 +6,7 @@
 import { sendErrorMessage } from '../utils/sendErrorMessage'
 import tags from '../utils/tags'
 import { logError } from '../utils/log'
+import { getAuthor } from '../utils/user'
 
 // Export an object with command info and the function to execute.
 export const tagCommand = {
@@ -36,14 +37,8 @@ export const tagCommand = {
       // Save the embed from the tags.
       const embed = tags[tag]
 
-      // Save the user.
-      const user = message.member ? message.member.user : message.author
-
       // Add the author & timestamp to the embed.
-      embed.author = {
-        name: user.username,
-        icon_url: user.avatarURL
-      }
+      embed.author = getAuthor(message.member)
       embed.timestamp = new Date()
 
       try {

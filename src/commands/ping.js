@@ -5,6 +5,7 @@
 
 import { blue } from '../utils/colours'
 import { logError } from '../utils/log'
+import { getAuthor } from '../utils/user'
 
 // Export an object with command info and the function to execute.
 export const pingCommand = {
@@ -19,6 +20,7 @@ export const pingCommand = {
       const embed = {
         title: 'Pong!',
         color: blue,
+        author: getAuthor(message.member),
         fields: [{
           name: 'Ping:',
           value: `${Math.round(message.client.ping)}ms.`

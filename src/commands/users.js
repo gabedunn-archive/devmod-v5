@@ -5,6 +5,7 @@
 
 import { blue } from '../utils/colours'
 import { logError } from '../utils/log'
+import { getAuthor } from '../utils/user'
 
 // Export an object with command info and the function to execute.
 export const usersCommand = {
@@ -34,10 +35,7 @@ export const usersCommand = {
             color: blue,
             description: `There are currently ${guild.memberCount} users in this discord server (${guild.members.array().filter(
               m => m.presence.status !== 'offline').length} currently online).`,
-            author: {
-              name: message.member.user.username,
-              icon_url: message.member.user.avatarURL
-            }
+            author: getAuthor(message.member)
           }
         })
       } catch (err) {

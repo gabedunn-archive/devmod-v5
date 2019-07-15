@@ -7,6 +7,7 @@ import { blue, red } from '../utils/colours'
 import { msgDeleteTime, prefix } from '../utils/config'
 import { allRoles } from '../utils/approvedRoles'
 import { logError } from '../utils/log'
+import { getAuthor } from '../utils/user'
 
 // Export an object with command info and the function to execute.
 export const rolesCommand = {
@@ -17,18 +18,12 @@ export const rolesCommand = {
   permissions: ['SEND_MESSAGES'],
   exec: async (args, message) => {
     try {
-      // Save the user who sent the message. 'member.user' if 'member' exists, otherwise 'author'.
-      const user = message.member ? message.member.user : message.author
-
       try {
         // Create the initial embed.
         const embed = {
           title: 'Available Roles',
           color: blue,
-          author: {
-            name: user.username,
-            icon_url: user.avatarURL
-          },
+          author: getAuthor(message.member),
           fields: [],
           timestamp: new Date()
         }
