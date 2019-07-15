@@ -16,7 +16,7 @@ export const helpCommand = {
   category: 'utils',
   description: 'Sends a list of commands that can be used with the bot.',
   permissions: ['SEND_MESSAGES'],
-  usage: 'help [<user>]',
+  usage: '[<user>]',
   exec: async (args, message) => {
     try {
       // Set categories to an empty object to have all the commands added into.
@@ -24,10 +24,12 @@ export const helpCommand = {
 
       // Loop through all commands and add them to their proper place in the categories object.
       for (const command of commandsArray) {
+        // Format usage
+        const usage = command.usage ? `${command.aliases[0]} ${command.usage}` : command.aliases[0]
         // Save the embed field.
         const field = {
           name: command.name,
-          value: `Usage: \`${prefix}${command.usage || command.aliases[0]}\`\n${command.description}`
+          value: `Usage: \`${prefix}${usage}\`\n${command.description}`
         }
 
         // If the category exists, push the field. Otherwise, initialize the category with the field as it's first element.
@@ -90,7 +92,7 @@ export const helpCommand = {
 
           // If msgDeleteTime doesn't equal 0, set a timeout to delete the message after x seconds. (x secs * 1000 ms).
           if (msgDeleteTime !== 0) {
-            return setTimeout(() => {
+            setTimeout(() => {
               try {
                 // Delete the message.
                 sent.delete(1)

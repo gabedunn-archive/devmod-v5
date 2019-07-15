@@ -12,11 +12,10 @@ import { log, logError } from '../utils/log'
 // Export an object with command info and the function to execute.
 export const buildRolesCommand = {
   name: 'Build Roles',
-  aliases: ['buildRoles', 'build-roles', 'buildroles'],
+  aliases: ['buildroles', 'buildRoles', 'build-roles'],
   category: 'admin',
   description: 'Builds the messages in the roles channel.',
   permissions: ['ADMINISTRATOR'],
-  usage: 'buildRoles',
   exec: async (args, message) => {
     try {
       // Save the user who sent the message. 'member.user' if 'member' exists, otherwise 'author'.

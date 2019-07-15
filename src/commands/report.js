@@ -15,7 +15,7 @@ export const reportCommand = {
   category: 'moderation',
   description: 'Reports a user to the staff.',
   permissions: ['SEND_MESSAGES'],
-  usage: 'report <user> <reason>',
+  usage: '<user> <reason>',
   exec: async (args, message) => {
     try {
       // If there aren't any args, send an error message stating a member wasn't specified and terminate the command.

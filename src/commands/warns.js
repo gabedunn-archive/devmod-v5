@@ -16,7 +16,7 @@ export const warnsCommand = {
   category: 'moderation',
   description: 'Sends a list of warnings for a user.',
   permissions: ['KICK_MEMBERS'],
-  usage: 'warns <user>',
+  usage: '<user>',
   exec: async (args, message) => {
     try {
       // If a user isn't specified send an error message and terminate the command.

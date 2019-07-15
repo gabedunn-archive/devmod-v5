@@ -14,7 +14,7 @@ export const tagCommand = {
   category: 'utils',
   description: 'Sends a specified tag.',
   permissions: ['SEND_MESSAGES'],
-  usage: 'tag <tag> [<user]',
+  usage: '<tag> [<user]',
   exec: async (args, message) => {
     try {
       // If a tag isn't specified send an error message and terminate the command.

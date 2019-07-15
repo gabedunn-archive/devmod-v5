@@ -15,7 +15,7 @@ export const roleCommand = {
   category: 'utils',
   description: 'Adds or removes a role from a user.',
   permissions: ['SEND_MESSAGES'],
-  usage: 'role <add|rm> <role>',
+  usage: '<add|rm> <role>',
   exec: async (args, message) => {
     try {
       // If a command isn't specified send an error message and terminate the command.

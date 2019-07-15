@@ -14,7 +14,7 @@ export const lmgtfyCommand = {
   category: 'fun',
   description: 'Sends a \'let me google that for you link\'.',
   permissions: ['SEND_MESSAGES'],
-  usage: 'lmgtfy <query>',
+  usage: '<query>',
   exec: async (args, message) => {
     try {
       // If a query isn't specified, send an error message and terminate the command.

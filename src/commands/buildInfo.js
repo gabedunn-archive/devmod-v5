@@ -12,11 +12,10 @@ import { blue } from '../utils/colours'
 // Export an object with command info and the function to execute.
 export const buildInfoCommand = {
   name: 'Build Info',
-  aliases: ['buildInfo', 'build-info', 'buildinfo'],
-  category: 'utils',
+  aliases: ['buildinfo', 'buildInfo', 'build-info'],
+  category: 'admin',
   description: 'Sends an info message to the info channel.',
   permissions: ['ADMINISTRATOR'],
-  usage: 'buildInfo',
   exec: async (args, message) => {
     try {
       // Save the message's channel.

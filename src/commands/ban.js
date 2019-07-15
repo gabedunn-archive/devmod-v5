@@ -15,7 +15,7 @@ export const banCommand = {
   category: 'moderation',
   description: 'Bans a user and removes their messages from a specified number of days previous.',
   permissions: ['BAN_MEMBERS'],
-  usage: 'ban <user> [<days> <reason>]',
+  usage: '<user> [<days> <reason>]',
   exec: async (args, message) => {
     try {
       // If there aren't any args, send an error message stating a member wasn't specified and terminate the command.

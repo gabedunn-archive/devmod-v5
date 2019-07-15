@@ -13,7 +13,6 @@ export const aboutCommand = {
   category: 'utils',
   description: 'Tells a little bit about the bot.',
   permissions: ['SEND_MESSAGES'],
-  usage: 'about',
   exec: async (args, message) => {
     try {
       // Save the user who sent the message. 'member.user' if 'member' exists, otherwise 'author'.

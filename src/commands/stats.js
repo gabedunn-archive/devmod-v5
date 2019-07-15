@@ -15,7 +15,6 @@ export const statsCommand = {
   category: 'utils',
   description: 'Sends some stats about the bot and server.',
   permissions: ['SEND_MESSAGES'],
-  usage: 'stats',
   exec: async (args, message) => {
     try {
       // Save some info about the server and bot.

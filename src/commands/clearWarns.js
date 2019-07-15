@@ -11,11 +11,11 @@ import { logError } from '../utils/log'
 // Export an object with command info and the function to execute.
 export const clearWarnsCommand = {
   name: 'Clear Warns',
-  aliases: ['clearWarns', 'clear-warns', 'cWarns', 'cwarns', 'c-warns'],
+  aliases: ['clearwarns', 'clearWarns', 'clear-warns', 'cWarns', 'cwarns', 'c-warns'],
   category: 'moderation',
   description: 'Clears a user\'s warnings.',
   permissions: ['KICK_MEMBERS'],
-  usage: 'clearwarns <user>',
+  usage: '<user>',
   exec: async (args, message) => {
     try {
       // If a user isn't specified send an error message and terminate the command.

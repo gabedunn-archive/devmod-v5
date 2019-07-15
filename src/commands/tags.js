@@ -16,7 +16,6 @@ export const tagsCommand = {
   category: 'utils',
   description: 'Sends a list of tags.',
   permissions: ['SEND_MESSAGES'],
-  usage: 'tags',
   exec: async (args, message) => {
     try {
       // Save the user who sent the message. 'member.user' if 'member' exists, otherwise 'author'.

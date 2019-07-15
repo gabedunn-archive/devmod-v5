@@ -13,7 +13,6 @@ export const usersCommand = {
   category: 'utils',
   description: 'Shows how many users are on the server.',
   permissions: ['SEND_MESSAGES'],
-  usage: 'users',
   exec: async (args, message) => {
     try {
       try {

@@ -13,7 +13,6 @@ export const pingCommand = {
   category: 'utils',
   description: 'Shows ping and round trip time for the bot.',
   permissions: ['SEND_MESSAGES'],
-  usage: 'ping',
   exec: async (args, message) => {
     try {
       // Create the initial embed to send.

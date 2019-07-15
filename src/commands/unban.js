@@ -14,7 +14,7 @@ export const unbanCommand = {
   category: 'moderation',
   description: 'Unbans a user.',
   permissions: ['BAN_MEMBERS'],
-  usage: 'unban <user>',
+  usage: '<user>',
   exec: async (args, message) => {
     try {
       // If there aren't any args, send an error message stating a member wasn't specified and terminate the command.

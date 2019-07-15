@@ -15,7 +15,7 @@ export const reputationCommand = {
   category: 'utils',
   description: 'Sends a count of reputation points for a user.',
   permissions: ['SEND_MESSAGES'],
-  usage: 'reputation <user>',
+  usage: '<user>',
   exec: async (args, message) => {
     try {
       // If a user isn't specified send an error message and terminate the command.

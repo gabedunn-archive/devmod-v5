@@ -15,7 +15,6 @@ export const rolesCommand = {
   category: 'utils',
   description: 'Sends a list of roles.',
   permissions: ['SEND_MESSAGES'],
-  usage: 'roles',
   exec: async (args, message) => {
     try {
       // Save the user who sent the message. 'member.user' if 'member' exists, otherwise 'author'.

@@ -15,7 +15,7 @@ export const unmuteCommand = {
   category: 'moderation',
   description: 'Remove a muted role from a user.',
   permissions: ['KICK_MEMBERS'],
-  usage: 'unmute <user>',
+  usage: '<user>',
   exec: async (args, message) => {
     try {
       // If a user isn't specified send an error message and terminate the command.
