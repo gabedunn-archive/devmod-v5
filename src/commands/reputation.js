@@ -29,7 +29,7 @@ export const reputationCommand = {
       const member = message.mentions.members.first()
 
       // If the user doesn't exist send an error message and terminate the command.
-      if (member === null) {
+      if (member === undefined) {
         return await sendErrorMessage('Not a User', 'The user you specified either doesn\'t exist or isn\'t a user.', message)
       }
 

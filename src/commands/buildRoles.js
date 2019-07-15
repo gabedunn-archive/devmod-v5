@@ -9,6 +9,7 @@ import { getSetting, setSetting } from '../db'
 import { allRoles } from '../utils/approvedRoles'
 import { log, logError } from '../utils/log'
 import { getAuthor } from '../utils/user'
+import { sendErrorMessage } from '../utils/sendErrorMessage'
 
 // Export an object with command info and the function to execute.
 export const buildRolesCommand = {
@@ -25,17 +26,19 @@ export const buildRolesCommand = {
       // Save the roles channel
       const rolesChannel = message.guild.channels.find(c => c.name === channels.roles)
 
-      // If the roles channel exists, find and delete the previous messages.
-      if (rolesChannel !== null) {
-        // Delete the previous roles messages if they exist.
-        for (const messageID of Object.values(previousRolesMessages)) {
-          try {
-            // noinspection JSCheckFunctionSignatures
-            const roleMessage = await rolesChannel.fetchMessage(messageID)
-            await roleMessage.delete()
-          } catch (err) {
-            logError('BuildRoles', 'Failed to delete roles message', err, message)
-          }
+      if (rolesChannel === undefined) {
+        return await sendErrorMessage('No Role Channel', 'The roles channel either isn\'t set or doesn\'t exist.')
+      }
+
+      // Find and delete the previous messages.
+      // Delete the previous roles messages if they exist.
+      for (const messageID of Object.values(previousRolesMessages)) {
+        try {
+          // noinspection JSCheckFunctionSignatures
+          const roleMessage = await rolesChannel.fetchMessage(messageID)
+          await roleMessage.delete()
+        } catch (err) {
+          logError('BuildRoles', 'Failed to delete roles message', err, message)
         }
       }
 
@@ -53,7 +56,6 @@ export const buildRolesCommand = {
 
         try {
           // Find the roles channel, send the roles message, and save the ID.
-          // noinspection JSObjectNullOrUndefined
           const roleMessage = await rolesChannel.send({
             // Create the discord embed to send to the channel.
             embed: {

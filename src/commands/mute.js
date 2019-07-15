@@ -28,7 +28,7 @@ export const muteCommand = {
       const member = message.mentions.members.first()
 
       // If the user doesn't exist send an error message and terminate the command.
-      if (member === null) {
+      if (member === undefined) {
         return await sendErrorMessage('Not a User', 'The user you specified either doesn\'t exist or isn\'t a user.', message)
       }
 
@@ -39,7 +39,7 @@ export const muteCommand = {
       const muted = guild.roles.find(r => r.name === mutedRole)
 
       // If the muted role doesn't exist, send an error message and terminate the command.
-      if (muted === null) {
+      if (muted === undefined) {
         return await sendErrorMessage('Muted Role Doesn\'t Exist', 'The muted role specified in the config does not exist.', message)
       }
 

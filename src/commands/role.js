@@ -56,7 +56,7 @@ export const roleCommand = {
       const guildRole = guild.roles.find(r => r.name === role)
 
       // If the role doesn't exist, send an error message and terminate the command.
-      if (guildRole === null) {
+      if (guildRole === undefined) {
         return await sendErrorMessage('Role Doesn\'t Exist', 'The specified role doesn\'t exist.', message)
       }
 

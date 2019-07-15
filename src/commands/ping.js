@@ -42,7 +42,7 @@ export const pingCommand = {
           return await sent.edit({ embed })
         } catch (err) {
           logError('Ping', 'Error updating message', err, message)
-          return null
+          return await new Promise((resolve => resolve))
         }
       } catch (err) {
         logError('Ping', 'Failed to send message', err, message)

@@ -48,7 +48,7 @@ export const helpCommand = {
           const taggedUserID = message.mentions.members.first().id
 
           // If the user exists, send a message tagging them.
-          if (taggedUserID !== null && taggedUserID !== undefined) {
+          if (taggedUserID !== undefined) {
             // Sent the message tagging the user.
             const sent = await message.channel.send(`<@${taggedUserID}>`)
 
