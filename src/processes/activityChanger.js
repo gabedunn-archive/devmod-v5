@@ -5,7 +5,7 @@
 
 import { activities } from '../utils/activities'
 import { prefix, statusInterval } from '../utils/config'
-import { logError } from '../utils/log'
+import { log, logError } from '../utils/log'
 
 // Changes the status of the bot to the specified activities on an interval based on the config value 'statusInterval'.
 export const initActivityChanger = async client => {
@@ -37,4 +37,5 @@ export const initActivityChanger = async client => {
       }
     }, 60 * 1000)
   }, statusInterval * 60 * 1000)
+  log('Init', 'Activity changer initialized!')
 }

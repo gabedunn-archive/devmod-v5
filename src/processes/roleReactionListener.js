@@ -5,7 +5,7 @@
 
 import { allRoles } from '../utils/approvedRoles'
 import { getSetting } from '../db'
-import { logError } from '../utils/log'
+import { log, logError } from '../utils/log'
 
 // Applied an action to either add a remove a role from a user based on the action provided and the approved roles list.
 const roleAction = async ({ client, guildId, messageId, userId, emojiName }, remove = false) => {
@@ -121,6 +121,7 @@ export const initReactionListener = async client => {
         logError('RoleListener', 'Failed to handle reaction', err)
       }
     })
+    log('Init', 'Role reaction listener initialized!')
   } catch (err) {
     logError('RoleListener', 'Failed to add raw listener', err)
   }

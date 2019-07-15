@@ -57,6 +57,7 @@ export const initThanksListener = client => {
         logError('Thanks', 'Failed to run listener', err)
       }
     })
+    log('Init', 'Thanks listener initialized!')
   } catch (err) {
     logError('CommandListener', 'Failed to initialize the command listener', err)
   }

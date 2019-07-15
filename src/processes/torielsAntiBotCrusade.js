@@ -6,7 +6,7 @@
 // Export a function to initialize the anti bot process.
 import { orange } from '../utils/colours'
 import { channels } from '../utils/config'
-import { logError } from '../utils/log'
+import { log, logError } from '../utils/log'
 
 export const initTorielsAntiBotCrusade = async client => {
   try {
@@ -50,6 +50,7 @@ export const initTorielsAntiBotCrusade = async client => {
         logError('AntiBot', 'Failed to handle the message', err)
       }
     })
+    log('Init', 'Toriel\'s anti-bot crusade initialized!')
   } catch (err) {
     logError('AntiBot', 'Failed to initialize the anti bot crusade', err)
   }

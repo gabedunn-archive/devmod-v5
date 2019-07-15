@@ -6,7 +6,7 @@
 import { commands } from '../commands'
 import { prefix } from '../utils/config'
 import { sendErrorMessage } from '../utils/sendErrorMessage'
-import { logError } from '../utils/log'
+import { log, logError } from '../utils/log'
 
 export const initCommandListener = client => {
   try {
@@ -36,7 +36,7 @@ export const initCommandListener = client => {
             } else {
               try {
                 // Send error message.
-                sendErrorMessage(
+                return sendErrorMessage(
                   'Insufficient Permissions',
                   'You do not have permission to use that command.',
                   msg
@@ -51,6 +51,7 @@ export const initCommandListener = client => {
         }
       }
     })
+    log('Init', 'Command listener initialized!')
   } catch (err) {
     logError('CommandListener', 'Failed to initialize the command listener', err)
   }
