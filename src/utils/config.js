@@ -29,8 +29,9 @@ export const channels = {
   info: process.env.CHANNEL_INFO || 'info', // Channel to send the info to.
   crusade: process.env.CHANNEL_CRUSADE || 'reports' // Channel to send notifications that the anti bot crusade has deleted a message.
 }
-export const mutedRole = process.env.MUTED_ROLE || 'muted' // Name of the role to apply to muted users.
-export const verifiedRole = process.env.VERIFIED_ROLE || 'verified' // Name of the role to apply to verified users.
-export const pointEmoji = process.env.POINTS_EMOJI || 'boye' // Name of emoji to use for GBP.
+export const roles = {
+  muted: process.env.ROLE_MUTED || 'muted', // Name of the role to apply to muted users.
+  verified: process.env.ROLE_VERIFIED || 'verified' // Name of the role to apply to verified users.
+}
 export const statusInterval = process.env.STATUS_INTERVAL || 5 // Amount of time in minutes between status message changes.
 export const pointsTopCount = process.env.POINTS_TOP_COUNT || 10 // Number of users to show in GBP top and bottom counts.

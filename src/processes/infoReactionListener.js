@@ -4,7 +4,7 @@
  */
 
 import { getSetting } from '../db'
-import { verifiedRole } from '../utils/config'
+import { roles } from '../utils/config'
 import { log, logError } from '../utils/log'
 
 // Applied an action to either add a remove a role from a user based on the action provided.
@@ -16,10 +16,10 @@ const roleAction = async ({ client, guildId, messageId, userId, emojiName }, rem
     // Save some details about the reaction event to constants.
     const guild = client.guilds.get(guildId)
     const member = guild.member(userId)
-    const roles = guild.roles
+    const guildRoles = guild.roles
 
     // Grab the verified role from the server.
-    const role = roles.find(r => r.name === verifiedRole)
+    const role = guildRoles.find(r => r.name === roles.verified)
 
     try {
       // If the role exists, continue.

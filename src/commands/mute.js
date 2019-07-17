@@ -5,7 +5,7 @@
 
 import { orange } from '../utils/colours'
 import { sendErrorMessage } from '../utils/sendErrorMessage'
-import { channels, mutedRole } from '../utils/config'
+import { channels, roles } from '../utils/config'
 import { logError } from '../utils/log'
 import { getAuthor, getName } from '../utils/user'
 
@@ -36,7 +36,7 @@ export const muteCommand = {
       const guild = message.guild
 
       // Fetch the muted role from the server.
-      const muted = guild.roles.find(r => r.name === mutedRole)
+      const muted = guild.roles.find(r => r.name === roles.muted)
 
       // If the muted role doesn't exist, send an error message and terminate the command.
       if (muted === undefined) {
