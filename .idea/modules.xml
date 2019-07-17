@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/devmod-v5.iml" filepath="$PROJECT_DIR$/.idea/devmod-v5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/devmod.iml" filepath="$PROJECT_DIR$/.idea/devmod.iml" />
     </modules>
   </component>
 </project>

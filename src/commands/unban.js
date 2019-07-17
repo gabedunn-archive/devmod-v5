@@ -27,7 +27,7 @@ export const unbanCommand = {
       const tagged = message.mentions.members.first()
 
       // Get the member tagged in the args.
-      const member = tagged ? tagged : args[0]
+      const member = tagged || args[0]
 
       // Save the server.
       const guild = message.guild

@@ -16,7 +16,7 @@ try {
     logError('Main', 'Unhandled Rejection', err)
     process.exit(1)
   })
-// Same thing but for uncaught exception.
+  // Same thing but for uncaught exception.
   process.on('uncaughtException', err => {
     logError('Main', 'Uncaught Exception', err)
     process.exit(1)
