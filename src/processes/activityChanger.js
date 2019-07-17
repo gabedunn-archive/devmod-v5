@@ -4,7 +4,7 @@
  */
 
 import { activities } from '../utils/activities'
-import { prefix, statusInterval } from '../utils/config'
+import { prefix } from '../utils/config'
 import { log, logError } from '../utils/log'
 
 // Changes the status of the bot to the specified activities on an interval based on the config value 'statusInterval'.
@@ -15,7 +15,7 @@ export const initActivityChanger = async client => {
   } catch (err) {
     logError('Activity', `Failed to set activity to ${prefix}help:`, err)
   }
-  // Set an interval to run a function every x minutes where statusInterval = x. (x mins * 60 secs * 1000 ms).
+  // Set an interval to run a function every 5 minutes (5 mins * 60 secs * 1000 ms).
   setInterval(async () => {
     try {
       // Choose a random activity from the activities file.
@@ -36,6 +36,6 @@ export const initActivityChanger = async client => {
         logError('Activity', `Failed to set activity back to ${prefix}help:`, err)
       }
     }, 60 * 1000)
-  }, statusInterval * 60 * 1000)
+  }, 5 * 60 * 1000)
   log('Init', 'Activity changer initialized!')
 }

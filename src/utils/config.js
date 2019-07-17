@@ -10,6 +10,7 @@ import { join } from 'path'
 config()
 
 export const botToken = process.env.BOT_TOKEN // Discord API token for the bot.
+export const botOwner = process.env.BOT_OWNER // Discord ID for the bot owner.
 export const prefix = process.env.PREFIX || '.' // Prefix for bot commands.
 export const msgDeleteTime = process.env.MSG_DELETE_TIME || 20 // Amount of time in seconds to wait before deleting large help messages.
 export const dbFile = join(
@@ -33,4 +34,3 @@ export const roles = {
   muted: process.env.ROLE_MUTED || 'muted', // Name of the role to apply to muted users.
   verified: process.env.ROLE_VERIFIED || 'verified' // Name of the role to apply to verified users.
 }
-export const statusInterval = process.env.STATUS_INTERVAL || 5 // Amount of time in minutes between status message changes.
