@@ -22,6 +22,7 @@ export const expandCommands = commands => {
       return previous
     }, {})
   } catch (err) {
+    // noinspection JSIgnoredPromiseFromCall
     logError('Function', 'expandCommand failed', err)
   }
 }

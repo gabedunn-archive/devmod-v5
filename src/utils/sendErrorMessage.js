@@ -9,10 +9,13 @@ import { logError } from './log'
 // Given a title and a description, return the object for a Discord embedded error message.
 export const sendErrorMessage = async (title, description, message) => {
   try {
-    // React to the message with an X emoji.
-    await message.react('❌')
+    // noinspection JSUnresolvedVariable
+    if (!message.deleted) {
+      // React to the message with an X emoji.
+      await message.react('❌')
+    }
   } catch (err) {
-    logError('Function', 'Failed to react to message', err)
+    await logError('Function', 'Failed to react to message', err)
   }
 
   try {
@@ -26,6 +29,6 @@ export const sendErrorMessage = async (title, description, message) => {
       }
     })
   } catch (err) {
-    logError('Function', 'Failed to send error message', err)
+    await logError('Function', 'Failed to send error message', err)
   }
 }

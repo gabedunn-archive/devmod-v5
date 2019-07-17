@@ -27,7 +27,7 @@ export const setSetting = async (key, value) => {
     // Update database entries with a key of 'key' with the new values. Upsert: create new document if one doesn't already exist.
     await db.update({ key }, { key, value }, { upsert: true })
   } catch (err) {
-    logError('DB', `setSetting: ${key}:${value} failed`, err)
+    await logError('DB', `setSetting: ${key}:${value} failed`, err)
   }
 }
 
@@ -43,7 +43,7 @@ export const getSetting = async key => {
       return defaultDBValues[key]
     }
   } catch (err) {
-    logError('DB', `getSetting: ${key} failed`, err)
+    await logError('DB', `getSetting: ${key} failed`, err)
   }
 }
 
@@ -60,7 +60,7 @@ export const addWarning = async (user, reason, staff) => {
     // Update the database by pushing the warning to the user.
     await db.update({ key: 'warnings' }, { $push }, { upsert: true })
   } catch (err) {
-    logError('DB', 'addWarning failed', err)
+    await logError('DB', 'addWarning failed', err)
   }
 }
 
@@ -81,7 +81,7 @@ export const getWarnings = async user => {
       return []
     }
   } catch (err) {
-    logError('DB', 'getWarning failed', err)
+    await logError('DB', 'getWarning failed', err)
   }
 }
 
@@ -95,7 +95,7 @@ export const clearWarnings = async user => {
     // Update the database by setting the user's warnings to an empty array.
     await db.update({ key: 'warnings' }, { $set }, { upsert: true })
   } catch (err) {
-    logError('DB', 'clearWarning failed', err)
+    await logError('DB', 'clearWarning failed', err)
   }
 }
 
@@ -113,10 +113,10 @@ export const incrementThanks = async (thankee, thanker) => {
       // Return the number of thanks.
       return (await getThanks(thankee)).length
     } catch (err) {
-      logError('DB', 'Failed to get number of thanks', err)
+      await logError('DB', 'Failed to get number of thanks', err)
     }
   } catch (err) {
-    logError('DB', 'incrementThanks failed', err)
+    await logError('DB', 'incrementThanks failed', err)
   }
 }
 
@@ -137,6 +137,6 @@ export const getThanks = async user => {
       return []
     }
   } catch (err) {
-    logError('DB', 'getThanks failed', err)
+    await logError('DB', 'getThanks failed', err)
   }
 }

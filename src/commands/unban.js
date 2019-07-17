@@ -67,24 +67,24 @@ export const unbanCommand = {
           }
         })
       } catch (err) {
-        logError('Unban', 'Failed to log unban', err, message)
+        await logError('Unban', 'Failed to log unban', err, message)
       }
 
       try {
         // Remove the user's message.
         await message.delete()
       } catch (err) {
-        logError('Unban', 'Failed to delete message', err, message)
+        await logError('Unban', 'Failed to delete message', err, message)
       }
 
       try {
         // Unban the user
         await guild.unban(memberToUnban.user, 'Unbanned by devmod.')
       } catch (err) {
-        logError('Unban', 'Failed to unban member', err, message)
+        await logError('Unban', 'Failed to unban member', err, message)
       }
     } catch (err) {
-      logError('Unban', 'Failed to run command', err, message)
+      await logError('Unban', 'Failed to run command', err, message)
     }
   }
 }

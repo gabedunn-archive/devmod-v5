@@ -8,27 +8,30 @@
  */
 
 import { devmod } from './devmod'
-import { logError } from './utils/log'
+import { log, logError } from './utils/log'
 
-try {
+const main = async () => {
+  try {
 // If an unhandled rejection occurs, log it and exit the program.
-  process.on('unhandledRejection', err => {
-    logError('Main', 'Unhandled Rejection', err)
-    process.exit(1)
-  })
-  // Same thing but for uncaught exception.
-  process.on('uncaughtException', err => {
-    logError('Main', 'Uncaught Exception', err)
-    process.exit(1)
-  })
-} catch (err) {
-  logError('Main', 'Failed to add process error listeners', err)
+    process.on('unhandledRejection', async err => {
+      await logError('Main', 'Unhandled Rejection', err)
+      process.exit(1)
+    })
+    // Same thing but for uncaught exception.
+    process.on('uncaughtException', async err => {
+      await logError('Main', 'Uncaught Exception', err)
+      process.exit(1)
+    })
+  } catch (err) {
+    await logError('Main', 'Failed to add process error listeners', err)
+  }
+
+  try {
+    await devmod()
+  } catch (err) {
+    await logError('Main', 'Something has failed', err)
+  }
 }
 
-try {
-// noinspection JSIgnoredPromiseFromCall
-  devmod()
-} catch (err) {
-  logError('Main', 'Something has failed', err)
-  process.exit(1)
-}
+// Run the main function.
+main().then(r => log('Main', 'Something has happened:', r))

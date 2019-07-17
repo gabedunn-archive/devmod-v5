@@ -59,23 +59,23 @@ export const tagsCommand = {
           // Remove the user's message.
           await message.delete()
         } catch (err) {
-          logError('Tags', 'Failed to delete message', err, message)
+          await logError('Tags', 'Failed to delete message', err, message)
         }
 
         // Return a timeout that deletes the message after x seconds (x seconds * 1000 ms where x = msgDeleteTime).
-        return setTimeout(() => {
+        return setTimeout(async () => {
           try {
             // Delete the message.
             sent.delete(1)
           } catch (err) {
-            logError('Tags', 'Failed to delete command', err, message)
+            await logError('Tags', 'Failed to delete command', err, message)
           }
         }, msgDeleteTime * 1000)
       } catch (err) {
-        logError('Tags', 'Failed to send message', err, message)
+        await logError('Tags', 'Failed to send message', err, message)
       }
     } catch (err) {
-      logError('Tags', 'Failed to run command', err, message)
+      await logError('Tags', 'Failed to run command', err, message)
     }
   }
 }

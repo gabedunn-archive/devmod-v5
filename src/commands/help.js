@@ -62,7 +62,7 @@ export const helpCommand = {
           }
         }
       } catch (err) {
-        logError('Help', 'Failed to tag user', err, message)
+        await logError('Help', 'Failed to tag user', err, message)
       }
 
       // For each category, send a message with each of the commands.
@@ -81,29 +81,29 @@ export const helpCommand = {
 
           // If msgDeleteTime doesn't equal 0, set a timeout to delete the message after x seconds. (x secs * 1000 ms).
           if (msgDeleteTime !== 0) {
-            setTimeout(() => {
+            setTimeout(async () => {
               try {
                 // Delete the message.
                 sent.delete(1)
               } catch (err) {
-                logError('Tags', 'Failed to delete message', err, message)
+                await logError('Tags', 'Failed to delete message', err, message)
               }
             }, msgDeleteTime * 1000)
           } else {
             return sent
           }
         } catch (err) {
-          logError('Help', 'Failed to send message', err, message)
+          await logError('Help', 'Failed to send message', err, message)
         }
       }
       try {
         // Remove the user's message.
         await message.delete()
       } catch (err) {
-        logError('Help', 'Failed to delete message', err, message)
+        await logError('Help', 'Failed to delete message', err, message)
       }
     } catch (err) {
-      logError('Help', 'Failed to run command', err, message)
+      await logError('Help', 'Failed to run command', err, message)
     }
   }
 }

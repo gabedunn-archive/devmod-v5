@@ -47,14 +47,14 @@ export const muteCommand = {
         // Remove the user's message.
         await message.delete()
       } catch (err) {
-        logError('Mute', 'Failed to delete message', err, message)
+        await logError('Mute', 'Failed to delete message', err, message)
       }
 
       try {
         // Add the muted role to the member.
         await member.addRole(muted)
       } catch (err) {
-        logError('Mute', 'Failed to add muted role', err, message)
+        await logError('Mute', 'Failed to add muted role', err, message)
       }
 
       // Save some info about the staff member.
@@ -76,10 +76,10 @@ export const muteCommand = {
           }
         })
       } catch (err) {
-        logError('Mute', 'Failed to send message', err, message)
+        await logError('Mute', 'Failed to send message', err, message)
       }
     } catch (err) {
-      logError('Mute', 'Failed to run command', err, message)
+      await logError('Mute', 'Failed to run command', err, message)
     }
   }
 }

@@ -41,20 +41,20 @@ export const pingCommand = {
           // Edit the message.
           return await sent.edit({ embed })
         } catch (err) {
-          logError('Ping', 'Error updating message', err, message)
+          await logError('Ping', 'Error updating message', err, message)
           return await new Promise(resolve => resolve)
         }
       } catch (err) {
-        logError('Ping', 'Failed to send message', err, message)
+        await logError('Ping', 'Failed to send message', err, message)
       }
       try {
         // Remove the user's message.
         await message.delete()
       } catch (err) {
-        logError('Ping', 'Failed to delete message', err, message)
+        await logError('Ping', 'Failed to delete message', err, message)
       }
     } catch (err) {
-      logError('Ping', 'Failed to run command', err, message)
+      await logError('Ping', 'Failed to run command', err, message)
     }
   }
 }

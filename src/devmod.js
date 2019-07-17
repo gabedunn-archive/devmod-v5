@@ -27,7 +27,7 @@ export const devmod = async () => {
   try {
     await client.login(botToken)
   } catch (err) {
-    logError('Init', 'Bot failed to log in', err)
+    await logError('Init', 'Bot failed to log in', err)
   }
 
   // Save all the processes to an array.
@@ -45,7 +45,7 @@ export const devmod = async () => {
     try {
       process(client)
     } catch (err) {
-      logError('Init', `Failed to initialize process ${process.name}`, err)
+      await logError('Init', `Failed to initialize process ${process.name}`, err)
     }
   }
 }

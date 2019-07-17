@@ -26,7 +26,7 @@ export const buildInfoCommand = {
         // Remove the user's message.
         await message.delete()
       } catch (err) {
-        logError('BuildInfo', 'Failed to delete message', err, message)
+        await logError('BuildInfo', 'Failed to delete message', err, message)
       }
 
       try {
@@ -51,7 +51,7 @@ export const buildInfoCommand = {
             const message = await infoChannel.fetchMessage(messageID)
             await message.delete()
           } catch (err) {
-            logError('BuildInfo', 'Failed to delete info message(s)', err, message)
+            await logError('BuildInfo', 'Failed to delete info message(s)', err, message)
           }
         }
 
@@ -74,11 +74,11 @@ export const buildInfoCommand = {
                 verifyMessage = sentMessage.id
                 await sentMessage.react('✅')
               } catch (err) {
-                logError('BuildInfo', 'Failed to add reaction', err, message)
+                await logError('BuildInfo', 'Failed to add reaction', err, message)
               }
             }
           } catch (err) {
-            logError('BuildInfo', 'Failed to send message', err, message)
+            await logError('BuildInfo', 'Failed to send message', err, message)
           }
         }
 
@@ -88,7 +88,7 @@ export const buildInfoCommand = {
           await setSetting('verify_message_id', verifyMessage)
           console.log(`${chalk.greenBright('[BuildInfo]')} ${chalk.blue('Successfully built info message(s)!')}`)
         } catch (err) {
-          logError('BuildInfo', 'Error pushing messageIDs to database', err, message)
+          await logError('BuildInfo', 'Error pushing messageIDs to database', err, message)
         }
 
         try {
@@ -104,13 +104,13 @@ export const buildInfoCommand = {
             }
           })
         } catch (err) {
-          logError('BuildInfo', 'Failed to send message', err, message)
+          await logError('BuildInfo', 'Failed to send message', err, message)
         }
       } catch (err) {
-        logError('BuildInfo', 'Failed to fetch messages', err, message)
+        await logError('BuildInfo', 'Failed to fetch messages', err, message)
       }
     } catch (err) {
-      logError('BuildInfo', 'BuildInfo command failed', err, message)
+      await logError('BuildInfo', 'BuildInfo command failed', err, message)
     }
   }
 }

@@ -29,7 +29,7 @@ export const lmgtfyCommand = {
         // Remove the user's message.
         await message.delete()
       } catch (err) {
-        logError('LMGTFY', 'Failed to delete message', err, message)
+        await logError('LMGTFY', 'Failed to delete message', err, message)
       }
 
       try {
@@ -45,10 +45,10 @@ export const lmgtfyCommand = {
           }
         })
       } catch (err) {
-        logError('LMGTFY', 'Failed to send message', err, message)
+        await logError('LMGTFY', 'Failed to send message', err, message)
       }
     } catch (err) {
-      logError('LMGTFY', 'Failed to run command', err, message)
+      await logError('LMGTFY', 'Failed to run command', err, message)
     }
   }
 }

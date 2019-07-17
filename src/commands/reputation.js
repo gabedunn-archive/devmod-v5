@@ -53,7 +53,7 @@ export const reputationCommand = {
         // Remove the user's message.
         await message.delete()
       } catch (err) {
-        logError('Reputation', 'Failed to delete message', err, message)
+        await logError('Reputation', 'Failed to delete message', err, message)
       }
 
       try {
@@ -61,10 +61,10 @@ export const reputationCommand = {
         // noinspection JSCheckFunctionSignatures
         return await message.channel.send({ embed })
       } catch (err) {
-        logError('Reputation', 'Failed to send message', err, message)
+        await logError('Reputation', 'Failed to send message', err, message)
       }
     } catch (err) {
-      logError('Reputation', 'Failed to run command', err, message)
+      await logError('Reputation', 'Failed to run command', err, message)
     }
   }
 }

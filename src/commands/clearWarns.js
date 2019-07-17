@@ -37,14 +37,14 @@ export const clearWarnsCommand = {
         // Clear the warnings from the database.
         await clearWarnings(member.user.id)
       } catch (err) {
-        logError('ClearWarns', 'Failed to clear warnings', err, message)
+        await logError('ClearWarns', 'Failed to clear warnings', err, message)
       }
 
       try {
         // Remove the user's message.
         await message.delete()
       } catch (err) {
-        logError('ClearWarns', 'Failed to delete message', err, message)
+        await logError('ClearWarns', 'Failed to delete message', err, message)
       }
 
       // Save some info about the staff member.
@@ -67,10 +67,10 @@ export const clearWarnsCommand = {
           }
         })
       } catch (err) {
-        logError('ClearWarns', 'Failed to send message', err, message)
+        await logError('ClearWarns', 'Failed to send message', err, message)
       }
     } catch (err) {
-      logError('ClearWarns', 'Failed to run command', err, message)
+      await logError('ClearWarns', 'Failed to run command', err, message)
     }
   }
 }

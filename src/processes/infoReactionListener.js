@@ -34,10 +34,10 @@ const roleAction = async ({ client, guildId, messageId, userId, emojiName }, rem
         }
       }
     } catch (err) {
-      logError('InfoListener', 'Failed to run role command', err)
+      await logError('InfoListener', 'Failed to run role command', err)
     }
   } catch (err) {
-    logError('InfoListener', 'Failed to execute the role action', err)
+    await logError('InfoListener', 'Failed to execute the role action', err)
   }
 }
 
@@ -55,7 +55,7 @@ const roleAdd = async (client, guildId, messageId, userId, emojiName) => {
     // Run the roleAction function with the context passed in.
     await roleAction(context)
   } catch (err) {
-    logError('InfoListener', `Failed to add role: ${err}`)
+    await logError('InfoListener', `Failed to add role: ${err}`)
   }
 }
 
@@ -73,7 +73,7 @@ const roleRm = async (client, guildId, messageId, userId, emojiName) => {
     // Run the roleAction function with the context passed in and remove set to true.
     await roleAction(context, true)
   } catch (err) {
-    logError('InfoListener', 'Failed to remove role', err)
+    await logError('InfoListener', 'Failed to remove role', err)
   }
 }
 
@@ -107,11 +107,11 @@ export const initInfoReactionListener = async client => {
           )
         }
       } catch (err) {
-        logError('InfoListener', 'Failed handling reaction', err)
+        await logError('InfoListener', 'Failed handling reaction', err)
       }
     })
     log('Init', 'Info reaction listener initialized!')
   } catch (err) {
-    logError('InitListener', 'Failed to add raw listener', err)
+    await logError('InitListener', 'Failed to add raw listener', err)
   }
 }

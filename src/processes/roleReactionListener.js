@@ -38,7 +38,7 @@ const roleAction = async ({ client, guildId, messageId, userId, emojiName }, rem
                     // If remove is true, remove the role from the user. Otherwise, add the role to the user.
                     remove ? await member.removeRole(role) : await member.addRole(role)
                   } catch (err) {
-                    logError('RoleListener', 'Failed to run role command', err)
+                    await logError('RoleListener', 'Failed to run role command', err)
                   }
                 }
               }
@@ -48,7 +48,7 @@ const roleAction = async ({ client, guildId, messageId, userId, emojiName }, rem
       }
     }
   } catch (err) {
-    logError('RoleListener', 'Failed to execute the role action', err)
+    await logError('RoleListener', 'Failed to execute the role action', err)
   }
 }
 
@@ -66,7 +66,7 @@ const roleAdd = async (client, guildId, messageId, userId, emojiName) => {
     // Run the roleAction function with the context passed in.
     await roleAction(context)
   } catch (err) {
-    logError('RoleListener', 'Failed to add role', err)
+    await logError('RoleListener', 'Failed to add role', err)
   }
 }
 
@@ -84,7 +84,7 @@ const roleRm = async (client, guildId, messageId, userId, emojiName) => {
     // Run the roleAction function with the context passed in and remove set to true.
     await roleAction(context, true)
   } catch (err) {
-    logError('RoleListener', 'Failed to remove role', err)
+    await logError('RoleListener', 'Failed to remove role', err)
   }
 }
 
@@ -118,11 +118,11 @@ export const initReactionListener = async client => {
           )
         }
       } catch (err) {
-        logError('RoleListener', 'Failed to handle reaction', err)
+        await logError('RoleListener', 'Failed to handle reaction', err)
       }
     })
     log('Init', 'Role reaction listener initialized!')
   } catch (err) {
-    logError('RoleListener', 'Failed to add raw listener', err)
+    await logError('RoleListener', 'Failed to add raw listener', err)
   }
 }

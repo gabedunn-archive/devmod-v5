@@ -74,7 +74,7 @@ export const roleCommand = {
               // Delete the user's message.
               await message.delete()
             } catch (err) {
-              logError('Role', 'Failed to delete message', err, message)
+              await logError('Role', 'Failed to delete message', err, message)
             }
 
             try {
@@ -88,10 +88,10 @@ export const roleCommand = {
                 }
               })
             } catch (err) {
-              logError('Role', 'Failed to send message', err, message)
+              await logError('Role', 'Failed to send message', err, message)
             }
           } catch (err) {
-            logError('Role', 'Failed to add role', err, message)
+            await logError('Role', 'Failed to add role', err, message)
             return await sendErrorMessage('Couldn\'t Add Role', 'Couldn\'t add the specified role.', message)
           }
           break
@@ -104,7 +104,7 @@ export const roleCommand = {
               // Delete the user's message.
               await message.delete()
             } catch (err) {
-              logError('Role', 'Failed to delete message', err, message)
+              await logError('Role', 'Failed to delete message', err, message)
             }
 
             try {
@@ -118,10 +118,10 @@ export const roleCommand = {
                 }
               })
             } catch (err) {
-              logError('Role', 'Failed to send message', err, message)
+              await logError('Role', 'Failed to send message', err, message)
             }
           } catch (err) {
-            logError('Role', 'Failed to add role', err, message)
+            await logError('Role', 'Failed to add role', err, message)
             return await sendErrorMessage('Couldn\'t Remove Role', 'Couldn\'t remove the specified role.', message)
           }
           break
@@ -129,7 +129,7 @@ export const roleCommand = {
           return await sendErrorMessage('Invalid Command', 'The command wasn\'t one of add or rm.', message)
       }
     } catch (err) {
-      logError('Role', 'Failed to run command', err, message)
+      await logError('Role', 'Failed to run command', err, message)
     }
   }
 }

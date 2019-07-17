@@ -74,7 +74,7 @@ export const banCommand = {
           }
         })
       } catch (err) {
-        logError('Ban', 'Failed to send member message', err, message)
+        await logError('Ban', 'Failed to send member message', err, message)
       }
 
       // Save some info about the staff member.
@@ -104,14 +104,14 @@ export const banCommand = {
             }
           })
       } catch (err) {
-        logError('Ban', 'Failed to log ban to channel', err, message)
+        await logError('Ban', 'Failed to log ban to channel', err, message)
       }
 
       try {
         // Ban the member.
         await member.ban({ days, reason })
       } catch (err) {
-        logError('Ban', 'Failed to ban the member', err, message)
+        await logError('Ban', 'Failed to ban the member', err, message)
       }
 
       try {
@@ -119,11 +119,11 @@ export const banCommand = {
         await message.delete()
       } catch (err) {
         if (err.message !== 'Unknown Message') {
-          logError('Ban', 'Failed to delete message', err, message)
+          await logError('Ban', 'Failed to delete message', err, message)
         }
       }
     } catch (err) {
-      logError('Ban', 'Failed to run command', err, message)
+      await logError('Ban', 'Failed to run command', err, message)
     }
   }
 }

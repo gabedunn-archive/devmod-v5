@@ -45,7 +45,7 @@ export const warnCommand = {
           )
         }
       } catch (err) {
-        logError('Warn', 'Failed to check user permissions', err, message)
+        await logError('Warn', 'Failed to check user permissions', err, message)
       }
 
       const reason = args.length > 1 ? args.slice(1).join(' ') : 'warned by devmod'
@@ -60,7 +60,7 @@ export const warnCommand = {
         // Log the warning to the database.
         await addWarning(member.user.id, reason, staffMember.user.id)
       } catch (err) {
-        logError('Warn', 'Failed to log warning', err, message)
+        await logError('Warn', 'Failed to log warning', err, message)
       }
 
       // Select the colour based on the number of previous warnings.
@@ -89,7 +89,7 @@ export const warnCommand = {
             }
           })
       } catch (err) {
-        logError('Warn', 'Failed to log warn', err, message)
+        await logError('Warn', 'Failed to log warn', err, message)
       }
 
       try {
@@ -114,7 +114,7 @@ export const warnCommand = {
           }
         })
       } catch (err) {
-        logError('Warn', 'Failed to DM user', err, message)
+        await logError('Warn', 'Failed to DM user', err, message)
       }
 
       // If autoban is enabled, see if the user should be banned.
@@ -125,7 +125,7 @@ export const warnCommand = {
             // Run the ban command.
             await banCommand.exec([args[0], banMsgDelete, ...'Exceeded maximum warnings'.split(' ')], message)
           } catch (err) {
-            logError('Warn', 'Failed to autoban user', err, message)
+            await logError('Warn', 'Failed to autoban user', err, message)
           }
         }
       }
@@ -134,10 +134,10 @@ export const warnCommand = {
         // Remove the user's message.
         await message.delete()
       } catch (err) {
-        logError('Warn', 'Failed to delete message', err, message)
+        await logError('Warn', 'Failed to delete message', err, message)
       }
     } catch (err) {
-      logError('Warn', 'Failed to run command', err, message)
+      await logError('Warn', 'Failed to run command', err, message)
     }
   }
 }

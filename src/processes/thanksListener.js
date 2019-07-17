@@ -7,7 +7,7 @@ import { log, logError } from '../utils/log'
 import { incrementThanks } from '../db'
 import { green } from '../utils/colours'
 
-export const initThanksListener = client => {
+export const initThanksListener = async client => {
   try {
     // For each message run a function.
     client.on('message', async message => {
@@ -43,21 +43,22 @@ export const initThanksListener = client => {
                   }
                 })
               } catch (err) {
-                logError('Thanks', 'Failed to send message', err)
+                await logError('Thanks', 'Failed to send message', err)
               }
             } catch (err) {
-              logError('Thanks', 'Failed to log the thanks', err)
+              await logError('Thanks', 'Failed to log the thanks', err)
             }
 
             log('Thanks', thanker.id)
           }
         }
       } catch (err) {
-        logError('Thanks', 'Failed to run listener', err)
+        await logError('Thanks', 'Failed to run listener', err)
       }
     })
     log('Init', 'Thanks listener initialized!')
   } catch (err) {
+    // noinspection ES6MissingAwait
     logError('CommandListener', 'Failed to initialize the command listener', err)
   }
 }

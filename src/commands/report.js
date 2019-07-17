@@ -50,10 +50,10 @@ export const reportCommand = {
             }
           })
         } catch (err) {
-          logError('Report', 'Failed to send thanks message', err, message)
+          await logError('Report', 'Failed to send thanks message', err, message)
         }
       } catch (err) {
-        logError('Report', 'Failed to create DM channel', err, message)
+        await logError('Report', 'Failed to create DM channel', err, message)
       }
 
       // Save the current server.
@@ -66,7 +66,7 @@ export const reportCommand = {
         // Remove the user's message.
         await message.delete()
       } catch (err) {
-        logError('Report', 'Failed to delete message', err, message)
+        await logError('Report', 'Failed to delete message', err, message)
       }
 
       try {
@@ -98,10 +98,10 @@ export const reportCommand = {
           }
         })
       } catch (err) {
-        logError('Report', 'Failed to send message', err, message)
+        await logError('Report', 'Failed to send message', err, message)
       }
     } catch (err) {
-      logError('Report', 'Failed to run command', err, message)
+      await logError('Report', 'Failed to run command', err, message)
     }
   }
 }

@@ -20,7 +20,7 @@ export const usersCommand = {
         // Remove the user's message.
         await message.delete()
       } catch (err) {
-        logError('Users', 'Failed to delete message', err, message)
+        await logError('Users', 'Failed to delete message', err, message)
       }
 
       // Save some info about the server and bot.
@@ -39,10 +39,10 @@ export const usersCommand = {
           }
         })
       } catch (err) {
-        logError('Users', 'Failed to send message', err, message)
+        await logError('Users', 'Failed to send message', err, message)
       }
     } catch (err) {
-      logError('Users', 'Failed to run command', err, message)
+      await logError('Users', 'Failed to run command', err, message)
     }
   }
 }

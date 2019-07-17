@@ -45,17 +45,17 @@ export const tagCommand = {
         // Remove the user's message.
         await message.delete()
       } catch (err) {
-        logError('Tag', 'Failed to delete message', err, message)
+        await logError('Tag', 'Failed to delete message', err, message)
       }
 
       try {
         // noinspection JSUnresolvedFunction
         return message.channel.send(taggedMember, { embed })
       } catch (err) {
-        logError('Tag', 'Failed to send message', err, message)
+        await logError('Tag', 'Failed to send message', err, message)
       }
     } catch (err) {
-      logError('Tag', 'Failed to run command', err, message)
+      await logError('Tag', 'Failed to run command', err, message)
     }
   }
 }

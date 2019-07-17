@@ -19,7 +19,7 @@ export const pruneCommand = {
         // Remove the user's message.
         await message.delete()
       } catch (err) {
-        logError('Prune', 'Failed to delete message', err, message)
+        await logError('Prune', 'Failed to delete message', err, message)
       }
 
       // Save the amount arg. If it doesn't exist, default to 5.
@@ -36,13 +36,13 @@ export const pruneCommand = {
           // Delete all of the messages selected with the previous command.
           messages.deleteAll()
         } catch (err) {
-          logError('Prune', 'Failed to delete messages', err, message)
+          await logError('Prune', 'Failed to delete messages', err, message)
         }
       } catch (err) {
-        logError('Prune', 'Failed to fetch messages', err, message)
+        await logError('Prune', 'Failed to fetch messages', err, message)
       }
     } catch (err) {
-      logError('Prune', 'Failed to run command', err, message)
+      await logError('Prune', 'Failed to run command', err, message)
     }
   }
 }

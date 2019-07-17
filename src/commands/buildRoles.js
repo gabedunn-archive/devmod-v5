@@ -38,7 +38,7 @@ export const buildRolesCommand = {
           const roleMessage = await rolesChannel.fetchMessage(messageID)
           await roleMessage.delete()
         } catch (err) {
-          logError('BuildRoles', 'Failed to delete roles message', err, message)
+          await logError('BuildRoles', 'Failed to delete roles message', err, message)
         }
       }
 
@@ -74,11 +74,11 @@ export const buildRolesCommand = {
             try {
               await roleMessage.react(reaction.emoji)
             } catch (err) {
-              logError('BuildRoles', 'Failed to add reaction to roles message:', err, message)
+              await logError('BuildRoles', 'Failed to add reaction to roles message:', err, message)
             }
           }
         } catch (err) {
-          logError('BuildRoles', 'Failed to send message to role channel', err, message)
+          await logError('BuildRoles', 'Failed to send message to role channel', err, message)
         }
 
         // Increment count, and if it's equal to the number of role groups, call the finish function with messageIDs.
@@ -91,7 +91,7 @@ export const buildRolesCommand = {
             await setSetting('reactions_message_ids', messageIDs)
             log('BuildRoles', 'Successfully sent roles message!')
           } catch (err) {
-            logError('BuildRoles', 'Error pushing messageIDs to database', err, message)
+            await logError('BuildRoles', 'Error pushing messageIDs to database', err, message)
           }
         }
       }
@@ -100,7 +100,7 @@ export const buildRolesCommand = {
         // Remove the user's message.
         await message.delete()
       } catch (err) {
-        logError('BuildRoles', 'Failed to delete message:', err, message)
+        await logError('BuildRoles', 'Failed to delete message:', err, message)
       }
 
       try {
@@ -116,10 +116,10 @@ export const buildRolesCommand = {
           }
         })
       } catch (err) {
-        logError('BuildRoles', 'Failed to send message', err, message)
+        await logError('BuildRoles', 'Failed to send message', err, message)
       }
     } catch (err) {
-      logError('BuildRoles', 'Failed to run command', err, message)
+      await logError('BuildRoles', 'Failed to run command', err, message)
     }
   }
 }

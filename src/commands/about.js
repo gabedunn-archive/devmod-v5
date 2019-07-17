@@ -20,7 +20,7 @@ export const aboutCommand = {
         // Remove the user's message.
         await message.delete()
       } catch (err) {
-        logError('About', 'Failed to delete message', err, message)
+        await logError('About', 'Failed to delete message', err, message)
       }
 
       try {
@@ -51,10 +51,10 @@ export const aboutCommand = {
           }
         })
       } catch (err) {
-        logError('About', 'Failed to send message', err, message)
+        await logError('About', 'Failed to send message', err, message)
       }
     } catch (err) {
-      logError('About', 'Failed to run command', err, message)
+      await logError('About', 'Failed to run command', err, message)
     }
   }
 }

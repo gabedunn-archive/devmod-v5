@@ -84,7 +84,7 @@ export const warnsCommand = {
         // Remove the user's message.
         await message.delete()
       } catch (err) {
-        logError('Warns', 'Failed to delete message', err, message)
+        await logError('Warns', 'Failed to delete message', err, message)
       }
 
       try {
@@ -92,10 +92,10 @@ export const warnsCommand = {
         // noinspection JSCheckFunctionSignatures
         return await message.channel.send({ embed })
       } catch (err) {
-        logError('Warns', 'Failed to send message', err, message)
+        await logError('Warns', 'Failed to send message', err, message)
       }
     } catch (err) {
-      logError('Warns', 'Failed to run command', err, message)
+      await logError('Warns', 'Failed to run command', err, message)
     }
   }
 }

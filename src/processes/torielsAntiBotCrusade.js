@@ -42,16 +42,16 @@ export const initTorielsAntiBotCrusade = async client => {
               // Delete the message.
               await message.delete()
             } catch (err) {
-              logError('AntiBot', `Failed to delete spam message from ${message.author.username}`, err)
+              await logError('AntiBot', `Failed to delete spam message from ${message.author.username}`, err)
             }
           }
         }
       } catch (err) {
-        logError('AntiBot', 'Failed to handle the message', err)
+        await logError('AntiBot', 'Failed to handle the message', err)
       }
     })
     log('Init', 'Toriel\'s anti-bot crusade initialized!')
   } catch (err) {
-    logError('AntiBot', 'Failed to initialize the anti bot crusade', err)
+    await logError('AntiBot', 'Failed to initialize the anti bot crusade', err)
   }
 }

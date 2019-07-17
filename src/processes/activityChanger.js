@@ -13,7 +13,7 @@ export const initActivityChanger = async client => {
   try {
     await client.user.setActivity(`${prefix}help`)
   } catch (err) {
-    logError('Activity', `Failed to set activity to ${prefix}help:`, err)
+    await logError('Activity', `Failed to set activity to ${prefix}help:`, err)
   }
   // Set an interval to run a function every 5 minutes (5 mins * 60 secs * 1000 ms).
   setInterval(async () => {
@@ -24,7 +24,7 @@ export const initActivityChanger = async client => {
       // Wait for the activity to be set.
       await client.user.setActivity(activity)
     } catch (err) {
-      logError('Activity', 'Failed to set activity', err)
+      await logError('Activity', 'Failed to set activity', err)
     }
 
     // Set a timeout to switch the activity back to '.help' after 1 minute. (60 secs * 1000 ms).
@@ -33,7 +33,7 @@ export const initActivityChanger = async client => {
         // Set the activity back to '.help'.
         await client.user.setActivity(`${prefix}help`)
       } catch (err) {
-        logError('Activity', `Failed to set activity back to ${prefix}help:`, err)
+        await logError('Activity', `Failed to set activity back to ${prefix}help:`, err)
       }
     }, 60 * 1000)
   }, 5 * 60 * 1000)

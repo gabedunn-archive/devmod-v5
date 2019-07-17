@@ -54,7 +54,7 @@ export const unmuteCommand = {
           // Remove the user's message.
           await message.delete()
         } catch (err) {
-          logError('Unmute', 'Failed to delete message', err, message)
+          await logError('Unmute', 'Failed to delete message', err, message)
         }
 
         try {
@@ -70,13 +70,13 @@ export const unmuteCommand = {
             }
           })
         } catch (err) {
-          logError('Unmute', 'Failed to send message', err, message)
+          await logError('Unmute', 'Failed to send message', err, message)
         }
       } catch (err) {
-        logError('Unmute', 'Failed to remove role', err, message)
+        await logError('Unmute', 'Failed to remove role', err, message)
       }
     } catch (err) {
-      logError('Unmute', 'Failed to run command', err, message)
+      await logError('Unmute', 'Failed to run command', err, message)
     }
   }
 }

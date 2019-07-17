@@ -8,10 +8,10 @@ import { prefix } from '../utils/config'
 import { sendErrorMessage } from '../utils/sendErrorMessage'
 import { log, logError } from '../utils/log'
 
-export const initCommandListener = client => {
+export const initCommandListener = async client => {
   try {
     // For each message run a function.
-    client.on('message', msg => {
+    client.on('message', async msg => {
       // If the message isn't a dm, the first character is the prefix, and the author isn't a bot, continue.
       if (msg.channel.type !== 'dm' && msg.content[0] === prefix && !msg.author.bot) {
         // Separate the entire command after the prefix into args.
@@ -31,28 +31,28 @@ export const initCommandListener = client => {
                 // Run the command.
                 cmd.exec(args, msg)
               } catch (err) {
-                logError('CommandListener', 'Failed to execute command', err)
+                await logError('CommandListener', 'Failed to execute command', err)
               }
             } else {
               try {
                 // Send error message.
-                return sendErrorMessage(
+                return await sendErrorMessage(
                   'Insufficient Permissions',
                   'You do not have permission to use that command.',
                   msg
                 )
               } catch (err) {
-                logError('CommandListener', 'Failed to send error message', err)
+                await logError('CommandListener', 'Failed to send error message', err)
               }
             }
           } catch (err) {
-            logError('CommandListener', 'Failed to test for permissions', err)
+            await logError('CommandListener', 'Failed to test for permissions', err)
           }
         }
       }
     })
     log('Init', 'Command listener initialized!')
   } catch (err) {
-    logError('CommandListener', 'Failed to initialize the command listener', err)
+    await logError('CommandListener', 'Failed to initialize the command listener', err)
   }
 }
