@@ -383,5 +383,11 @@ export default {
         value: '[A CSS Grid video series by Wes Bos.](https://cssgrid.io/)'
       }
     ]
+  },
+  markdown: {
+    title: 'Markdown Formatting',
+    color: blue,
+    description: 'A guide on markdown formatting in discord.',
+    url: 'https://support.discordapp.com/hc/en-us/articles/210298617-Markdown-Text-101-Chat-Formatting-Bold-Italic-Underline-'
   }
 }
