@@ -44,7 +44,7 @@ configured to run the bot. All you need to do now is set up the config.
 
 ### Step 4 - Configuring the bot
 
-This part is easy. Just type in `npm run env` and it will ask you some
+This part is easy. Just type in `npm run prep` and it will ask you some
 questions.
 
 Option | Default | Description
