@@ -46,7 +46,7 @@ export const roleCommand = {
 
       // If the specified role isn't in availableRoles, send an error message and terminate the command.
       if (!availableRoles.some(r => r === role)) {
-        return await sendErrorMessage('Invalid Role', 'That role isn\'t allow or doesn\'t exist.', message)
+        return await sendErrorMessage('Invalid Role', 'That role isn\'t allowed or doesn\'t exist.', message)
       }
 
       // Save the server.
