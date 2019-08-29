@@ -34,10 +34,10 @@ const roleAction = async ({ client, guildId, messageId, userId, emojiName }, rem
         }
       }
     } catch (err) {
-      await logError('InfoListener', 'Failed to run role command', err)
+      await logError('InfoListener', 'Failed to add or remove the role', err)
     }
   } catch (err) {
-    await logError('InfoListener', 'Failed to execute the role action', err)
+    await logError('InfoListener', 'Failed to execute the verified role action', err)
   }
 }
 

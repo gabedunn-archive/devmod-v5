@@ -38,7 +38,7 @@ const roleAction = async ({ client, guildId, messageId, userId, emojiName }, rem
                     // If remove is true, remove the role from the user. Otherwise, add the role to the user.
                     remove ? await member.removeRole(role) : await member.addRole(role)
                   } catch (err) {
-                    await logError('RoleListener', 'Failed to run role command', err)
+                    await logError('RoleListener', 'Failed to add or remove role', err)
                   }
                 }
               }
