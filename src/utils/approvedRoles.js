@@ -24,7 +24,7 @@ const helpRoles = {
   roles: {
     'helper': { name: 'Helper', emoji: '🚁' },
     'help-javascript': { name: 'JavaScript Helper', emoji: '🖥' },
-    'help-html-css': { name: 'HTML & CSS Helper', emoji: '📰' },
+    'help-frontend': { name: 'Frontend Helper', emoji: '📰' },
     'help-design': { name: 'Design Helper', emoji: '📱' },
     'help-ux': { name: 'UX Helper', emoji: '♦' },
     'help-php': { name: 'PHP Helper', emoji: '💩' }
