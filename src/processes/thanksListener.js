@@ -6,6 +6,7 @@
 import { log, logError } from '../utils/log'
 import { incrementThanks } from '../db'
 import { green } from '../utils/colours'
+import { sendErrorMessage } from '../utils/sendErrorMessage'
 
 export const initThanksListener = async client => {
   try {
@@ -21,6 +22,12 @@ export const initThanksListener = async client => {
           if (thankee !== undefined) {
             // Save the thanker.
             const thanker = message.member
+
+            // If the member thanks themselves, send an error message.
+            if (thankee.user.id === thanker.user.id) {
+              return await sendErrorMessage('You Can\'t Thank Yourself!', 'You can see how that would be an issue, yes?', message)
+            }
+
             try {
               // Increment the thanks for the user.
               const thanks = await incrementThanks(thankee.id, thanker.id)
