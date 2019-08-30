@@ -19,10 +19,10 @@ export const initTorielsAntiBotCrusade = async client => {
     // On each message check to see if it contains the link.
     client.on('message', async message => {
       try {
-        // If the message is from a bot, a staff/trusted member, ignore it.
-        if (!message.author.bot && !message.member.roles.some(role => ['Staff', 'MVP'].includes(role.name))) {
-          // If the message content includes one of the spam bot urls.
-          if (spamBotUrls.some(spam => message.content.includes(spam))) {
+        // If the message content includes one of the spam bot urls.
+        if (spamBotUrls.some(spam => message.content.includes(spam))) {
+          // If the message is from a bot, a staff/trusted member, ignore it.
+          if (!message.author.bot && !message.member.roles.some(role => ['Staff', 'MVP'].includes(role.name))) {
             try {
               // Send a message to the reports channel detailing the removal.
               await client.channels.find(c => c.name === channels.crusade).send({
