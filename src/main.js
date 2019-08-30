@@ -34,4 +34,4 @@ const main = async () => {
 }
 
 // Run the main function.
-main().then(r => log('Main', 'Bot Initialized', r))
+main().then(() => log('Main', 'Bot Initialized!'))
