@@ -14,7 +14,7 @@ export const initThanksListener = async client => {
     client.on('message', async message => {
       try {
         // If the message isn't a dm, the author isn't a bot, and it contains the word 'thank' or 'kudos', continue.
-        if (message.channel.type !== 'dm' && !message.author.bot && ['thank', 'kudos'].some(t => message.content.includes(t))) {
+        if (message.channel.type !== 'dm' && !message.author.bot && ['thank', 'kudos'].some(t => message.content.toLowerCase().includes(t))) {
           // Get the member thanked.
           const thankee = message.mentions.members.first()
 
