@@ -21,7 +21,7 @@ export const reportCommand = {
     try {
       // If there aren't any args, send an error message stating a member wasn't specified and terminate the command.
       if (args.length < 1) {
-        return await sendErrorMessage('User Not Specified', 'You didn\'t specify a user to ban.', message)
+        return await sendErrorMessage('User Not Specified', 'You didn\'t specify a user to report.', message)
       }
 
       // Get the member tagged in the args.
@@ -31,7 +31,7 @@ export const reportCommand = {
         return await sendErrorMessage('Reason Not Specified', 'You didn\'t specify a reason for reporting the user.', message)
       }
 
-      // Save the args remaining after the first two. If there aren't more than two args, default to 'Banned by devmod.'.
+      // Save the args remaining after the first one.
       const reason = args.slice(1).join(' ')
 
       try {
