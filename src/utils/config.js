@@ -28,7 +28,8 @@ export const channels = {
   report: process.env.CHANNEL_REPORT || 'reports', // Channel to forward all user report messages.
   roles: process.env.CHANNEL_ROLES || 'roles', // Channel to send and listen to reactions for roles.
   info: process.env.CHANNEL_INFO || 'info', // Channel to send the info to.
-  crusade: process.env.CHANNEL_CRUSADE || 'crusade' // Channel to send notifications that the anti bot crusade has deleted a message.
+  crusade: process.env.CHANNEL_CRUSADE || 'crusade', // Channel to send notifications that the anti bot crusade has deleted a message.
+  errors: process.env.CHANNEL_ERRORS || 'errors' // Channel to log errors to.
 }
 export const roles = {
   muted: process.env.ROLE_MUTED || 'muted', // Name of the role to apply to muted users.

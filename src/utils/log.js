@@ -5,9 +5,10 @@
 
 import chalk from 'chalk'
 import discord from 'discord.js'
-import { botOwner, botToken } from './config'
+import { botToken, channels } from './config'
 import { red } from './colours'
 import { capitalize } from './capitalize'
+import { sendErrorMessage } from './sendErrorMessage'
 
 // Given an area and a message, log a nice looking message to the console.
 export const log = (area, message) => {
@@ -43,37 +44,35 @@ const logErrorToDM = (area, message, err) => {
 
     // Add a listener to run when the client is ready.
     client.on('ready', async () => {
-      // Save the owner of the bot.
-      const owner = client.users.find(u => u.id === botOwner)
+      // Save the errors channel
+      const errorChannel = message.guild.channels.find(c => c.name === channels.roles)
 
-      // If the owner exists, send a DM.
-      if (owner !== undefined) {
-        // Create a DM channel with the owner.
-        const dm = await owner.createDM()
-
-        // Send the owner a DM.
-        await dm.send({
-          embed: {
-            title: `Error [${area}]:`,
-            color: red,
-            description: message,
-            fields: Object.entries(err).map(field => {
-              return {
-                name: `${capitalize(field[0])}:`,
-                value: field[1]
-              }
-            })
-          }
-        })
-
-        // Destroy the client after sending the message.
-        return client.destroy()
+      if (errorChannel === undefined) {
+        return await sendErrorMessage('No Error Channel', 'The errors channel either isn\'t set or doesn\'t exist.')
       }
+
+      // Send the owner a DM.
+      await errorChannel.send({
+        embed: {
+          title: `Error [${area}]:`,
+          color: red,
+          description: message,
+          fields: Object.entries(err).map(field => {
+            return {
+              name: `${capitalize(field[0])}:`,
+              value: field[1]
+            }
+          })
+        }
+      })
+
+      // Destroy the client after sending the message.
+      return client.destroy()
     })
 
     // Log the bot in.
     return client.login(botToken)
   } catch (err) {
-    console.error(`${chalk.greenBright('[Log]')} ${chalk.redBright('Failed to send owner DM:')}`, err)
+    console.error(`${chalk.greenBright('[Log]')} ${chalk.redBright('Failed to send error message to channel:')}`, err)
   }
 }
