@@ -74,6 +74,19 @@ export const moveCommand = {
         }
       }
 
+      // Fetch all messages again.
+      const messagesToDelete = await message.channel.fetchMessages({
+        before: recentMessage.id,
+        limit: messagesToQuote.length - 1
+      })
+
+      try {
+        // Delete all of the users quoted messages.
+        await messagesToDelete.deleteAll()
+      } catch (err) {
+        await logError('Move', 'Failed to delete quoted messages', err, message)
+      }
+
       try {
         // Remove the user's message.
         await message.delete()
