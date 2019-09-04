@@ -38,15 +38,12 @@ export const reputationCommand = {
 
       // Create the initial embed.
       const embed = {
-        title: `Reputation for ${getName(member)} (${member.user.tag})`,
+        description: `${getName(member)} has ${reputation} reputation.`,
         color: blue,
-        description: `${member} has ${reputation} reputation.`,
         author: getAuthor(message.member),
         footer: {
-          icon_url: member.user.avatarURL,
-          text: `${getName(member)}'s (${member.user.tag}'s) reputation.`
+          text: `Use thanks @user to give someone rep!`
         },
-        timestamp: new Date()
       }
 
       try {
