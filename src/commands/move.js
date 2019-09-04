@@ -88,7 +88,7 @@ export const moveCommand = {
           embed: {
             title: `Message${messagesToQuote.length === 1 ? '' : 's'} Moved`,
             color: orange,
-            description: messagesToQuote.map(m => m.content).reverse().join('\n\n'),
+            description: messagesToQuote.map(m => m.content).reverse().join('\n'),
             author: getAuthor(memberTagged),
             footer: {
               icon_url: message.member.user.avatarURL,
