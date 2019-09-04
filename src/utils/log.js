@@ -20,8 +20,8 @@ export const logError = async (area, message, err, msg = false) => {
   // Log the error to the console.
   console.error(`${chalk.greenBright(`[${area}]`)} ${chalk.redBright(`${message}:`)}`, err)
 
-  // Log the error to the bot owner's DMs.
-  logErrorToDM(area, message, err)
+  // Log the error to the error channel.
+  logErrorToChannel(area, message, err)
 
   // If a msg was passed, try to add the failed reaction.
   if (msg) {
@@ -37,7 +37,7 @@ export const logError = async (area, message, err, msg = false) => {
   }
 }
 
-const logErrorToDM = (area, message, err) => {
+const logErrorToChannel = (area, message, err) => {
   try {
     // Create the discord client.
     const client = new discord.Client()
@@ -51,7 +51,7 @@ const logErrorToDM = (area, message, err) => {
         return await sendErrorMessage('No Error Channel', 'The errors channel either isn\'t set or doesn\'t exist.')
       }
 
-      // Send the owner a DM.
+      // Send the error message.
       await errorChannel.send({
         embed: {
           title: `Error [${area}]:`,
