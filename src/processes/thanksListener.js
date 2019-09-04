@@ -35,7 +35,7 @@ export const initThanksListener = async client => {
                 // Send a confirmation message.
                 return message.channel.send({
                   embed: {
-                    title: 'Thanks Received!',
+                    title: 'Thanks received!',
                     color: green,
                     description: `${thankee} has been thanked by ${thanker}!\n\nThey now have ${thanks} rep.`
                   }
