@@ -8,6 +8,20 @@ import { sendErrorMessage } from '../utils/sendErrorMessage'
 import { logError } from '../utils/log'
 import { getAuthor } from '../utils/user'
 
+const types = ['web','image']
+const sites = ['google','yahoo','bing','ask','aol','duckduckgo']
+const siteJson = {
+  'google': 'g',
+  'yahoo':'y',
+  'bing': 'b',
+  'ask': 'k',
+  'aol': 'a',
+  'duckduckgo': 'd'
+}
+const typeJson = {
+  'web': 'w',
+  'image': 'i'
+}
 // Export an object with command info and the function to execute.
 export const lmgtfyCommand = {
   name: 'LMGTFY',
@@ -15,15 +29,39 @@ export const lmgtfyCommand = {
   category: 'fun',
   description: 'Sends a \'let me google that for you link\'.',
   permissions: ['SEND_MESSAGES'],
-  usage: '<query>',
+  usage: '<query> <web|image> <site>',
   exec: async (args, message) => {
     try {
+      //if no options are specified google and web are default
+      let t = 'w'
+      let s = 'g'
       // If a query isn't specified, send an error message and terminate the command.
       if (args.length < 1) {
         return await sendErrorMessage(
           'No Query Specified', 'You need to specify a query.', message
         )
       }
+      let options = args.slice(-2)
+
+      //Loop through both the arrays to check the options specified
+        sites.forEach(e => {
+          if(options[0].toLowerCase() === e){
+            s = siteJson[e]
+        }
+      })
+
+      //lmgtfy only supports image for google searches
+      if(s === 'g'){
+        types.forEach(e => {
+          if(options[1].toLowerCase() === e){
+            t = typeJson[e]
+        }
+      })
+    }
+      
+      
+      
+
 
       try {
         // Remove the user's message.
@@ -37,9 +75,9 @@ export const lmgtfyCommand = {
         // noinspection JSUnresolvedFunction,JSCheckFunctionSignatures
         return message.channel.send({
           embed: {
-            title: args.join(' '),
+            title: args.slice(0,args.length-2).join(' '),
             color: blue,
-            url: `https://lmgtfy.com/?q=${args.join('+')}`,
+            url: `https://lmgtfy.com/?q=${args.slice(0,args.length-2).join('+')}&s=${s}&t=${t}`,
             description: 'Here you go!',
             author: getAuthor(message.member)
           }
