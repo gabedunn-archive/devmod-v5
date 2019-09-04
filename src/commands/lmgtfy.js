@@ -29,7 +29,7 @@ export const lmgtfyCommand = {
   category: 'fun',
   description: 'Sends a \'let me google that for you link\'.',
   permissions: ['SEND_MESSAGES'],
-  usage: '<query> <web|image> <site>',
+  usage: '<query> <site> <web|image>',
   exec: async (args, message) => {
     try {
       //if no options are specified google and web are default
