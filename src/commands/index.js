@@ -12,6 +12,7 @@ import { buildRolesCommand } from './buildRoles'
 import { clearWarnsCommand } from './clearWarns'
 import { helpCommand } from './help'
 import { lmgtfyCommand } from './lmgtfy'
+import { moveCommand } from './move'
 import { muteCommand } from './mute'
 import { pingCommand } from './ping'
 import { pruneCommand } from './prune'
@@ -37,6 +38,7 @@ export const commandsArray = [
   clearWarnsCommand,
   helpCommand,
   lmgtfyCommand,
+  moveCommand,
   muteCommand,
   pingCommand,
   pruneCommand,
