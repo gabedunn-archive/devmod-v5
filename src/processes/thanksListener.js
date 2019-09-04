@@ -37,7 +37,10 @@ export const initThanksListener = async client => {
                   embed: {
                     title: 'Thanks received!',
                     color: green,
-                    description: `${thankee} has been thanked by ${thanker}!\n\nThey now have ${thanks} rep.`
+                    description: `${thankee} has been thanked by ${thanker}!\n\nThey now have ${thanks} rep.`,
+                    footer: {
+                      text: `Use "thanks @user" to give someone rep!`
+                    },
                   }
                 })
               } catch (err) {
