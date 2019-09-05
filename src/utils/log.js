@@ -44,20 +44,26 @@ const logErrorToChannel = (area, message, err) => {
 
     // Add a listener to run when the client is ready.
     client.on('ready', async () => {
+      // Grab the guild object.
+      const guild = client.guilds.first()
+
       // Save the errors channel
-      const errorChannel = message.guild.channels.find(c => c.name === channels.roles)
+      const errorChannel = guild.channels.find(c => c.name === channels.errors)
 
       if (errorChannel === undefined) {
         return await sendErrorMessage('No Error Channel', 'The errors channel either isn\'t set or doesn\'t exist.')
       }
+
+      // Convert the error to an iterable object using a custom replacer function.
+      const errorObject = JSON.parse(JSON.stringify(err, errorReplacer))
 
       // Send the error message.
       await errorChannel.send({
         embed: {
           title: `Error [${area}]:`,
           color: red,
-          description: message,
-          fields: Object.entries(err).map(field => {
+          description: `${message}.`,
+          fields: Object.entries(errorObject).map(field => {
             return {
               name: `${capitalize(field[0])}:`,
               value: field[1]
@@ -75,4 +81,21 @@ const logErrorToChannel = (area, message, err) => {
   } catch (err) {
     console.error(`${chalk.greenBright('[Log]')} ${chalk.redBright('Failed to send error message to channel:')}`, err)
   }
+}
+
+// Used in JSON.stringify to parse all entries in an error object.
+const errorReplacer = (key, value) => {
+  // If it's an error, treat it as such.
+  if (value instanceof Error) {
+    const errorObject = {
+      // Pull all enumerable properties, supporting properties on custom Errors
+      ...value,
+      // Explicitly pull Error's non-enumerable properties
+      name: value.name,
+      message: value.message,
+    }
+    delete errorObject.stack
+    return errorObject
+  }
+  return value
 }
