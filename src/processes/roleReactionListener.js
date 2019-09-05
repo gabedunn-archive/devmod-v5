@@ -15,7 +15,17 @@ const roleAction = async ({ client, guildId, messageId, userId, emojiName }, rem
 
     // Save some details about the reaction event to constants.
     const guild = client.guilds.get(guildId)
-    const member = guild.member(userId)
+
+    if (guild === undefined || guild === null) {
+      return await logError('InfoListener', 'The guild is invalid')
+    }
+
+    const member = await guild.fetchMember(userId)
+
+    if (member === undefined || member === null) {
+      return await logError('InfoListener', 'The member is invalid')
+    }
+
     const roles = guild.roles
 
     // Run a function for each message ID in the list of reaction role messages.
