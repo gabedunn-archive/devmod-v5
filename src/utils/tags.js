@@ -389,5 +389,13 @@ export default {
     color: blue,
     description: 'A guide on markdown formatting in discord.',
     url: 'https://support.discordapp.com/hc/en-us/articles/210298617-Markdown-Text-101-Chat-Formatting-Bold-Italic-Underline-'
+  },
+  thanks: {
+    title: 'Thanking people',
+    color: blue,
+    description: 'Thanking someone is a nice way to appreciate the help they have given you' +
+        ' for solving a problem or explaining something. ' +
+        ' You can thank someone by typing ``thanks @user#id``.' +
+        ' Additionally any sentence with the word "thank" and a user tag will thank the user.'
   }
 }
