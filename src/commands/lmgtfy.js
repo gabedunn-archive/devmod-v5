@@ -8,20 +8,6 @@ import { sendErrorMessage } from '../utils/sendErrorMessage'
 import { logError } from '../utils/log'
 import { getAuthor } from '../utils/user'
 
-const types = ['web','image']
-const sites = ['google','yahoo','bing','ask','aol','duckduckgo']
-const siteJson = {
-  'google': 'g',
-  'yahoo':'y',
-  'bing': 'b',
-  'ask': 'k',
-  'aol': 'a',
-  'duckduckgo': 'd'
-}
-const typeJson = {
-  'web': 'w',
-  'image': 'i'
-}
 // Export an object with command info and the function to execute.
 export const lmgtfyCommand = {
   name: 'LMGTFY',
@@ -31,37 +17,49 @@ export const lmgtfyCommand = {
   permissions: ['SEND_MESSAGES'],
   usage: '<query> <site> <web|image>',
   exec: async (args, message) => {
+    // Set up type and site options.
+    const types = {
+      '-w': 'w', // web
+      '-i': 'i' // image
+    }
+    const sites = {
+      '-g': 'g', // google
+      '-y': 'y', //yahoo
+      '-b': 'b', // bing
+      '-k': 'k', // ask
+      '-a': 'a', // aol
+      '-d': 'd' // duckduckgo
+    }
     try {
-      //if no options are specified google and web are default
-      let t = 'w'
-      let s = 'g'
+      // Set default options to web & google.
+      let type = types['-w']
+      let site = sites['-g']
+
       // If a query isn't specified, send an error message and terminate the command.
       if (args.length < 1) {
         return await sendErrorMessage(
           'No Query Specified', 'You need to specify a query.', message
         )
       }
-      let options = args.slice(-2)
 
-      //Loop through both the arrays to check the options specified
-        sites.forEach(e => {
-          if(options[0].toLowerCase() === e){
-            s = siteJson[e]
+      const query = args.filter(a => a[0] !== '-')
+      const options = args.filter(args => args[0] === '-')
+
+      // If the specified options exists, set them.
+      for (const option of options) {
+        if (Object.keys(sites).includes(option.toLowerCase())) {
+          site = sites[option]
         }
-      })
+      }
 
-      //lmgtfy only supports image for google searches
-      if(s === 'g'){
-        types.forEach(e => {
-          if(options[1].toLowerCase() === e){
-            t = typeJson[e]
+      // LMGTFY only supports image for google searches
+      if (site === 'g') {
+        for (const option of options) {
+          if (Object.keys(types).includes(option.toLowerCase())) {
+            type = types[option]
+          }
         }
-      })
-    }
-      
-      
-      
-
+      }
 
       try {
         // Remove the user's message.
@@ -75,9 +73,9 @@ export const lmgtfyCommand = {
         // noinspection JSUnresolvedFunction,JSCheckFunctionSignatures
         return message.channel.send({
           embed: {
-            title: args.slice(0,args.length-2).join(' '),
+            title: query.join(' '),
             color: blue,
-            url: `https://lmgtfy.com/?q=${args.slice(0,args.length-2).join('+')}&s=${s}&t=${t}`,
+            url: `https://lmgtfy.com/?q=${query.join('+')}&s=${site}&t=${type}`,
             description: 'Here you go!',
             author: getAuthor(message.member)
           }
