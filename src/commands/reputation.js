@@ -42,7 +42,7 @@ export const reputationCommand = {
         color: blue,
         author: getAuthor(message.member),
         footer: {
-          text: `Use thanks @user to give someone rep!`
+          text: `Use "thanks @user" to give someone rep!`
         },
       }
 
