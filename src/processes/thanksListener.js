@@ -21,7 +21,7 @@ export const initThanksListener = async client => {
          * 
          * Has a lot of edge case tests :)
          */
-        if (message.channel.type !== 'dm' && !message.author.bot && message.content.match(/(?<=^thanks?.*|^kudos.*)(?<=\s)@[^\n#]+#\d{4}\b/gi).length > 0) {
+        if (message.channel.type !== 'dm' && !message.author.bot && message.content.match(/(?<=^thanks?.*|^kudos.*)(?<=\s)@[^\n#]+#\d{4}\b/gi) !== null) {
           // Get the member thanked and filter for undefined members.
           const thankees = message.mentions.members.filter(thankee => thankee !== undefined)
 
