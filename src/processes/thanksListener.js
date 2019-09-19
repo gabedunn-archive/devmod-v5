@@ -15,7 +15,13 @@ export const initThanksListener = async client => {
     client.on('message', async message => {
       try {
         // If the message isn't a dm, the author isn't a bot, and it contains the word 'thank' or 'kudos', continue.
-        if (message.channel.type !== 'dm' && !message.author.bot && ['thank', 'kudos'].some(t => message.content.toLowerCase().includes(t))) {
+
+        /**
+         * Matching the following RegExp: https://regex101.com/r/aR3sc1/22
+         * 
+         * Has a lot of edge case tests :)
+         */
+        if (message.channel.type !== 'dm' && !message.author.bot && message.content.match(/(?<=^thanks?.*|^kudos.*)(?<=\s)@[^\n#]+#\d{4}\b/gi).length > 0) {
           // Get the member thanked and filter for undefined members.
           const thankees = message.mentions.members.filter(thankee => thankee !== undefined)
 

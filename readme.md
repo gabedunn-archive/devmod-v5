@@ -1,5 +1,5 @@
 # devmod
-> v5.0.0
+> v5.1.0
 
 > A Discord bot for moderating servers.
 
