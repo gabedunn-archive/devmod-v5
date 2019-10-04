@@ -22,7 +22,7 @@
     "test:db": "babel-node src/utils/tests/dbTest.js"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.4.4",
+    "@babel/polyfill": "^7.6.0",
     "chalk": "^2.4.2",
     "discord.js": "^11.5.1",
     "dotenv": "^8.0.0",
