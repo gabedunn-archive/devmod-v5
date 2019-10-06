@@ -398,5 +398,37 @@ export default {
         ' for solving a problem or explaining something. ' +
         ' You can thank someone by typing ``thanks @user#id``.' +
         ' Additionally any sentence with the word "thank" and a user tag will thank the user.'
+  },
+  design: {
+    title: 'Design Articles',
+    color: purple,
+    description: 'Looking to improve your design skills? Here are some helpful' +
+      'articles.',
+    fields: [
+      {
+        name: '7 Tips for Cheating at Design',
+        value: '[Improve your designs with tactics instead of talent.](https://medium.com/refactoring-ui/7-practical-tips-for-cheating-at-design-40c736799886)'
+      },
+      {
+        name: '10 Design Rules for Programmers',
+        value: '[Rules to follow when designing.](https://thoughtspile.github.io/2018/12/17/design-crash-course/)'
+      },
+      {
+        name: 'The Secret Heroes of UX Design',
+        value: '[Learn more about UX design.](https://link.medium.com/XrKhnmTAsT)'
+      },
+      {
+        name: 'Color Pallete',
+        value: '[Learn how to create color palletes.](https://refactoringui.com/previews/building-your-color-palette/)'
+      },
+      {
+        name: 'Color Usage',
+        value: '[Learn how to use colors.](https://www.smashingmagazine.com/2017/09/vibrant-colors-apps-websites/)'
+      },
+      {
+        name: 'Using Gradients',
+        value: '[Learn how to use gradients.](https://www.smashingmagazine.com/2018/01/gradients-user-experience-design/)'
+      }
+    ]
   }
 }
