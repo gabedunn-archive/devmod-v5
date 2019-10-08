@@ -406,28 +406,22 @@ export default {
       'articles.',
     fields: [
       {
-        name: '7 Tips for Cheating at Design',
-        value: '[Improve your designs with tactics instead of talent.](https://medium.com/refactoring-ui/7-practical-tips-for-cheating-at-design-40c736799886)'
+        name: '[7 Tips for Cheating at Design](https://medium.com/refactoring-ui/7-practical-tips-for-cheating-at-design-40c736799886)'
       },
       {
-        name: '10 Design Rules for Programmers',
-        value: '[Rules to follow when designing.](https://thoughtspile.github.io/2018/12/17/design-crash-course/)'
+        name: '[10 Design Rules for Programmers](https://thoughtspile.github.io/2018/12/17/design-crash-course/)',
       },
       {
-        name: 'The Secret Heroes of UX Design',
-        value: '[Learn more about UX design.](https://link.medium.com/XrKhnmTAsT)'
+        name: '[The Secret Heroes of UX Design](https://link.medium.com/XrKhnmTAsT)',
       },
       {
-        name: 'Color Pallete',
-        value: '[Learn how to create color palletes.](https://refactoringui.com/previews/building-your-color-palette/)'
+        name: '[Color Pallete](https://refactoringui.com/previews/building-your-color-palette/)',
       },
       {
-        name: 'Color Usage',
-        value: '[Learn how to use colors.](https://www.smashingmagazine.com/2017/09/vibrant-colors-apps-websites/)'
+        name: '[Color Usage](https://www.smashingmagazine.com/2017/09/vibrant-colors-apps-websites/)',
       },
       {
-        name: 'Using Gradients',
-        value: '[Learn how to use gradients.](https://www.smashingmagazine.com/2018/01/gradients-user-experience-design/)'
+        name: '[Using Gradients](https://www.smashingmagazine.com/2018/01/gradients-user-experience-design/)',
       }
     ]
   }
