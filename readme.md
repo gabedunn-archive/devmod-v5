@@ -6,6 +6,8 @@
 This was originally made to moderate the DevCord Discord community, but you
 don't need to be a developer to use it.
 
+## Hosting the bot yourself
+
 ## Setup
 
 ### Step 1 - Creating the Bot User
