@@ -84,6 +84,9 @@ If you want to run the bot in the background without needing to keep a command
 line window open, build it with `npm run build` (`yarn build`) and run 
 it with the command `pm2 start ./dist/devmod.js`.
 
+You can also run this bot using the `esm` compatibility layer by running (from the devmod folder)
+`node ./src/esm.js` or `pm2 start ./src/esm.js`.
+
 Now the bot is ready for use!
 
 > Just a quick note - the tags in `src/utils/tags.js`, the activities in
