@@ -12,15 +12,13 @@ import { log, logError } from './utils/log'
 
 const main = async () => {
   try {
-// If an unhandled rejection occurs, log it and exit the program.
+// If an unhandled rejection occurs log it.
     process.on('unhandledRejection', async err => {
       await logError('Main', 'Unhandled Rejection', err)
-      process.exit(1)
     })
     // Same thing but for uncaught exception.
     process.on('uncaughtException', async err => {
       await logError('Main', 'Uncaught Exception', err)
-      process.exit(1)
     })
   } catch (err) {
     await logError('Main', 'Failed to add process error listeners', err)
