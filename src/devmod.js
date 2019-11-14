@@ -10,7 +10,6 @@ import { log, logError } from './utils/log'
 import { initCommandListener } from './processes/commandListener'
 import { initActivityChanger } from './processes/activityChanger'
 import { initReactionListener } from './processes/roleReactionListener'
-import { initInfoReactionListener } from './processes/infoReactionListener'
 import { initTorielsAntiBotCrusade } from './processes/torielsAntiBotCrusade'
 import { initThanksListener } from './processes/thanksListener'
 
@@ -34,7 +33,6 @@ export const devmod = async () => {
   const processes = [
     initCommandListener,
     initReactionListener,
-    initInfoReactionListener,
     initActivityChanger,
     initTorielsAntiBotCrusade,
     initThanksListener
