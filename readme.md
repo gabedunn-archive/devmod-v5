@@ -54,15 +54,15 @@ Option | Default | Description
 `autoBanWarns` | `3` | Amount of warnings to warrant an auto-ban if enabled.
 `banMsgDelete` | `0` | Number of days of messages to delete when user is banned.
 `thanks` | `['thank', 'kudos']` | List of triggers for thanking users.
-`channels.warn` | `warnings` | Channel to forward all warning confirmation messages.
-`channels.bans` | `bans` | Channel to forward all ban confirmation messages.
-`channels.reports` | `reports` | Channel to forward all user report messages.
-`channels.roles` | `roles` | Channel to send and listen to reactions for roles.
-`channels.info` | `info` | Channel to send the info to.
-`channels.crusade` | `crusade` | Channel to send notifications that the anti bot crusade has deleted a message.
-`channels.errors` | `crusade` | Channel to log errors to.
-`roles.muted` | `muted` | Name of the role to apply to muted users.
-`roles.verified` | `verified` | Name of the role to apply to verified users.
+`channels.warn` | `'warnings'` | Channel to forward all warning confirmation messages.
+`channels.bans` | `'bans'` | Channel to forward all ban confirmation messages.
+`channels.reports` | `'reports'` | Channel to forward all user report messages.
+`channels.roles` | `'roles'` | Channel to send and listen to reactions for roles.
+`channels.info` | `'info'` | Channel to send the info to.
+`channels.crusade` | `'crusade'` | Channel to send notifications that the anti bot crusade has deleted a message.
+`channels.errors` | `'errors'` | Channel to log errors to.
+`roles.muted` | `'muted'` | Name of the role to apply to muted users.
+`roles.verified` | `'verified'` | Name of the role to apply to verified users.
 `Activities` | `[...]` | List of activities for the bot's status message.
 `tags` | `[...]` | List of tags for the `.tag` command. Each one is a discord embed object. Can be imported from a different file (config/tags.js).
 `approvedRoles` | `[...]` | List of lists of roles the reaction roles channel. Can be imported from a different file (config/approvedRoles.js).
