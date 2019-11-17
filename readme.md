@@ -35,9 +35,11 @@ Otherwise, download the repo as a zip and unpack it to any folder of
 your choosing. Open up the command line and `cd` into the folder that contains
 the cloned/unzipped code.
 
-Run `npm install` (or `yarn`) to install all of the bot's dependencies and then `npm install
--g pm2` (or `yarn global add pm2`) to be able to run the bot in the background. The host machine
+Run `yarn` (or `npm install`) to install all of the bot's dependencies and then `yarn global add pm2`
+(or `npm install -g pm2`) to be able to run the bot in the background. The host machine
 is now configured to run the bot. All you need to do now is set up the config.
+
+Of course, you could also run the bot with other solutions, such as `forever`, `tmux`, or `screen`.
 
 ### Step 4 - Configuring the bot
 To configure the bot, edit `devmod.config.js`. The supported values are in the table below.
@@ -51,6 +53,7 @@ Option | Default | Description
 `autoBan` | `true` | Whether or not to enforce auto-banning after a specified number of warnings.
 `autoBanWarns` | `3` | Amount of warnings to warrant an auto-ban if enabled.
 `banMsgDelete` | `0` | Number of days of messages to delete when user is banned.
+`thanks` | `['thank', 'kudos']` | List of triggers for thanking users.
 `channels.warn` | `warnings` | Channel to forward all warning confirmation messages.
 `channels.bans` | `bans` | Channel to forward all ban confirmation messages.
 `channels.reports` | `reports` | Channel to forward all user report messages.
@@ -61,145 +64,32 @@ Option | Default | Description
 `roles.muted` | `muted` | Name of the role to apply to muted users.
 `roles.verified` | `verified` | Name of the role to apply to verified users.
 `Activities` | `[...]` | List of activities for the bot's status message.
-`tags` | `[...]` | List of tags for the `.tag` command. Each one is a discord embed object. Can be imported from a different file.
-`approvedRoles` | `[...]` | List of lists of roles the reaction roles channel. Can be imported from a different file.
-
-Afterwards, open up `src/utils/approvedRoles.js`. Add role names and emojis 
-that you would like members to be able to assign to themselves via the
-role command and reactions. This is case sensitive, so be sure to get 
-it 100% accurate.
+`tags` | `[...]` | List of tags for the `.tag` command. Each one is a discord embed object. Can be imported from a different file (config/tags.js).
+`approvedRoles` | `[...]` | List of lists of roles the reaction roles channel. Can be imported from a different file (config/approvedRoles.js).
 
 ### Step 5 - Running the Bot
+Now that you have all of the options set up, you can run the bot. To run it normally, use
+`yarn start` (`npm run start`). It can also be run with `node ./src/esm.js`.
 
-Now that you have all of the options set up, you can run the bot. If you want to
-run it on your computer while keeping the command line window open, use either the
-command `npm run start` (`yarn start`) or `npm run build` (`yarn build`)
-and `node ./dist/devmod.js`.
+#### Verification bot
+There is also a verification bot that requires users to click a reaction on a message to agree to
+some rules in order to get a role added which you can configure to give them permission participate.
 
-If you want to run the bot in the background without needing to keep a command
-line window open, build it with `npm run build` (`yarn build`) and run 
-it with the command `pm2 start ./dist/devmod.js`.
+You can start this bot with `yarn verify` (or `npm run verify`) or with `node ./src/utils/verify.js`.
 
 Now the bot is ready for use!
 
-> Just a quick note - the tags in `src/utils/tags.js`, the activities in
-`src/utils/activities.js`, and the roles in `src/utils/approvedRoles.js`
+> Just a quick note - the default tags in `config/tags.js`, the activities in
+`src/utils/default.config.js/activities.js`, and the roles in `config/approvedRoles.js`
 may not be specific to all servers, so make sure to check those out
 before running the bot.
 
-## Features & Usage
-
-> This overview assumes that all config options are set to their defaults.
-
-### Warning Users
-
-If a user has a role that allows them to kick users, they can use the
-warns system.
-
-`.warn <user> <reason>` will send a DM to the user with their warning, send a
-message to the channel specified in `CHANNEL_WARN`, and adds the warning to
-the database file along with the ID of the user who issued it. If a user already
-has 2 warnings, they will be banned. A DM will be sent to them with the reason
-and it will be logged to the bans channel. Once they are banned, all of their
-warnings are removed from the database.
-
-`.warns <user>` will list all of the warnings a user
-has, the reasons for these warnings, and the people who warned them.
-
-`.clearwarns <user>` (or `.cwarns <user>`) will clear the warnings from
-a user.
-
-### Banning Users
-
-If a user has a role that allows them to ban users, they can use the ban
-command.
-
-`.ban <user> [<days> <reason>]` will ban a user for the specified reason
-and remove the user's messages from the specified amount of days previous.
-
-### Unbanning Users
-
-If a user has a role that allows them to ban user, they are able to use
-the unban command.
-
-`.unban <user> [<reason>]` will unban a user from their username.
-
-### Reporting Users
-
-Any user can use the report command.
-
-`.report <message>` will send a message into the reports channel with the
-message, the name of the user who sent it, and the channel that it was sent
-from.
-
-### Tags
-
-Any user is able to use tags and list tags.
-
-`.tag <tag> [<user>]` will call up a tag. If `<user>` is specified, the bot will
-tag the user when sending the message.
-
-`.tags` will show a list of tags. This list will be deleted after 10 seconds.
-
-> Tags commands can be used in DMs.
-
-### Reputation
-
-Saying `thanks @user` or `kudos @user` will add 1 reputation to the user
-mentioned.
-
-You can view a user's reputation by running `.reputation <user>`.
-
-### Roles System
-
-Anyone can use the role command. It will add & remove roles that have been
-whitelisted in `src/utils/approvedRoles.js`.
-
-`.role add <role>` will add the specified role.
-
-`role rm <role>` will remove the specified role.
-
-Both commands are case sensitive.
-
-The roles will also be available to be added in the specified roles
-channel after running the `.buildroles` command.
-
-### Prune
-
-Anyone with MANAGE_MESSAGES permission can use this command.
-
-`.prune [<amount>]` will remove the specified amount of commands from the
-current channel. If no number is specified, the default is 5.
-
-### Stats & Users Commands
-
-These commands can be used by all users on the server.
-
-`.stats` will display stats about the user.
-
-`.users` will display the number of users on the server.
-
-### LMGTFY
-
-This command can be used by anyone.
-
-`.lmgtfy <query>` will send a link with the LMGTFY query.
-
-### Help
-
-Anyone can use this command.
-
-`.help` will send a message with a list of commands and how to use them. The
-message will be deleted after 20 seconds.
-
-### Ping
-
-Anyone can use this command.
-
-`.ping` will send a message to the chat with the ping and round trip time of the
-bot.
+## Usage
+The usage of this bot is described and documented on the [usage page](docs/usage.md).
 
 ## Future Ideas
-
 - Add configuration for whether to delete warns on a ban.
 - Add usage statistics to DB.
+
+## Author
+**devmod** © [RedXTech](https://github.com/redxtech), Released under the [MIT](./LICENSE.md) License.
