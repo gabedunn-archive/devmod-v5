@@ -3,10 +3,10 @@
  * Verification bot.
  */
 
-import { log, logError } from './utils/log'
-import { initInfoReactionListener } from './processes/infoReactionListener'
+import { log, logError } from '../log'
+import { initInfoReactionListener } from '../../processes/infoReactionListener'
 import discord from 'discord.js'
-import { botToken } from './utils/config'
+import { botToken } from '../config'
 
 const main = async () => {
   try {

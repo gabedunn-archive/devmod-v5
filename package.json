@@ -13,16 +13,11 @@
   "scripts": {
     "dev": "nodemon src/esm.js",
     "lint": "eslint --ext .js src",
-    "lint:fix": "eslint --ext .js src --fix",
-    "prep": "envup",
     "start": "node src/esm.js",
-    "test": "babel-node src/utils/tests/test.js",
-    "test:db": "babel-node src/utils/tests/dbTest.js",
-    "verify": "node src/esmVerify.js",
-    "verify:dev": "nodemon src/esmVerify.js"
+    "verify": "node src/utils/verify/esm.js",
+    "verify:dev": "nodemon src/utils/verify/esm.js"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.4.4",
     "chalk": "^2.4.2",
     "discord.js": "^11.5.1",
     "dotenv": "^8.0.0",
@@ -36,13 +31,8 @@
     "nedb-async-await": "^0.1.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.5",
-    "@babel/node": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
     "envup": "^1.1.2",
     "eslint-plugin-import": "^2.17.3",
-    "nodemon": "^1.19.1",
-    "parcel-bundler": "^1.12.3"
+    "nodemon": "^1.19.1"
   }
 }
