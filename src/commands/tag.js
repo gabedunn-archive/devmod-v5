@@ -4,9 +4,10 @@
 */
 
 import { sendErrorMessage } from '../utils/sendErrorMessage'
-import { tags } from '../../config/tags'
 import { logError } from '../utils/log'
 import { getAuthor } from '../utils/user'
+
+const { tags } = require('../utils/config')
 
 // Export an object with command info and the function to execute.
 export const tagCommand = {

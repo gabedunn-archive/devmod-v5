@@ -4,10 +4,11 @@
 */
 
 import { green, red } from '../utils/colours'
-import { approvedRoles } from '../../config/approvedRoles'
 import { sendErrorMessage } from '../utils/sendErrorMessage'
 import { logError } from '../utils/log'
 import { getAuthor } from '../utils/user'
+
+const { approvedRoles } = require('../utils/config')['default']
 
 // Export an object with command info and the function to execute.
 export const roleCommand = {

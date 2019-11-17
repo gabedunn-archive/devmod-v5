@@ -3,9 +3,10 @@
  * Functionality relating to listening for reactions on the roles message(s) and applying roles to users.
  */
 
-import { approvedRoles } from '../../config/approvedRoles'
 import { getSetting } from '../db'
 import { log, logError } from '../utils/log'
+
+const { approvedRoles } = require('../utils/config')
 
 // Applied an action to either add a remove a role from a user based on the action provided and the approved roles list.
 const roleAction = async ({ client, guildId, messageId, userId, emojiName }, remove = false) => {
