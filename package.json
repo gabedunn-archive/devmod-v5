@@ -14,8 +14,7 @@
     "dev": "nodemon src/esm.js",
     "lint": "eslint --ext .js src",
     "start": "node src/esm.js",
-    "verify": "node src/utils/verify/esm.js",
-    "verify:dev": "nodemon src/utils/verify/esm.js"
+    "verify": "node src/utils/verify/esm.js"
   },
   "dependencies": {
     "chalk": "^2.4.2",
