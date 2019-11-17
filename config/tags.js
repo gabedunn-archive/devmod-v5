@@ -1,11 +1,11 @@
 /*
  * Gabe Dunn 2018
  * Definitions of available tags.
- * TODO: do the thing
  */
-import { blue, green, orange, purple, red, yellow } from './colours'
 
-export default {
+import { blue, green, orange, purple, red, yellow } from '../src/utils/colours'
+
+export const tags = {
   bot: {
     title: 'Bot Channel',
     color: blue,
@@ -196,8 +196,8 @@ export default {
       {
         name: 'Notepad++',
         value: 'Notepad++ is a very lightweight code editor, with a lot ' +
-        'of plugins for everything you can think of. It is beyond excellent ' +
-        'for quick edit or doodle work. [Download](https://notepad-plus-plus.org/)'
+          'of plugins for everything you can think of. It is beyond excellent ' +
+          'for quick edit or doodle work. [Download](https://notepad-plus-plus.org/)'
       }
     ]
   },
@@ -310,8 +310,8 @@ export default {
     title: 'Flexbox',
     color: purple,
     description: 'The Flexible Box Module, usually referred to as flexbox, was' +
-        ' designed as a one-dimensional layout model, and as a method that could' +
-        ' offer space distribution between items in an interface and powerful alignment capabilities.',
+      ' designed as a one-dimensional layout model, and as a method that could' +
+      ' offer space distribution between items in an interface and powerful alignment capabilities.',
     fields: [
       {
         name: 'MDN web docs',
@@ -335,8 +335,8 @@ export default {
     title: 'JavaScript Fetch API',
     color: purple,
     description: 'The Fetch API provides an interface for fetching resources' +
-    ' (including across the network). It will seem familiar to anyone who has used' +
-    ' XMLHttpRequest, but the new API provides a more powerful and flexible feature set.',
+      ' (including across the network). It will seem familiar to anyone who has used' +
+      ' XMLHttpRequest, but the new API provides a more powerful and flexible feature set.',
     fields: [
       {
         name: 'MDN web docs',
@@ -396,9 +396,9 @@ export default {
     title: 'Thanking people',
     color: blue,
     description: 'Thanking someone is a nice way to appreciate the help they have given you' +
-        ' for solving a problem or explaining something. ' +
-        ' You can thank someone by typing ``thanks @user#id``.' +
-        ' Additionally any sentence with the word "thank" and a user tag will thank the user.'
+      ' for solving a problem or explaining something. ' +
+      ' You can thank someone by typing ``thanks @user#id``.' +
+      ' Additionally any sentence with the word "thank" and a user tag will thank the user.'
   },
   design: {
     title: 'Design Articles',

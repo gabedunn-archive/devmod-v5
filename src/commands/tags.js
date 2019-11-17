@@ -4,7 +4,7 @@
 */
 
 import { blue, red } from '../utils/colours'
-import tags from '../utils/tags'
+import { tags } from '../../config/tags'
 import { capitalize } from '../utils/capitalize'
 import { logError } from '../utils/log'
 import { getAuthor } from '../utils/user'

@@ -4,7 +4,7 @@
 */
 
 import { green, red } from '../utils/colours'
-import { allRoles } from '../utils/approvedRoles'
+import { approvedRoles } from '../../config/approvedRoles'
 import { sendErrorMessage } from '../utils/sendErrorMessage'
 import { logError } from '../utils/log'
 import { getAuthor } from '../utils/user'
@@ -35,8 +35,8 @@ export const roleCommand = {
       // Save the role after converting it to lower case.
       const role = args[1].toLowerCase()
 
-      // Reduce the allRoles list to an array of all of the keys of each roleGroup.roles.
-      const availableRoles = allRoles.reduce((previousValue, currentValue) => {
+      // Reduce the approvedRoles list to an array of all of the keys of each roleGroup.roles.
+      const availableRoles = approvedRoles.reduce((previousValue, currentValue) => {
         const previousArray = previousValue
         for (const role of Object.keys(currentValue.roles)) {
           previousArray.push(role)

@@ -4,6 +4,8 @@
  */
 
 import { join } from 'path'
+import { tags } from './config/tags'
+import { approvedRoles } from './config/approvedRoles'
 
 export default {
   botToken: 'NTkzMTMwOTM0ODQ1NDQwMDA2.Xczq0A.9t0Oaf1uS0o_4ORcC5ZiAqIt8DE',
@@ -17,5 +19,7 @@ export default {
     info: 'rules-and-information',
     crusade: 'mod-log',
     errors: 'errors'
-  }
+  },
+  tags,
+  approvedRoles
 }

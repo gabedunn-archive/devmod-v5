@@ -3,7 +3,7 @@
  * Functionality relating to listening for reactions on the roles message(s) and applying roles to users.
  */
 
-import { allRoles } from '../utils/approvedRoles' // TODO: do the thing
+import { approvedRoles } from '../../config/approvedRoles'
 import { getSetting } from '../db'
 import { log, logError } from '../utils/log'
 
@@ -33,7 +33,7 @@ const roleAction = async ({ client, guildId, messageId, userId, emojiName }, rem
       // If the message ID is equal the ID from the loop, continue.
       if (reactionMessageIDs[key] === messageId) {
         // For each group of roles in the approved roles list, run a function.
-        for (const roleGroup of allRoles) {
+        for (const roleGroup of approvedRoles) {
           // If the current key (from the message) is equal to a role group ID, continue.
           if (roleGroup.id === key) {
             // For each role in the current role group, run a function.

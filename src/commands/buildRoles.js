@@ -5,7 +5,7 @@
 
 import { blue } from '../utils/colours'
 import { getSetting, setSetting } from '../db'
-import { allRoles } from '../utils/approvedRoles'
+import { approvedRoles } from '../../config/approvedRoles'
 import { log, logError } from '../utils/log'
 import { getAuthor } from '../utils/user'
 import { sendErrorMessage } from '../utils/sendErrorMessage'
@@ -47,8 +47,8 @@ export const buildRolesCommand = {
       const messageIDs = {}
       let count = 0
 
-      // For each group of roles in allRoles, send a message.
-      for (const roleGroup of allRoles) {
+      // For each group of roles in approvedRoles, send a message.
+      for (const roleGroup of approvedRoles) {
         // Create an array, and for each approved role push a string with 'name: emoji' to it.
         const roleArray = []
         for (const role of Object.values(roleGroup.roles)) {
@@ -83,7 +83,7 @@ export const buildRolesCommand = {
         }
 
         // Increment count, and if it's equal to the number of role groups, call the finish function with messageIDs.
-        if (++count === allRoles.length) {
+        if (++count === approvedRoles.length) {
           // Log the IDs to the console joined by ', '
           log('BuildRoles', `Role Message IDs: ${Object.values(messageIDs).join(', ')}.`)
 

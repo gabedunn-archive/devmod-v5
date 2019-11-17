@@ -3,8 +3,6 @@
  * List and gather all roles approved for use with automatic role assignment.
  */
 
-// TODO: change to allow for discord emoji
-
 // For each category of roles, make an object with a unique ID and name, a message, and an object consisting of
 // {role: {name, emoji}} groups.
 const generalRoles = {
@@ -32,7 +30,7 @@ const helpRoles = {
 }
 
 // Export a list of all available roles.
-export const allRoles = [
+export const approvedRoles = [
   generalRoles,
   helpRoles
 ]

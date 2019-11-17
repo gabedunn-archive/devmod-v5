@@ -4,7 +4,7 @@
 */
 
 import { sendErrorMessage } from '../utils/sendErrorMessage'
-import tags from '../utils/tags'
+import { tags } from '../../config/tags'
 import { logError } from '../utils/log'
 import { getAuthor } from '../utils/user'
 

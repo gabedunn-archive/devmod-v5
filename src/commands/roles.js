@@ -4,7 +4,7 @@
 */
 
 import { blue, red } from '../utils/colours'
-import { allRoles } from '../utils/approvedRoles'
+import { approvedRoles } from '../../config/approvedRoles'
 import { logError } from '../utils/log'
 import { getAuthor } from '../utils/user'
 
@@ -29,8 +29,8 @@ export const rolesCommand = {
           timestamp: new Date()
         }
 
-        // For each roleGroup of allRoles, loop through the roleGroup and add each role to the embed.
-        for (const roleGroup of allRoles) {
+        // For each roleGroup of approvedRoles, loop through the roleGroup and add each role to the embed.
+        for (const roleGroup of approvedRoles) {
           // For each role in the roleGroup's roles property, push an entry to the embed with it's information.
           for (const role of Object.keys(roleGroup.roles)) {
             embed.fields.push({
