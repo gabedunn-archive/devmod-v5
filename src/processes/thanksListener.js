@@ -1,6 +1,7 @@
 /*
  * Gabe Dunn 2019
  * Functionality relating to listening and logging thanks.
+ * TODO: the thing
  */
 
 import { log, logError } from '../utils/log'

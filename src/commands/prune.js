@@ -1,6 +1,7 @@
 /*
 * Gabe Dunn 2018
 * Command that prunes the last x messages from the channel.
+* TODO: fix
 */
 
 // Export an object with command info and the function to execute.

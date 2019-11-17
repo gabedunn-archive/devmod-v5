@@ -1,6 +1,6 @@
 /*
 * Gabe Dunn 2018
-* Command that sends a list of tags.
+* Command that sends a list of available tags.
 */
 
 import { blue, red } from '../utils/colours'

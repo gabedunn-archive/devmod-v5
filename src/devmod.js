@@ -1,6 +1,6 @@
 /*
  * Gabe Dunn 2019
- * Main function for the bot's operation.
+ * Main function to initialize the bot's operation.
  */
 
 import discord from 'discord.js'
@@ -42,6 +42,7 @@ export const devmod = async () => {
   // For each process, run it asynchronously.
   for (const process of processes) {
     try {
+      // noinspection ES6MissingAwait
       process(client)
     } catch (err) {
       await logError('Init', `Failed to initialize process ${process.name}`, err)

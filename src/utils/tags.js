@@ -1,6 +1,7 @@
 /*
  * Gabe Dunn 2018
- * List of available tags.
+ * Definitions of available tags.
+ * TODO: do the thing
  */
 import { blue, green, orange, purple, red, yellow } from './colours'
 

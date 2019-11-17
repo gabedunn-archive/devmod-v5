@@ -20,7 +20,6 @@ export const sendErrorMessage = async (title, description, message) => {
 
   try {
     // Send the error message.
-    // noinspection JSUnresolvedFunction,JSCheckFunctionSignatures
     return message.channel.send({
       embed: {
         title,

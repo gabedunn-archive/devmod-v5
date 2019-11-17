@@ -1,11 +1,15 @@
+/*
+ * Gabe Dunn 2019
+ * Default configuration values.
+ */
+
 import { join } from 'path'
 
 export default {
   botToken: undefined, // Discord API token for the bot.
   prefix: '.', // Prefix for bot commands.
   msgDeleteTime: 30, // Amount of time in seconds to wait before deleting large help messages.
-  // dbFile: join(__dirname, '..', '..', 'devmod.db'), // Absolute path for the database file.
-  dbFile: join(__dirname, 'devmod.db'), // Absolute path for the database file.
+  dbFile: join(__dirname, '..', '..', 'devmod.db'), // Absolute path for the database file.
   autoBan: true, // Whether or not to enforce auto-banning after a specified number of warnings.
   autoBanWarns: 3, // Amount of warnings to warrant an auto-ban if enabled.
   banMsgDelete: 0, // Amount of warnings to warrant an auto-ban if enabled.

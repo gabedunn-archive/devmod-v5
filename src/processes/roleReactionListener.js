@@ -3,7 +3,7 @@
  * Functionality relating to listening for reactions on the roles message(s) and applying roles to users.
  */
 
-import { allRoles } from '../utils/approvedRoles'
+import { allRoles } from '../utils/approvedRoles' // TODO: do the thing
 import { getSetting } from '../db'
 import { log, logError } from '../utils/log'
 

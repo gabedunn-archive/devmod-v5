@@ -1,6 +1,6 @@
 /*
  * Gabe Dunn 2019
- * File to merge default values and user config.
+ * File to compile and export configuration.
  */
 
 import defaultConfig from './default.config'

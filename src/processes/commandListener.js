@@ -1,6 +1,6 @@
 /*
  * Gabe Dunn 2019
- * Functionality relating to changing the bot's activity in the sidebar.
+ * Functionality relating to listening to messages and running commands.
  */
 
 import { commands } from '../commands'

@@ -1,6 +1,6 @@
 /*
 * Gabe Dunn 2018
-* Command that sends a number of reputation points for a user.
+* Command that sends the number of reputation points for either a user or the top users.
 */
 
 import { blue } from '../utils/colours'

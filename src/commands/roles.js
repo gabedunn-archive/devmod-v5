@@ -1,6 +1,6 @@
 /*
 * Gabe Dunn 2018
-* Command that sends a list of roles.
+* Command that sends a list of roles available to self-assign.
 */
 
 import { blue, red } from '../utils/colours'

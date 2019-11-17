@@ -1,6 +1,6 @@
 /*
  * Gabe Dunn 2019
- * Functionality relating to listening for reactions on the info message and applying roles to users.
+ * Functionality relating to listening for a reaction on the info message and applying roles to users.
  */
 
 import { getSetting } from '../db'

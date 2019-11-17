@@ -1,3 +1,8 @@
+/*
+ * Gabe Dunn 2019
+ * Configuration files.
+ */
+
 import { join } from 'path'
 
 export default {
