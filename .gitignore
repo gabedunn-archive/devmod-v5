@@ -2,6 +2,7 @@
 .cache
 dist
 devmod.db
+devmod.config.js
 
 # Created by .ignore support plugin (hsz.mobi)
 .DS_Store
