@@ -1,7 +1,7 @@
 {
   "name": "devmod",
   "version": "5.0.1",
-  "description": "The latest in a series of rewrites for devmod, a bot meant for moderation of discord servers, specifically devcord.",
+  "description": "A bot for moderating discord servers. Written by and for developers with modularity in mind.",
   "main": "src/main.js",
   "types": "module",
   "license": "MIT",
