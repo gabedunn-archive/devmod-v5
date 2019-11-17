@@ -15,7 +15,7 @@ export const lmgtfyCommand = {
   category: 'fun',
   description: 'Sends a \'let me google that for you link\'.',
   permissions: ['SEND_MESSAGES'],
-  usage: '<query> <site> <web|image>',
+  usage: '<query> [<site> <web|image>]',
   exec: async (args, message) => {
     // Set up type and site options.
     const types = {

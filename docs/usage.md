@@ -56,3 +56,6 @@ the user who was thanked (tagged) gets a reputation point added to them.
 Adapted from https://gist.github.com/Dracovian/cb923c2b2fff7bad07ff7da4cdb6a3f8
 
 If a message contains a blacklisted URL, remove it and log it.
+
+## Author
+**devmod** © [RedXTech](https://github.com/redxtech), Released under the [MIT](../LICENSE.md) License.

@@ -32,7 +32,7 @@ export const moveCommand = {
       }
 
       // Send error message.
-      if (args.length < 1) {
+      if (args.length < 2) {
         return await sendErrorMessage('Channel Not Specified', 'You didn\'t specify a channel to move the message to.', message)
       }
 
