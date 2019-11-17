@@ -4,12 +4,13 @@
 */
 
 import { blue } from '../utils/colours'
-import { channels } from '../utils/config'
 import { getSetting, setSetting } from '../db'
 import { allRoles } from '../utils/approvedRoles'
 import { log, logError } from '../utils/log'
 import { getAuthor } from '../utils/user'
 import { sendErrorMessage } from '../utils/sendErrorMessage'
+
+const { channels: { roles } } = require('../utils/config')['default']
 
 // Export an object with command info and the function to execute.
 export const buildRolesCommand = {
@@ -24,7 +25,7 @@ export const buildRolesCommand = {
       const previousRolesMessages = await getSetting('reactions_message_ids')
 
       // Save the roles channel
-      const rolesChannel = message.guild.channels.find(c => c.name === channels.roles)
+      const rolesChannel = message.guild.channels.find(c => c.name === roles)
 
       if (rolesChannel === undefined) {
         return await sendErrorMessage('No Role Channel', 'The roles channel either isn\'t set or doesn\'t exist.')

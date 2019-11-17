@@ -7,7 +7,8 @@ import { sendErrorMessage } from '../utils/sendErrorMessage'
 import { green } from '../utils/colours'
 import { logError } from '../utils/log'
 import { getAuthor, getName } from '../utils/user'
-import { channels } from '../utils/config'
+
+const { channels: { ban } } = require('../utils/config')['default']
 
 // Export an object with command info and the function to execute.
 export const unbanCommand = {
@@ -48,7 +49,7 @@ export const unbanCommand = {
       const reason = memberToUnban.reason
 
       // Save the ban channel.
-      const channel = guild.channels.find(c => c.name === channels.ban)
+      const channel = guild.channels.find(c => c.name === ban)
 
       try {
         // Log the unban to the current channel.

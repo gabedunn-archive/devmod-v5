@@ -4,8 +4,9 @@
  */
 
 import { Datastore } from 'nedb-async-await'
-import { dbFile } from './utils/config'
 import { logError } from './utils/log'
+
+const { dbFile } = require('./utils/config')['default']
 
 // Create and initialize the database using auto-loading and the configured filename.
 const db = new Datastore({

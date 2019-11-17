@@ -5,9 +5,10 @@
 
 import { sendErrorMessage } from '../utils/sendErrorMessage'
 import { red } from '../utils/colours'
-import { banMsgDelete, channels } from '../utils/config'
 import { logError } from '../utils/log'
 import { getAuthor, getName } from '../utils/user'
+
+const { banMsgDelete, channels: { ban } } = require('../utils/config')['default']
 
 // Export an object with command info and the function to execute.
 export const banCommand = {
@@ -83,7 +84,7 @@ export const banCommand = {
       try {
         // Log the ban to the bans channel.
         await message.guild.channels
-          .find(c => c.name === channels.ban)
+          .find(c => c.name === ban)
           .send({
             embed: {
               color: red,

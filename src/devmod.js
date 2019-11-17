@@ -5,13 +5,14 @@
 
 import discord from 'discord.js'
 
-import { botToken } from './utils/config'
 import { log, logError } from './utils/log'
 import { initCommandListener } from './processes/commandListener'
 import { initActivityChanger } from './processes/activityChanger'
 import { initReactionListener } from './processes/roleReactionListener'
 import { initTorielsAntiBotCrusade } from './processes/torielsAntiBotCrusade'
 import { initThanksListener } from './processes/thanksListener'
+
+const { botToken } = require('./utils/config')['default']
 
 export const devmod = async () => {
   // Initialize the client.

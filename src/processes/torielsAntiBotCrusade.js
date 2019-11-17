@@ -5,8 +5,9 @@
 
 // Export a function to initialize the anti bot process.
 import { orange } from '../utils/colours'
-import { channels } from '../utils/config'
 import { log, logError } from '../utils/log'
+
+const { channels: { crusade } } = require('../utils/config')['default']
 
 export const initTorielsAntiBotCrusade = async client => {
   try {
@@ -25,7 +26,7 @@ export const initTorielsAntiBotCrusade = async client => {
           if (!message.author.bot && !message.member.roles.some(role => ['Staff', 'MVP'].includes(role.name))) {
             try {
               // Send a message to the reports channel detailing the removal.
-              await client.channels.find(c => c.name === channels.crusade).send({
+              await client.channels.find(c => c.name === crusade).send({
                 embed: {
                   color: orange,
                   author: {

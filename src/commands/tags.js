@@ -4,11 +4,12 @@
 */
 
 import { blue, red } from '../utils/colours'
-import { msgDeleteTime, prefix } from '../utils/config'
 import tags from '../utils/tags'
 import { capitalize } from '../utils/capitalize'
 import { logError } from '../utils/log'
 import { getAuthor } from '../utils/user'
+
+const { msgDeleteTime, prefix } = require('../utils/config')['default']
 
 // Export an object with command info and the function to execute.
 export const tagsCommand = {

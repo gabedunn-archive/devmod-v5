@@ -6,9 +6,10 @@
 import { green, orange, red, yellow } from '../utils/colours'
 import { sendErrorMessage } from '../utils/sendErrorMessage'
 import { getWarnings } from '../db'
-import { autoBanWarns } from '../utils/config'
 import { logError } from '../utils/log'
 import { getAuthor, getName } from '../utils/user'
+
+const { autoBanWarns } = require('../utils/config')['default']
 
 // Export an object with command info and the function to execute.
 export const warnsCommand = {

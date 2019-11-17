@@ -3,12 +3,13 @@
 * Command that sends an info message to the info channel.
 */
 
-import { channels } from '../utils/config'
 import { getSetting, setSetting } from '../db'
 import chalk from 'chalk'
 import { logError } from '../utils/log'
 import { blue } from '../utils/colours'
 import { getAuthor } from '../utils/user'
+
+const { channels: { info } } = require('../utils/config')['default']
 
 // Export an object with command info and the function to execute.
 export const buildInfoCommand = {
@@ -39,7 +40,7 @@ export const buildInfoCommand = {
         const guild = message.guild
 
         // Find the info channel.
-        const infoChannel = guild.channels.find(c => c.name === channels.info)
+        const infoChannel = guild.channels.find(c => c.name === info)
 
         // Save the previous info messages.
         const previousInfoMessages = await getSetting('info_message_ids')

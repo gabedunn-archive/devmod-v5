@@ -5,11 +5,12 @@
 
 import { orange, red, yellow } from '../utils/colours'
 import { sendErrorMessage } from '../utils/sendErrorMessage'
-import { autoBan, autoBanWarns, banMsgDelete, channels } from '../utils/config'
 import { addWarning, getWarnings } from '../db'
 import { banCommand } from './ban'
 import { logError } from '../utils/log'
 import { getAuthor, getName } from '../utils/user'
+
+const { autoBan, autoBanWarns, banMsgDelete, channels: { warn } } = require('../utils/config')['default']
 
 // Export an object with command info and the function to execute.
 export const warnCommand = {
@@ -74,7 +75,7 @@ export const warnCommand = {
         // Log the warn to the current channel.
         // noinspection JSUnresolvedFunction
         await message.guild.channels
-          .find(c => c.name === channels.warn)
+          .find(c => c.name === warn)
           .send({
             embed: {
               color: colour,

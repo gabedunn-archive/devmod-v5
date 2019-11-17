@@ -5,9 +5,10 @@
 
 import { orange } from '../utils/colours'
 import { sendErrorMessage } from '../utils/sendErrorMessage'
-import { channels, roles } from '../utils/config'
 import { logError } from '../utils/log'
 import { getAuthor, getName } from '../utils/user'
+
+const { channels: { warn }, roles: { muted } } = require('../utils/config')['default']
 
 // Export an object with command info and the function to execute.
 export const muteCommand = {
@@ -36,10 +37,10 @@ export const muteCommand = {
       const guild = message.guild
 
       // Fetch the muted role from the server.
-      const muted = guild.roles.find(r => r.name === roles.muted)
+      const mutedRole = guild.roles.find(r => r.name === muted)
 
       // If the muted role doesn't exist, send an error message and terminate the command.
-      if (muted === undefined) {
+      if (mutedRole === undefined) {
         return await sendErrorMessage('Muted Role Doesn\'t Exist', 'The muted role specified in the config does not exist.', message)
       }
 
@@ -52,7 +53,7 @@ export const muteCommand = {
 
       try {
         // Add the muted role to the member.
-        await member.addRole(muted)
+        await member.addRole(mutedRole)
       } catch (err) {
         await logError('Mute', 'Failed to add muted role', err, message)
       }
@@ -61,12 +62,11 @@ export const muteCommand = {
       const staffMember = message.member
 
       // Save the warnings channel.
-      const channel = guild.channels.find(c => c.name === channels.warn)
+      const warnChannel = guild.channels.find(c => c.name === warn)
 
       try {
         // Log the mute to the warnings channel.
-        // noinspection JSUnresolvedFunction,JSCheckFunctionSignatures
-        return channel.send({
+        return warnChannel.send({
           embed: {
             color: orange,
             title: 'Mute',

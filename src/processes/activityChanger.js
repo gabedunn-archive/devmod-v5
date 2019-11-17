@@ -3,9 +3,9 @@
  * Functionality relating to changing the bot's activity in the sidebar.
  */
 
-import { activities } from '../utils/activities'
-import { prefix } from '../utils/config'
 import { log, logError } from '../utils/log'
+
+const { activities, prefix } = require('../utils/config')['default']
 
 // Changes the status of the bot to the specified activities on an interval based on the config value 'statusInterval'.
 export const initActivityChanger = async client => {

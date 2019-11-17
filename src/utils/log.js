@@ -5,10 +5,11 @@
 
 import chalk from 'chalk'
 import discord from 'discord.js'
-import { botToken, channels } from './config'
 import { red } from './colours'
 import { capitalize } from './capitalize'
 import { sendErrorMessage } from './sendErrorMessage'
+
+const { botToken, channels: { errors } } = require('./config')['default']
 
 // Given an area and a message, log a nice looking message to the console.
 export const log = (area, message) => {
@@ -48,7 +49,7 @@ const logErrorToChannel = (area, message, err) => {
       const guild = client.guilds.first()
 
       // Save the errors channel
-      const errorChannel = guild.channels.find(c => c.name === channels.errors)
+      const errorChannel = guild.channels.find(c => c.name === errors)
 
       if (errorChannel === undefined) {
         return await sendErrorMessage('No Error Channel', 'The errors channel either isn\'t set or doesn\'t exist.')

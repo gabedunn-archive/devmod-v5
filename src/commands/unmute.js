@@ -5,9 +5,10 @@
 
 import { green } from '../utils/colours'
 import { sendErrorMessage } from '../utils/sendErrorMessage'
-import { channels, roles } from '../utils/config'
 import { logError } from '../utils/log'
 import { getAuthor, getName } from '../utils/user'
+
+const { channels: { warn }, roles: { muted } } = require('../utils/config')['default']
 
 // Export an object with command info and the function to execute.
 export const unmuteCommand = {
@@ -36,19 +37,19 @@ export const unmuteCommand = {
       const guild = message.guild
 
       // Fetch the muted role from the server.
-      const muted = guild.roles.find(r => r.name === roles.muted)
+      const mutedRole = guild.roles.find(r => r.name === muted)
 
       // If the muted role doesn't exist, send an error message and terminate the command.
-      if (muted === undefined) {
+      if (mutedRole === undefined) {
         return await sendErrorMessage('Muted Role Doesn\'t Exist', 'The muted role specified in the config does not exist.', message)
       }
 
       try {
         // Remove the muted role from the member.
-        await member.removeRole(muted)
+        await member.removeRole(mutedRole)
 
         // Save the warnings channel.
-        const channel = guild.channels.find(c => c.name === channels.warn)
+        const channel = guild.channels.find(c => c.name === warn)
 
         try {
           // Remove the user's message.

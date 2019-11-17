@@ -4,15 +4,16 @@
  * TODO: go through entire project and user proper naming for user & member
  * TODO: test every case of each command
  * TODO: more extensively check for non-existent instances of classes
- * TODO: add universal logging error generators
  */
 
 import { devmod } from './devmod'
 import { log, logError } from './utils/log'
 
+const { botToken } = require('./utils/config')['default']
+
 const main = async () => {
   try {
-// If an unhandled rejection occurs log it.
+    // If an unhandled rejection occurs log it.
     process.on('unhandledRejection', async err => {
       await logError('Main', 'Unhandled Rejection', err)
     })
@@ -25,7 +26,12 @@ const main = async () => {
   }
 
   try {
-    await devmod()
+    if (botToken) {
+      await devmod()
+    } else {
+      log('Main', 'NO BOT TOKEN!')
+    }
+
   } catch (err) {
     await logError('Main', 'Something has failed', err)
   }

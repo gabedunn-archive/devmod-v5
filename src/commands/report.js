@@ -4,10 +4,11 @@
 */
 
 import { blue, orange } from '../utils/colours'
-import { channels } from '../utils/config'
 import { sendErrorMessage } from '../utils/sendErrorMessage'
 import { logError } from '../utils/log'
 import { getAuthor } from '../utils/user'
+
+const { channels: { reports } } = require('../utils/config')['default']
 
 // Export an object with command info and the function to execute.
 export const reportCommand = {
@@ -60,7 +61,7 @@ export const reportCommand = {
       const guild = message.guild
 
       // Save the reports channel.
-      const reportsChannel = guild.channels.find(c => c.name === channels.report)
+      const reportsChannel = guild.channels.find(c => c.name === reports)
 
       try {
         // Remove the user's message.

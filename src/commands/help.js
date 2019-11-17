@@ -5,10 +5,11 @@
 
 import { blue } from '../utils/colours'
 import { commandsArray } from './index'
-import { msgDeleteTime, prefix } from '../utils/config'
 import { capitalize } from '../utils/capitalize'
 import { logError } from '../utils/log'
 import { getAuthor } from '../utils/user'
+
+const { msgDeleteTime, prefix } = require('../utils/config')['default']
 
 // Export an object with command info and the function to execute.
 export const helpCommand = {

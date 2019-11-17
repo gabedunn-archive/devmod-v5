@@ -6,7 +6,8 @@
 import { log, logError } from '../log'
 import { initInfoReactionListener } from '../../processes/infoReactionListener'
 import discord from 'discord.js'
-import { botToken } from '../config'
+
+const { botToken } = require('../config')['default']
 
 const main = async () => {
   try {

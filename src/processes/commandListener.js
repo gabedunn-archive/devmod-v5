@@ -4,9 +4,10 @@
  */
 
 import { commands } from '../commands'
-import { prefix } from '../utils/config'
 import { sendErrorMessage } from '../utils/sendErrorMessage'
 import { log, logError } from '../utils/log'
+
+const { prefix } = require('../utils/config')['default']
 
 export const initCommandListener = async client => {
   try {
