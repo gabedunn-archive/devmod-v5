@@ -11,6 +11,7 @@ import { initActivityChanger } from './processes/activityChanger'
 import { initReactionListener } from './processes/roleReactionListener'
 import { initTorielsAntiBotCrusade } from './processes/torielsAntiBotCrusade'
 import { initThanksListener } from './processes/thanksListener'
+import { testChannelsAndRoles } from './utils/testChannelsAndRoles'
 
 const { botToken } = require('./utils/config')['default']
 
@@ -29,6 +30,10 @@ export const devmod = async () => {
   } catch (err) {
     await logError('Init', 'Bot failed to log in', err)
   }
+
+  // Test that all the channels and roles specified in the config exist.
+  // noinspection ES6MissingAwait
+  testChannelsAndRoles(client)
 
   // Save all the processes to an array.
   const processes = [

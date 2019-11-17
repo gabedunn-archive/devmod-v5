@@ -19,7 +19,7 @@ export const log = (area, message) => {
 // Given an area, message, and error, log a nice looking error to the console.
 export const logError = async (area, message, err, msg = false) => {
   // Log the error to the console.
-  console.error(`${chalk.greenBright(`[${area}]`)} ${chalk.redBright(`${message}:`)}`, err)
+  console.error(`${chalk.greenBright(`[${area}]`)} ${chalk.redBright(`${message}${err === false ? '' : ':'}`)}`, err === false ? '' : err)
 
   // Log the error to the error channel.
   logErrorToChannel(area, message, err)
