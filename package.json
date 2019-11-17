@@ -8,7 +8,7 @@
   "author": {
     "name": "Gabe Dunn",
     "email": "gabe@gabedunn.dev",
-    "url": "https://redxte.ch"
+    "url": "https://gabedunn.dev"
   },
   "scripts": {
     "dev": "nodemon src/esm.js",
