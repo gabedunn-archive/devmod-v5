@@ -5,6 +5,7 @@
 
 import { log, logError } from '../log'
 import { initInfoReactionListener } from '../../processes/infoReactionListener'
+import { testChannelsAndRoles } from '../testChannelsAndRoles'
 import discord from 'discord.js'
 
 const { botToken } = require('../config')['default']
@@ -38,6 +39,11 @@ const main = async () => {
     } catch (err) {
       await logError('Init', 'Bot failed to log in', err)
     }
+
+    // Test that all the channels and roles specified in the config exist.
+    // noinspection ES6MissingAwait
+    testChannelsAndRoles(client)
+
     await initInfoReactionListener(client)
   } catch (err) {
     await logError('Verify', 'Something has failed', err)
