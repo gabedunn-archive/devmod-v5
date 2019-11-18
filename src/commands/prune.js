@@ -16,15 +16,19 @@ export const pruneCommand = {
   usage: '[<messages>]',
   exec: async (args, message) => {
     try {
+      // Save the amount arg. If it doesn't exist, default to 5.
+      const amount = args.length > 0
+        ? isNaN(parseInt(args[0]))
+          ? 0
+          : parseInt(args[0])
+        : 5
+
       try {
         // Remove the user's message.
         await message.delete()
       } catch (err) {
         await logError('Prune', 'Failed to delete message', err, message)
       }
-
-      // Save the amount arg. If it doesn't exist, default to 5.
-      const amount = args.length > 0 ? parseInt(args[0]) : 5
 
       try {
         // Limit amount of messages to delete to 50.
@@ -35,7 +39,7 @@ export const pruneCommand = {
 
         try {
           // Delete all of the messages selected with the previous command.
-          messages.deleteAll()
+          await messages.deleteAll()
         } catch (err) {
           await logError('Prune', 'Failed to delete messages', err, message)
         }
