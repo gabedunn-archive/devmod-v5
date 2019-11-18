@@ -6,7 +6,7 @@
 import { getSetting } from '../db'
 import { log, logError } from '../utils/log'
 
-const { approvedRoles } = require('../utils/config')
+const { approvedRoles } = require('../utils/config')['default']
 
 // Applied an action to either add a remove a role from a user based on the action provided and the approved roles list.
 const roleAction = async ({ client, guildId, messageId, userId, emojiName }, remove = false) => {
