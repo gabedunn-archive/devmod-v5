@@ -47,6 +47,7 @@ To configure the bot, edit `devmod.config.js`. The supported values are in the t
 Option | Default | Description
 ---|---|---
 `botToken` | `undefined` | Discord API token for the bot.
+`guildID` | `undefined` | Discord ID of the server your bot is running on.
 `prefix` | `.` | Prefix for bot commands.
 `msgDeleteTime` | `join(__dirname, '..', '..', 'devmod.db')` | Amount of time in seconds to wait before deleting large help messages.
 `dbFile` | `devmod.db` | Absolute path for the database file.

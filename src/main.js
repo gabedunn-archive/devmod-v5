@@ -9,7 +9,7 @@
 import { devmod } from './devmod'
 import { log, logError } from './utils/log'
 
-const { botToken } = require('./utils/config')['default']
+const { botToken, guildID } = require('./utils/config')['default']
 
 const main = async () => {
   try {
@@ -27,7 +27,11 @@ const main = async () => {
 
   try {
     if (botToken) {
-      await devmod()
+      if (guildID) {
+        await devmod()
+      } else {
+        log('Main', 'NO GUILD ID!')
+      }
     } else {
       log('Main', 'NO BOT TOKEN!')
     }

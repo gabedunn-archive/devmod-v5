@@ -7,6 +7,7 @@ import { join } from 'path'
 
 export default {
   botToken: undefined, // Discord API token for the bot.
+  guildID: undefined, // Discord ID of the server your bot is running on.
   prefix: '.', // Prefix for bot commands.
   msgDeleteTime: 30, // Amount of time in seconds to wait before deleting large help messages.
   dbFile: join(__dirname, '..', '..', 'devmod.db'), // Absolute path for the database file.
