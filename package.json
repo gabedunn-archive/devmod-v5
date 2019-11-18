@@ -17,7 +17,7 @@
     "verify": "node src/utils/verify/esm.js"
   },
   "dependencies": {
-    "chalk": "^2.4.2",
+    "chalk": "^3.0.0",
     "discord.js": "^11.5.1",
     "esm": "^3.2.25",
     "moment": "^2.24.0",
