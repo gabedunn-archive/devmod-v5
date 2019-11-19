@@ -11,6 +11,7 @@ import { buildInfoCommand } from './buildInfo'
 import { buildRolesCommand } from './buildRoles'
 import { clearWarnsCommand } from './clearWarns'
 import { helpCommand } from './help'
+import { killCommand } from './kill'
 import { lmgtfyCommand } from './lmgtfy'
 import { moveCommand } from './move'
 import { muteCommand } from './mute'
@@ -37,6 +38,7 @@ export const commandsArray = [
   buildRolesCommand,
   clearWarnsCommand,
   helpCommand,
+  killCommand,
   lmgtfyCommand,
   moveCommand,
   muteCommand,
