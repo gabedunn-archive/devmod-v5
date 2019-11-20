@@ -13,6 +13,7 @@ import { clearWarnsCommand } from './clearWarns'
 import { helpCommand } from './help'
 import { killCommand } from './kill'
 import { lmgtfyCommand } from './lmgtfy'
+import { lockCommand } from './lock'
 import { moveCommand } from './move'
 import { muteCommand } from './mute'
 import { pingCommand } from './ping'
@@ -25,6 +26,7 @@ import { statsCommand } from './stats'
 import { tagCommand } from './tag'
 import { tagsCommand } from './tags'
 import { unbanCommand } from './unban'
+import { unlockCommand } from './unlock'
 import { unmuteCommand } from './unmute'
 import { usersCommand } from './users'
 import { warnCommand } from './warn'
@@ -40,6 +42,7 @@ export const commandsArray = [
   helpCommand,
   killCommand,
   lmgtfyCommand,
+  lockCommand,
   moveCommand,
   muteCommand,
   pingCommand,
@@ -52,6 +55,7 @@ export const commandsArray = [
   tagCommand,
   tagsCommand,
   unbanCommand,
+  unlockCommand,
   unmuteCommand,
   usersCommand,
   warnCommand,
