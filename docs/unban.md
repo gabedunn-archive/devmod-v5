@@ -5,6 +5,8 @@
 
 Unbans a user and logs it to `channel.ban`.
 
+You can ban a user with the [ban](./ban.md) command.
+
 ## Permission Requirements
 `['BAN_MEMBERS']`
 

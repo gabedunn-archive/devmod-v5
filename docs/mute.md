@@ -6,6 +6,8 @@
 Adds the role specified in the config's `roles.muted` to the user, and logs it to the
 channel specified in the config's `channels.warn`.
 
+You can unmute a user with the [unmute](./unmute.md) command.
+
 ## Permission Requirements
 `['KICK_MEMBERS']`
 

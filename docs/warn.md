@@ -10,6 +10,10 @@ If `autoBan` is true and the user's warnings after this one are equal to `autoBa
 the user will be banned, their messages from the path `banMsgDelete` days, and the ban
 will be logged to `channels.ban`.
 
+You can clear a user's warnings with the [clear warns](./clearwarns.md) command.
+
+You can list a user's warnings with the [warns](./warns.md) command.
+
 ## Permission Requirements
 `['KICK_MEMBERS']`
 

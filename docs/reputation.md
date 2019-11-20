@@ -5,6 +5,8 @@
 
 If a user is specified, show that user's reputation. If not, show the leaderboard.
 
+You can add reputation to a user with the by saying `thanks @user`.
+
 ## Permission Requirements
 `['SEND_MESSAGES']`
 

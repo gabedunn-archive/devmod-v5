@@ -5,6 +5,8 @@
 
 Unlock's a channel. Sets permissions for the `@everyone` and `verified` role to `{ 'SEND_MESSAGES' : null }`
 
+You can lock a channel with the [lock](./lock.md) command.
+
 ## Permission Requirements
 `['MANAGE_CHANNELS']`
 
