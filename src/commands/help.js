@@ -24,6 +24,8 @@ export const helpCommand = {
       // Set categories to an empty object to have all the commands added into.
       const categories = {}
 
+      const deleteMessages = msgDeleteTime !== 0 && !args.includes('true')
+
       // Loop through all commands and add them to their proper place in the categories object.
       for (const command of commandsArray) {
         // Format usage
@@ -61,7 +63,7 @@ export const helpCommand = {
             const sent = await message.channel.send(`<@${taggedUserID}>`)
 
             // If msgDeleteTime doesn't equal 0, set a timeout to delete the message after x seconds. (x secs * 1000 ms).
-            if (msgDeleteTime !== 0 && !args.includes('true')) {
+            if (deleteMessages) {
               setTimeout(() => {
                 // Delete the message.
                 sent.delete(1)
@@ -88,7 +90,7 @@ export const helpCommand = {
           })
 
           // If msgDeleteTime doesn't equal 0, set a timeout to delete the message after x seconds. (x secs * 1000 ms).
-          if (msgDeleteTime !== 0 && !args.includes('true')) {
+          if (deleteMessages) {
             setTimeout(async () => {
               try {
                 // Delete the message.
