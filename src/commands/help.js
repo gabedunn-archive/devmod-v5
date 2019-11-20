@@ -61,7 +61,7 @@ export const helpCommand = {
             const sent = await message.channel.send(`<@${taggedUserID}>`)
 
             // If msgDeleteTime doesn't equal 0, set a timeout to delete the message after x seconds. (x secs * 1000 ms).
-            if (msgDeleteTime !== 0 || args.includes('true')) {
+            if (msgDeleteTime !== 0 || !args.includes('true')) {
               setTimeout(() => {
                 // Delete the message.
                 sent.delete(1)
@@ -88,7 +88,7 @@ export const helpCommand = {
           })
 
           // If msgDeleteTime doesn't equal 0, set a timeout to delete the message after x seconds. (x secs * 1000 ms).
-          if (msgDeleteTime !== 0 || args.includes('true')) {
+          if (msgDeleteTime !== 0 || !args.includes('true')) {
             setTimeout(async () => {
               try {
                 // Delete the message.
