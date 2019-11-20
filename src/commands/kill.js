@@ -25,7 +25,6 @@ export const killCommand = {
 
       try {
         // Send the kill embed.
-        // noinspection JSUnresolvedFunction
         await message.channel.send({
           embed: {
             title: 'Killing Bot...',

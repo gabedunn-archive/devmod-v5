@@ -18,7 +18,7 @@ export const helpCommand = {
   category: 'utils',
   description: 'Sends a list of commands that can be used with the bot.',
   permissions: ['SEND_MESSAGES'],
-  usage: '[<user>]',
+  usage: '[<user> <true>]',
   exec: async (args, message) => {
     try {
       // Set categories to an empty object to have all the commands added into.
@@ -34,17 +34,24 @@ export const helpCommand = {
           value: `Usage: \`${prefix}${usage}\`\n${command.description}`
         }
 
-        // If the category exists, push the field. Otherwise, initialize the category with the field as it's first element.
-        if (categories.hasOwnProperty(command.category)) {
-          categories[command.category].push(field)
-        } else {
-          categories[command.category] = [field]
+        try {
+          // If the user has the permissions to run the command, add it to the array.
+          if (await message.member.hasPermission(command.permissions)) {
+            // If the category exists, push the field. Otherwise, initialize the category with the field as it's first element.
+            if (categories.hasOwnProperty(command.category)) {
+              categories[command.category].push(field)
+            } else {
+              categories[command.category] = [field]
+            }
+          }
+        } catch (err) {
+          await logError('Help', 'Failed to test for user permissions', err, message)
         }
       }
 
       try {
         // If a member is tagged, tag them.
-        if (args.length > 0) {
+        if (message.mentions.members.array().length > 0) {
           // Save the user object of the member
           const taggedUserID = message.mentions.members.first().id
 
@@ -54,7 +61,7 @@ export const helpCommand = {
             const sent = await message.channel.send(`<@${taggedUserID}>`)
 
             // If msgDeleteTime doesn't equal 0, set a timeout to delete the message after x seconds. (x secs * 1000 ms).
-            if (msgDeleteTime !== 0) {
+            if (msgDeleteTime !== 0 || args.includes('true')) {
               setTimeout(() => {
                 // Delete the message.
                 sent.delete(1)
@@ -81,7 +88,7 @@ export const helpCommand = {
           })
 
           // If msgDeleteTime doesn't equal 0, set a timeout to delete the message after x seconds. (x secs * 1000 ms).
-          if (msgDeleteTime !== 0) {
+          if (msgDeleteTime !== 0 || args.includes('true')) {
             setTimeout(async () => {
               try {
                 // Delete the message.
