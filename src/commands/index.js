@@ -14,6 +14,7 @@ import { helpCommand } from './help'
 import { killCommand } from './kill'
 import { lmgtfyCommand } from './lmgtfy'
 import { lockCommand } from './lock'
+import { mdnCommand } from './mdn'
 import { moveCommand } from './move'
 import { muteCommand } from './mute'
 import { pingCommand } from './ping'
@@ -43,6 +44,7 @@ export const commandsArray = [
   killCommand,
   lmgtfyCommand,
   lockCommand,
+  mdnCommand,
   moveCommand,
   muteCommand,
   pingCommand,
