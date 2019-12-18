@@ -425,5 +425,12 @@ export const tags = {
         name: '[Using Gradients](https://www.smashingmagazine.com/2018/01/gradients-user-experience-design/)',
       }
     ]
+  },
+  research: {
+    color: red,
+    title: 'Research before asking',
+    description: 'Search, research, and keep track of what you find. Even if you ' +
+      'don\'t find a useful answer elsewhere, including links to related questions ' +
+      'that haven\'t helped can help others better understand your question.'
   }
 }
