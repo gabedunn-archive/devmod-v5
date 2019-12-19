@@ -1,3 +1,8 @@
+/*
+* Gabe Dunn 2018
+* Command that queries MDN.
+*/
+
 import https from 'https'
 
 import { blue } from '../utils/colours'
@@ -5,7 +10,8 @@ import { logError } from '../utils/log'
 import { getAuthor } from '../utils/user'
 import { sendErrorMessage } from '../utils/sendErrorMessage'
 
-const mdn = query => new Promise((resolve, reject) => {
+// Function to query mdn and return the result
+const queryMDN = query => new Promise((resolve, reject) => {
   https.get(
     `https://developer.mozilla.org/api/v1/${query}`,
 
@@ -25,6 +31,7 @@ const mdn = query => new Promise((resolve, reject) => {
   ).on('error', reject)
 })
 
+// Export an object with command info and the function to execute.
 export const mdnCommand = {
   name: 'MDN',
   aliases: ['mdn'],
@@ -43,7 +50,7 @@ export const mdnCommand = {
 
     try {
       // Query the MDN search API
-      const { documents } = await mdn(`search/en-US?q=${query}&highlight=false`)
+      const { documents } = await queryMDN(`search/en-US?q=${query}&highlight=false`)
       const [result] = documents
 
       try {
