@@ -3,6 +3,7 @@ import https from 'https'
 import { blue } from '../utils/colours'
 import { logError } from '../utils/log'
 import { getAuthor } from '../utils/user'
+import { sendErrorMessage } from '../utils/sendErrorMessage'
 
 const mdn = query => new Promise((resolve, reject) => {
   https.get(
@@ -32,6 +33,12 @@ export const mdnCommand = {
   permissions: ['SEND_MESSAGES'],
 
   exec: async (args, message) => {
+
+    // If a query isn't specified send an error message and terminate the command.
+    if (args.length < 1) {
+      return await sendErrorMessage('Query Not Specified', 'You need to specify a query.', message)
+    }
+
     const query = encodeURIComponent(args.join(' '))
 
     try {
