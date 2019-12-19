@@ -11,6 +11,7 @@
 - [Help](./help.md)
 - [LMGTFY](./lmgtfy.md)
 - [Lock](./lock.md)
+- [MDN](./mdn.md)
 - [Move](./move.md)
 - [Mute](./mute.md)
 - [Ping](./ping.md)
