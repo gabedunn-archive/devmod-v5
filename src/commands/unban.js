@@ -8,7 +8,7 @@ import { green } from '../utils/colours'
 import { logError } from '../utils/log'
 import { getAuthor, getName } from '../utils/user'
 
-const { channels: { ban } } = require('../utils/config')['default']
+const { channels: { ban } } = require('../utils/config').default
 
 // Export an object with command info and the function to execute.
 export const unbanCommand = {

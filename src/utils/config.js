@@ -8,8 +8,8 @@ import { existsSync, realpathSync } from 'fs'
 
 const configFile = realpathSync('devmod.config.js')
 
-let userConfig = existsSync(configFile)
-  ? require(configFile)['default']
+const userConfig = existsSync(configFile)
+  ? require(configFile).default
   : {}
 
 export default {

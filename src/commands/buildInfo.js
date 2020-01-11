@@ -9,7 +9,7 @@ import { logError } from '../utils/log'
 import { blue } from '../utils/colours'
 import { getAuthor } from '../utils/user'
 
-const { channels: { info } } = require('../utils/config')['default']
+const { channels: { info } } = require('../utils/config').default
 
 // Export an object with command info and the function to execute.
 export const buildInfoCommand = {

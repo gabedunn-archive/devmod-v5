@@ -8,11 +8,11 @@ import { initInfoReactionListener } from '../../processes/infoReactionListener'
 import { testChannelsAndRoles } from '../testChannelsAndRoles'
 import discord from 'discord.js'
 
-const { botToken } = require('../config')['default']
+const { botToken } = require('../config').default
 
 const main = async () => {
   try {
-// If an unhandled rejection occurs, log it and exit the program.
+    // If an unhandled rejection occurs, log it and exit the program.
     process.on('unhandledRejection', async err => {
       await logError('Verify', 'Unhandled Rejection', err)
     })

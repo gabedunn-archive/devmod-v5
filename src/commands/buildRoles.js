@@ -9,7 +9,7 @@ import { log, logError } from '../utils/log'
 import { getAuthor } from '../utils/user'
 import { sendErrorMessage } from '../utils/sendErrorMessage'
 
-const { approvedRoles, channels: { roles } } = require('../utils/config')['default']
+const { approvedRoles, channels: { roles } } = require('../utils/config').default
 
 // Export an object with command info and the function to execute.
 export const buildRolesCommand = {

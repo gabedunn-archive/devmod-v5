@@ -7,7 +7,7 @@ import { red } from '../utils/colours'
 import { logError } from '../utils/log'
 import { getAuthor } from '../utils/user'
 
-const { roles: { verified } } = require('../utils/config')['default']
+const { roles: { verified } } = require('../utils/config').default
 
 // Export an object with command info and the function to execute.
 export const lockCommand = {
@@ -31,7 +31,7 @@ export const lockCommand = {
 
       for (const role of [verifiedRole, guild.defaultRole]) {
         await channel.overwritePermissions(role, {
-          'SEND_MESSAGES': false
+          SEND_MESSAGES: false
         }, 'Locking the channel')
       }
 

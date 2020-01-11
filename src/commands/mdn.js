@@ -40,10 +40,9 @@ export const mdnCommand = {
   permissions: ['SEND_MESSAGES'],
 
   exec: async (args, message) => {
-
     // If a query isn't specified send an error message and terminate the command.
     if (args.length < 1) {
-      return await sendErrorMessage('Query Not Specified', 'You need to specify a query.', message)
+      return sendErrorMessage('Query Not Specified', 'You need to specify a query.', message)
     }
 
     const query = encodeURIComponent(args.join(' '))

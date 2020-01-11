@@ -8,7 +8,7 @@ import { sendErrorMessage } from '../utils/sendErrorMessage'
 import { logError } from '../utils/log'
 import { getAuthor, getName } from '../utils/user'
 
-const { channels: { warn }, roles: { muted } } = require('../utils/config')['default']
+const { channels: { warn }, roles: { muted } } = require('../utils/config').default
 
 // Export an object with command info and the function to execute.
 export const unmuteCommand = {

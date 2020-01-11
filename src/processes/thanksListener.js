@@ -69,8 +69,8 @@ export const initThanksListener = async client => {
                   color: green,
                   description: `${thankeesString} ${thankeesArray.length === 1 ? 'has' : 'have'} been thanked by ${thanker}!`,
                   footer: {
-                    text: `Use "thanks @user" to give someone rep, and ".rep @user" to see how much they have!`
-                  },
+                    text: 'Use "thanks @user" to give someone rep, and ".rep @user" to see how much they have!'
+                  }
                 }
               })
             } catch (err) {

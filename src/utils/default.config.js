@@ -51,5 +51,5 @@ export default {
     'Promoting VUE!'
   ], // List of activities for the bot to show as a status.
   tags: [], // List of tags for the .tag command. Each one is a discord embed object. Can be imported from a different file.
-  approvedRoles: [], // List of lists of roles the reaction roles channel. Can be imported from a different file.
+  approvedRoles: [] // List of lists of roles the reaction roles channel. Can be imported from a different file.
 }

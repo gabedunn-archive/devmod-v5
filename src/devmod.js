@@ -13,7 +13,7 @@ import { initTorielsAntiBotCrusade } from './processes/torielsAntiBotCrusade'
 import { initThanksListener } from './processes/thanksListener'
 import { testChannelsAndRoles } from './utils/testChannelsAndRoles'
 
-const { botToken } = require('./utils/config')['default']
+const { botToken } = require('./utils/config').default
 
 export const devmod = async () => {
   // Initialize the client.

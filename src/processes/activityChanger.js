@@ -5,7 +5,7 @@
 
 import { log, logError } from '../utils/log'
 
-const { activities, prefix } = require('../utils/config')['default']
+const { activities, prefix } = require('../utils/config').default
 
 // Changes the status of the bot to the specified activities on an interval based on the config value 'statusInterval'.
 export const initActivityChanger = async client => {

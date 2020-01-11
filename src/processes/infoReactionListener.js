@@ -6,7 +6,7 @@
 import { getSetting } from '../db'
 import { log, logError } from '../utils/log'
 
-const { roles: { verified } } = require('../utils/config')['default']
+const { roles: { verified } } = require('../utils/config').default
 
 // Applied an action to either add a remove a role from a user based on the action provided.
 const roleAction = async ({ client, guildId, messageId, userId, emojiName }, remove = false) => {
