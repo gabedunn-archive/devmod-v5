@@ -5,7 +5,7 @@
 
 import { logError } from './log'
 
-const { channels, guildID, roles } = require('./config')['default']
+const { channels, guildID, roles } = require('./config').default
 
 export const testChannelsAndRoles = async client => {
   const guild = client.guilds.find(g => g.id === guildID)
@@ -13,19 +13,19 @@ export const testChannelsAndRoles = async client => {
   const guildRoles = guild.roles
 
   const nullChannels = Object.values(channels).map(c => {
-      return {
-        name: c,
-        channel: guildChannels.find(gc => gc.name === c)
-      }
+    return {
+      name: c,
+      channel: guildChannels.find(gc => gc.name === c)
     }
+  }
   ).filter(c => c.channel === null)
 
   const nullRoles = Object.values(roles).map(r => {
-      return {
-        name: r,
-        role: guildRoles.find(gr => gr.name === r)
-      }
+    return {
+      name: r,
+      role: guildRoles.find(gr => gr.name === r)
     }
+  }
   ).filter(r => r.role === null)
 
   if (nullChannels.length !== 0) {

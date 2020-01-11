@@ -3,11 +3,20 @@
  * Functionality relating to listening to messages and running commands.
  */
 
-import { commands } from '../commands'
-import { sendErrorMessage } from '../utils/sendErrorMessage'
-import { log, logError } from '../utils/log'
+import {
+  commands
+} from '../commands'
+import {
+  sendErrorMessage
+} from '../utils/sendErrorMessage'
+import {
+  log,
+  logError
+} from '../utils/log'
 
-const { prefix } = require('../utils/config')['default']
+const {
+  prefix
+} = require('../utils/config').default
 
 export const initCommandListener = async client => {
   try {
@@ -22,7 +31,7 @@ export const initCommandListener = async client => {
         const command = args.shift()
 
         // If the command exists, test for permissions and run the command function.
-        if (commands.hasOwnProperty(command)) {
+        if (Object.prototype.hasOwnProperty.call(commands, command)) {
           // Save the command to a variable.
           const cmd = commands[command]
           try {

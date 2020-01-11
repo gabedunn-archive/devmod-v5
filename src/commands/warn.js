@@ -10,7 +10,7 @@ import { banCommand } from './ban'
 import { logError } from '../utils/log'
 import { getAuthor, getName } from '../utils/user'
 
-const { autoBan, autoBanWarns, banMsgDelete, channels: { warn } } = require('../utils/config')['default']
+const { autoBan, autoBanWarns, banMsgDelete, channels: { warn } } = require('../utils/config').default
 
 // Export an object with command info and the function to execute.
 export const warnCommand = {

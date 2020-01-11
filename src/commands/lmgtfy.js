@@ -24,7 +24,7 @@ export const lmgtfyCommand = {
     }
     const sites = {
       '-g': 'g', // google
-      '-y': 'y', //yahoo
+      '-y': 'y', // yahoo
       '-b': 'b', // bing
       '-k': 'k', // ask
       '-a': 'a', // aol

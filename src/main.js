@@ -9,7 +9,7 @@
 import { devmod } from './devmod'
 import { log, logError } from './utils/log'
 
-const { botToken, guildID } = require('./utils/config')['default']
+const { botToken, guildID } = require('./utils/config').default
 
 const main = async () => {
   try {
@@ -35,7 +35,6 @@ const main = async () => {
     } else {
       log('Main', 'NO BOT TOKEN!')
     }
-
   } catch (err) {
     await logError('Main', 'Something has failed', err)
   }

@@ -7,7 +7,7 @@
 import { orange } from '../utils/colours'
 import { log, logError } from '../utils/log'
 
-const { channels: { crusade } } = require('../utils/config')['default']
+const { channels: { crusade } } = require('../utils/config').default
 
 export const initTorielsAntiBotCrusade = async client => {
   try {

@@ -3,10 +3,16 @@
  * Contains all functions that interact with the database.
  */
 
-import { Datastore } from 'nedb-async-await'
-import { logError } from './utils/log'
+import {
+  Datastore
+} from 'nedb-async-await'
+import {
+  logError
+} from './utils/log'
 
-const { dbFile } = require('./utils/config')['default']
+const {
+  dbFile
+} = require('./utils/config').default
 
 // Create and initialize the database using auto-loading and the configured filename.
 const db = new Datastore({
@@ -26,7 +32,14 @@ const defaultDBValues = {
 export const setSetting = async (key, value) => {
   try {
     // Update database entries with a key of 'key' with the new values. Upsert: create new document if one doesn't already exist.
-    await db.update({ key }, { key, value }, { upsert: true })
+    await db.update({
+      key
+    }, {
+      key,
+      value
+    }, {
+      upsert: true
+    })
   } catch (err) {
     await logError('DB', `setSetting: ${key}:${value} failed`, err)
   }
@@ -36,9 +49,11 @@ export const setSetting = async (key, value) => {
 export const getSetting = async key => {
   try {
     // Search the database for any one document with a key of 'key' and save it to setting.
-    const setting = await db.findOne({ key })
+    const setting = await db.findOne({
+      key
+    })
     // If 'key' exists (setting !== null), setting has more than 0 entries, and has a value property return the value. Otherwise return the default value.
-    if (setting !== null && Object.entries(setting).length > 0 && setting.hasOwnProperty('value')) {
+    if (setting !== null && Object.entries(setting).length > 0 && Object.prototype.hasOwnProperty.call(setting, 'value')) {
       return setting.value
     } else {
       return defaultDBValues[key]
@@ -52,14 +67,24 @@ export const getSetting = async key => {
 export const addWarning = async (user, reason, staff) => {
   try {
     // Create the warning object.
-    const warning = { reason, staff, timestamp: new Date() }
+    const warning = {
+      reason,
+      staff,
+      timestamp: new Date()
+    }
 
     // Create the push object and add the warning to it.
     const $push = {}
     $push[user] = warning
 
     // Update the database by pushing the warning to the user.
-    await db.update({ key: 'warnings' }, { $push }, { upsert: true })
+    await db.update({
+      key: 'warnings'
+    }, {
+      $push
+    }, {
+      upsert: true
+    })
   } catch (err) {
     await logError('DB', 'addWarning failed', err)
   }
@@ -69,11 +94,13 @@ export const addWarning = async (user, reason, staff) => {
 export const getWarnings = async user => {
   try {
     // Pull the warnings from the database.
-    const warnings = await db.findOne({ key: 'warnings' })
+    const warnings = await db.findOne({
+      key: 'warnings'
+    })
     // If warnings isn't null, continue.
     if (warnings !== null) {
       // If warnings has the property 'user', return the property.
-      if (warnings.hasOwnProperty(user)) {
+      if (Object.prototype.hasOwnProperty.call(warnings, user)) {
         return warnings[user]
       } else {
         return []
@@ -94,7 +121,13 @@ export const clearWarnings = async user => {
     $set[user] = []
 
     // Update the database by setting the user's warnings to an empty array.
-    await db.update({ key: 'warnings' }, { $set }, { upsert: true })
+    await db.update({
+      key: 'warnings'
+    }, {
+      $set
+    }, {
+      upsert: true
+    })
   } catch (err) {
     await logError('DB', 'clearWarning failed', err)
   }
@@ -108,7 +141,13 @@ export const incrementThanks = async (thankee, thanker) => {
     $push[thankee] = thanker
 
     // Update the database by pushing the thanks to the user.
-    await db.update({ key: 'thanks' }, { $push }, { upsert: true })
+    await db.update({
+      key: 'thanks'
+    }, {
+      $push
+    }, {
+      upsert: true
+    })
 
     try {
       // Return the number of thanks.
@@ -125,11 +164,13 @@ export const incrementThanks = async (thankee, thanker) => {
 export const getThanks = async user => {
   try {
     // Pull the thanks from the database.
-    const thanks = await db.findOne({ key: 'thanks' })
+    const thanks = await db.findOne({
+      key: 'thanks'
+    })
     // If thanks isn't null, continue.
     if (thanks !== null) {
       // If thanks has the property 'user', return the property.
-      if (thanks.hasOwnProperty(user)) {
+      if (Object.prototype.hasOwnProperty.call(thanks, user)) {
         return thanks[user]
       } else {
         return []
@@ -146,7 +187,9 @@ export const getThanks = async user => {
 export const getTopThanks = async () => {
   try {
     // Pull the thanks from the database.
-    const thanks = await db.findOne({ key: 'thanks' })
+    const thanks = await db.findOne({
+      key: 'thanks'
+    })
     // If thanks isn't null, continue.
     if (thanks !== null) {
       // Filter out database fields, sort by amount of thanks (length of thanks array), and take the first 10 elements.

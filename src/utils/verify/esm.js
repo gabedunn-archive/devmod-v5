@@ -3,7 +3,7 @@
  * File to run the verification bot through ESM compatibility.
  */
 
-require = require('esm')(module)
+const r = require('esm')(module)
 
 // Import the main module.
-module.exports = require('./verify.js')
+module.exports = r('./verify.js')
