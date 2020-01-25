@@ -10,6 +10,8 @@ import { green } from '../utils/colours'
 import { sendErrorMessage } from '../utils/sendErrorMessage'
 import { getName } from '../utils/user'
 
+const { repCoin } = require('../utils/config').default
+
 export const initThanksListener = async client => {
   try {
     // For each message run a function.
@@ -65,7 +67,7 @@ export const initThanksListener = async client => {
               // Send a confirmation message.
               return message.channel.send({
                 embed: {
-                  title: 'Thanks received!',
+                  title: `${repCoin ? `${repCoin} ` : ''}Thanks received!`,
                   color: green,
                   description: `${thankeesString} ${thankeesArray.length === 1 ? 'has' : 'have'} been thanked by ${thanker}!`,
                   footer: {

@@ -55,6 +55,7 @@ Option | Default | Description
 `autoBanWarns` | `3` | Amount of warnings to warrant an auto-ban if enabled.
 `banMsgDelete` | `0` | Number of days of messages to delete when user is banned.
 `thanks` | `['thank', 'kudos']` | List of triggers for thanking users.
+`repCoin` | `undefined` | The emoji to prefix the thanks received message. `<:name:id>`.
 `channels.warn` | `'warnings'` | Channel to forward all warning confirmation messages.
 `channels.bans` | `'bans'` | Channel to forward all ban confirmation messages.
 `channels.reports` | `'reports'` | Channel to forward all user report messages.
