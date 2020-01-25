@@ -42,16 +42,20 @@ export const banCommand = {
         )
       }
 
-      // TODo: move the days arg to after reason and make it with --rm
-      // Save the days arg. If it doesn't exist, default to 0. If it isn't an int, default to the amount specified in the config.
-      const days = args.length > 1
-        ? isNaN(parseInt(args[1]))
-          ? 0
-          : parseInt(args[1])
-        : banMsgDelete
+      const rmIndex = args.indexOf('--rm')
 
-      // Save the args remaining after the first two. If there aren't more than two args, default to 'Banned by devmod.'.
-      const reason = args.length > 2 ? args.slice(2).join(' ') : 'Banned by devmod.'
+      let days
+
+      // Save the days arg. If it doesn't exist, default to 0. If it isn't an int, default to the amount specified in the config.
+      if ((args.length > (rmIndex + 1)) && !isNaN(parseInt(args[rmIndex + 1]))) {
+        days = parseInt(args[rmIndex + 1])
+        args.splice(rmIndex, 2)
+      } else {
+        days = banMsgDelete
+      }
+
+      // Save the args remaining after the first. If there isn't more than one arg, default to 'banned by devmod.'.
+      const reason = args.length > 1 ? args.slice(1).join(' ') : 'banned by devmod.'
 
       try {
         // Send the user a DM letting them know they've been banned.
