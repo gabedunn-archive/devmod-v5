@@ -64,7 +64,7 @@ export const tags = {
     fields: [
       {
         name: 'To directly post code into Discord, type:',
-        value: '\\`\\`\\`lang\n// code\nconsole.log(\'I have no' +
+        value: '\\`\\`\\`\n// code\nconsole.log(\'I have no' +
           ' language.\')\n\\`\\`\\`'
       }, {
         name: 'For syntax highlighting replace lang with the language (js,' +
@@ -76,7 +76,11 @@ export const tags = {
       }, {
         name: 'How it will look with highlighting:',
         value: '```js\nconsole.log(\'hello this is js\')\n```'
-      }]
+      }, {
+        name: 'More Information',
+        value: 'You can find more information on code blocks from [Discord Support](https://support.discordapp.com/hc/en-us/articles/210298617-Markdown-Text-101-Chat-Formatting-Bold-Italic-Underline-)'
+      }
+    ]
   },
   pen: {
     title: 'Post Your Code',
