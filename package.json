@@ -1,6 +1,6 @@
 {
   "name": "devmod",
-  "version": "5.0.1",
+  "version": "5.1.0",
   "description": "A bot for moderating discord servers. Written by and for developers with modularity in mind.",
   "main": "src/main.js",
   "types": "module",
