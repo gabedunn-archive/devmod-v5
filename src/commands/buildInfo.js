@@ -32,7 +32,7 @@ export const buildInfoCommand = {
 
       try {
         // Fetch the most recent messages from the channel.
-        const infoMessages = (await channel.fetchMessages({ limit: 10 }))
+        const infoMessages = (await channel.messages.fetch({ limit: 10 }))
           .map(message => message.content)
           .reverse()
 
@@ -40,7 +40,8 @@ export const buildInfoCommand = {
         const guild = message.guild
 
         // Find the info channel.
-        const infoChannel = guild.channels.find(c => c.name === info)
+        // console.log(guild)
+        const infoChannel = guild.channels.cache.find(c => c.name === info)
 
         // Save the previous info messages.
         const previousInfoMessages = await getSetting('info_message_ids')
@@ -49,7 +50,7 @@ export const buildInfoCommand = {
         for (const messageID of Object.values(previousInfoMessages)) {
           try {
             // noinspection JSCheckFunctionSignatures
-            const message = await infoChannel.fetchMessage(messageID)
+            const message = await infoChannel.messages.fetch(messageID)
             await message.delete()
           } catch (err) {
             await logError('BuildInfo', 'Failed to delete info message(s)', err, message)

@@ -33,7 +33,7 @@ export const usersCommand = {
           embed: {
             title: 'Users',
             color: blue,
-            description: `There are currently ${guild.memberCount} users in this discord server (${guild.members.array().filter(
+            description: `There are currently ${guild.memberCount} users in this discord server (${guild.members.cache.array().filter(
               m => m.presence.status !== 'offline').length} currently online).`,
             author: getAuthor(message.member)
           }

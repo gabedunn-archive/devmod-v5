@@ -35,11 +35,11 @@ export const pruneCommand = {
         const actualAmount = amount > 50 ? 50 : amount
 
         // Fetch the last 'amount' of messages form the current channel.
-        const messages = await message.channel.fetchMessages({ limit: actualAmount })
+        const messages = await message.channel.messages.fetch({ limit: actualAmount })
 
         try {
           // Delete all of the messages selected with the previous command.
-          await messages.deleteAll()
+          await messages.clear()
         } catch (err) {
           await logError('Prune', 'Failed to delete messages', err, message)
         }

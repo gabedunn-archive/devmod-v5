@@ -65,7 +65,7 @@ export const banCommand = {
             title: `You have been banned from ${message.guild.name}.`,
             color: red,
             thumbnail: {
-              url: message.guild.iconURL
+              url: message.guild.iconURL()
             },
             fields: [
               {
@@ -87,7 +87,7 @@ export const banCommand = {
 
       try {
         // Log the ban to the bans channel.
-        await message.guild.channels
+        await message.guild.channels.cache
           .find(c => c.name === ban)
           .send({
             embed: {

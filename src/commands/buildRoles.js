@@ -24,7 +24,7 @@ export const buildRolesCommand = {
       const previousRolesMessages = await getSetting('reactions_message_ids')
 
       // Save the roles channel
-      const rolesChannel = message.guild.channels.find(c => c.name === roles)
+      const rolesChannel = message.guild.channels.cache.find(c => c.name === roles)
 
       if (rolesChannel === undefined) {
         return await sendErrorMessage('No Role Channel', 'The roles channel either isn\'t set or doesn\'t exist.')
