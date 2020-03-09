@@ -94,6 +94,7 @@ export const helpCommand = {
             setTimeout(async () => {
               try {
                 // Delete the message.
+                // BUG: Not deleting
                 sent.delete(1)
               } catch (err) {
                 await logError('Tags', 'Failed to delete message', err, message)

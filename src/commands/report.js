@@ -61,7 +61,7 @@ export const reportCommand = {
       const guild = message.guild
 
       // Save the reports channel.
-      const reportsChannel = guild.channels.find(c => c.name === reports)
+      const reportsChannel = guild.channels.cache.find(c => c.name === reports)
 
       try {
         // Remove the user's message.

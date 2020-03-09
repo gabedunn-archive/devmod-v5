@@ -46,10 +46,10 @@ const logErrorToChannel = (area, message, err) => {
     // Add a listener to run when the client is ready.
     client.on('ready', async () => {
       // Grab the guild object.
-      const guild = client.guilds.first()
+      const guild = client.guilds.cache.first()
 
       // Save the errors channel
-      const errorChannel = guild.channels.find(c => c.name === errors)
+      const errorChannel = guild.channels.cache.find(c => c.name === errors)
 
       if (errorChannel === undefined) {
         return sendErrorMessage('No Error Channel', 'The errors channel either isn\'t set or doesn\'t exist.')

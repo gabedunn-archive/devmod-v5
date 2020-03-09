@@ -27,8 +27,9 @@ export const lockCommand = {
 
       const channel = message.channel
       const guild = message.guild
-      const verifiedRole = guild.roles.find(r => r.name === verified)
+      const verifiedRole = guild.roles.cache.find(r => r.name === verified)
 
+      // BUG: Overwrite Permissions neds to be an array or permission
       for (const role of [verifiedRole, guild.defaultRole]) {
         await channel.overwritePermissions(role, {
           SEND_MESSAGES: false

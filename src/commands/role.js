@@ -54,7 +54,7 @@ export const roleCommand = {
       const guild = message.guild
 
       // Grab the role from the server.
-      const guildRole = guild.roles.find(r => r.name === role)
+      const guildRole = guild.roles.cache.find(r => r.name === role)
 
       // If the role doesn't exist, send an error message and terminate the command.
       if (guildRole === undefined) {

@@ -49,7 +49,7 @@ export const unbanCommand = {
       const reason = memberToUnban.reason
 
       // Save the ban channel.
-      const channel = guild.channels.find(c => c.name === ban)
+      const channel = guild.channels.cache.find(c => c.name === ban)
 
       try {
         // Log the unban to the current channel.

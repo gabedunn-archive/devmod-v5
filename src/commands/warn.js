@@ -74,7 +74,7 @@ export const warnCommand = {
       try {
         // Log the warn to the current channel.
         // noinspection JSUnresolvedFunction
-        await message.guild.channels
+        await message.guild.channels.cache
           .find(c => c.name === warn)
           .send({
             embed: {
