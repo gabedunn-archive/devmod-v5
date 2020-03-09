@@ -99,7 +99,7 @@ export const roleCommand = {
         case 'rm':
           try {
             // Remove the role from the member.
-            await member.removeRole(guildRole)
+            await member.roles.remove(guildRole)
 
             try {
               // Delete the user's message.
