@@ -38,8 +38,13 @@ export const pruneCommand = {
         const messages = await message.channel.messages.fetch({ limit: actualAmount })
 
         try {
-          // Delete all of the messages selected with the previous command.
-          await messages.clear()
+          // Delete all of the messages selected with the previous
+          // command.
+          // TEMP FIX: Itterate over messages and remove.
+          messages.array().forEach(m => {
+            m.delete()
+          })
+          // await messages.clear()
         } catch (err) {
           await logError('Prune', 'Failed to delete messages', err, message)
         }
