@@ -102,7 +102,7 @@ export const banCommand = {
                 }
               ],
               footer: {
-                icon_url: member.user.avatarURL,
+                icon_url: member.user.avatarURL(),
                 text: `${getName(member)}'s (${member.user.tag}'s) messages from the past ${days === 1 ? ' day' : `${days} days`} have been deleted.`
               },
               timestamp: new Date()
