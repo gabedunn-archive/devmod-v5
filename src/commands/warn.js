@@ -83,7 +83,7 @@ export const warnCommand = {
               description: `${getName(member)} (${member.user.tag} - ${member}) has been warned for: ${reason}.`,
               author: getAuthor(staffMember),
               footer: {
-                icon_url: member.user.avatarURL,
+                icon_url: member.user.avatarURL(),
                 text: `${getName(member)}'s (${member.user.tag}'s) has been warned.`
               },
               timestamp: new Date()

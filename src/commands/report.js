@@ -92,7 +92,7 @@ export const reportCommand = {
             ],
             author: getAuthor(message.member),
             footer: {
-              icon_url: memberReported.user.avatarURL,
+              icon_url: memberReported.user.avatarURL(),
               text: `${memberReported.user.tag} reported from #${message.channel.name} by ${message.member.user.tag}.`
             },
             timestamp: new Date()

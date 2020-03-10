@@ -61,7 +61,7 @@ export const unbanCommand = {
             description: `${getName(memberToUnban)} has been unbanned.\nThey were previously banned for reason: ${reason}`,
             author: getAuthor(message.member),
             footer: {
-              icon_url: memberToUnban.user.avatarURL,
+              icon_url: memberToUnban.user.avatarURL(),
               text: `${getName(memberToUnban)} has been unbanned.`
             },
             timestamp: new Date()

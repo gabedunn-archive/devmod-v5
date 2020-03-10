@@ -60,7 +60,7 @@ export const clearWarnsCommand = {
             description: `${getName(member)}'s (${member.user.tag}'s) warnings have been cleared.`,
             author: getAuthor(staffMember),
             footer: {
-              icon_url: member.user.avatarURL,
+              icon_url: member.user.avatarURL(),
               text: `${getName(member)}'s (${member.user.tag}'s) warnings have been cleared.`
             },
             timestamp: new Date()

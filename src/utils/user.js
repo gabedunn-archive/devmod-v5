@@ -20,11 +20,11 @@ export const getAuthor = user => {
     name: getName(user)
   }
 
-  // If the user has a 'user' field (read: is a member), set the icon_url to the user.avatarURL. Otherwise, set it to the avatarURL.
+  // If the user has a 'user' field (read: is a member), set the icon_url to the user.avatarURL(). Otherwise, set it to the avatarURL.
   if (Object.prototype.hasOwnProperty.call(user, 'user')) {
-    author.icon_url = user.user.avatarURL
+    author.icon_url = user.user.avatarURL()
   } else {
-    author.icon_url = user.avatarURL
+    author.icon_url = user.avatarURL()
   }
 
   // Return the author object.
