@@ -95,7 +95,7 @@ export const helpCommand = {
               try {
                 // Delete the message.
                 // BUG: Not deleting
-                sent.delete(1)
+                sent.delete()
               } catch (err) {
                 await logError('Tags', 'Failed to delete message', err, message)
               }
