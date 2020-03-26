@@ -195,10 +195,10 @@ export const getTopThanks = async () => {
       // Filter out database fields, sort by amount of thanks (length of thanks
       // array), and take the first 10 elements.
       return [...Object.entries(thanks)]
-      .filter(user => !['key', '_id'].includes(user[0]))
-      .sort((a, b) => (a[1].length > b[1].length) ? -1 : ((b[1].length > a[1].length) ? 1 : 0))
-      .slice(0, 10)
-  } else {
+        .filter(user => !['key', '_id'].includes(user[0]))
+        .sort((a, b) => (a[1].length > b[1].length) ? -1 : ((b[1].length > a[1].length) ? 1 : 0))
+        .slice(0, 10)
+    } else {
       return []
     }
   } catch (err) {
