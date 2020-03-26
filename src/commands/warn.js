@@ -104,7 +104,7 @@ export const warnCommand = {
             color: colour,
             author: getAuthor(member.client.user),
             thumbnail: {
-              url: message.guild.iconURL
+              url: message.guild.iconURL()
             },
             fields: [
               {

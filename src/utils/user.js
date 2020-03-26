@@ -5,7 +5,7 @@
 
 // Given a member or getName, return a string with the name of the member.
 export const getName = (user, id) => {
-  if(user !== undefined) {
+  if (user !== undefined) {
     // If he the user has a 'user' field (read: is a member), return the nickname or user.username. Otherwise, return the user.username.
     return Object.prototype.hasOwnProperty.call(user, 'user')
       ? user.nickname
