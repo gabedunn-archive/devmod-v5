@@ -41,7 +41,7 @@ export const reputationCommand = {
         // Map the array of users to each be a string and join it with
         // a new line.
         embed.description = topReputation
-          .map((user, i) => `${i + 1})  **${getName(guild.members.cache.find(m => m.id === user[0]))}** has ${user[1].length} reputation.`)
+          .map((user, i) => `${i + 1})  **${getName(guild.members.cache.find(m => m.id === user[0]), user[0])}** has ${user[1].length} reputation.`)
           .join('\n')
       } else {
         // Save the user object of the member to show reputation for.

@@ -4,13 +4,17 @@
  */
 
 // Given a member or getName, return a string with the name of the member.
-export const getName = user => {
-  // If he the user has a 'user' field (read: is a member), return the nickname or user.username. Otherwise, return the user.username.
-  return Object.prototype.hasOwnProperty.call(user, 'user')
-    ? user.nickname
+export const getName = (user, id) => {
+  if(user !== undefined) {
+    // If he the user has a 'user' field (read: is a member), return the nickname or user.username. Otherwise, return the user.username.
+    return Object.prototype.hasOwnProperty.call(user, 'user')
       ? user.nickname
-      : user.user.username
-    : user.username
+        ? user.nickname
+        : user.user.username
+      : user.username
+  } else {
+    return `<@${id}>`
+  }
 }
 
 // Given a member or getName, return an object of the author field for a message.
