@@ -70,7 +70,7 @@ export const muteCommand = {
           embed: {
             color: orange,
             title: 'Mute',
-            description: `${getName(member)} (${member.user.tag} - ${member}) has been muted.`,
+            description: `${getName(member, member.id)} (${member.user.tag} - ${member}) has been muted.`,
             author: getAuthor(staffMember),
             timestamp: new Date()
           }

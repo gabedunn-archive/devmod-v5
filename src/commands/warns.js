@@ -47,13 +47,13 @@ export const warnsCommand = {
 
       // Create the initial embed.
       const embed = {
-        title: `Warnings for ${getName(member)} (${member.user.tag})`,
+        title: `Warnings for ${getName(member, member.id)} (${member.user.tag})`,
         color: colour,
         author: getAuthor(member),
         fields: [],
         footer: {
           icon_url: member.user.avatarURL(),
-          text: `${getName(member)}'s (${member.user.tag}'s) warnings.`
+          text: `${getName(member, member.id)}'s (${member.user.tag}'s) warnings.`
         },
         timestamp: new Date()
       }

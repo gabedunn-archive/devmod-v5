@@ -80,11 +80,11 @@ export const warnCommand = {
             embed: {
               color: colour,
               title: `Warning #${currentWarnings.length + 1}`,
-              description: `${getName(member)} (${member.user.tag} - ${member}) has been warned for: ${reason}.`,
+              description: `${getName(member, member.id)} (${member.user.tag} - ${member}) has been warned for: ${reason}.`,
               author: getAuthor(staffMember),
               footer: {
                 icon_url: member.user.avatarURL(),
-                text: `${getName(member)}'s (${member.user.tag}'s) has been warned.`
+                text: `${getName(member, member.id)}'s (${member.user.tag}'s) has been warned.`
               },
               timestamp: new Date()
             }

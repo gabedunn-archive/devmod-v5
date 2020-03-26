@@ -21,7 +21,7 @@ export const getName = (user, id) => {
 export const getAuthor = user => {
   // Create an initial author object with the name of the user.
   const author = {
-    name: getName(user)
+    name: getName(user, user.id)
   }
 
   // If the user has a 'user' field (read: is a member), set the icon_url to the user.avatarURL(). Otherwise, set it to the avatarURL.

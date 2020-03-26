@@ -57,11 +57,11 @@ export const clearWarnsCommand = {
           embed: {
             color: blue,
             title: 'Warnings Cleared',
-            description: `${getName(member)}'s (${member.user.tag}'s) warnings have been cleared.`,
+            description: `${getName(member, member.id)}'s (${member.user.tag}'s) warnings have been cleared.`,
             author: getAuthor(staffMember),
             footer: {
               icon_url: member.user.avatarURL(),
-              text: `${getName(member)}'s (${member.user.tag}'s) warnings have been cleared.`
+              text: `${getName(member, member.id)}'s (${member.user.tag}'s) warnings have been cleared.`
             },
             timestamp: new Date()
           }
