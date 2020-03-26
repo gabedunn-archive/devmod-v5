@@ -93,7 +93,7 @@ export const banCommand = {
             embed: {
               color: red,
               title: 'Ban',
-              description: `${getName(member)} (${member.user.tag} - ${member}) has been banned.`,
+              description: `${getName(member, member.id)} (${member.user.tag} - ${member}) has been banned.`,
               author: getAuthor(staffMember),
               fields: [
                 {
@@ -103,7 +103,7 @@ export const banCommand = {
               ],
               footer: {
                 icon_url: member.user.avatarURL(),
-                text: `${getName(member)}'s (${member.user.tag}'s) messages from the past ${days === 1 ? ' day' : `${days} days`} have been deleted.`
+                text: `${getName(member, member.id)}'s (${member.user.tag}'s) messages from the past ${days === 1 ? ' day' : `${days} days`} have been deleted.`
               },
               timestamp: new Date()
             }

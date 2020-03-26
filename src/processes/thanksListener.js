@@ -29,7 +29,7 @@ export const initThanksListener = async client => {
 
             // If the thanker is in the list of thankees, send an error message.
             if (thankees.map(thankee => thankee.user.id).includes(thanker.user.id)) {
-              return await sendErrorMessage(`You Can't Thank Yourself, ${getName(thanker)}!`, 'You can see how that would be an issue, yes?', message)
+              return await sendErrorMessage(`You Can't Thank Yourself, ${getName(thanker, thanker.id)}!`, 'You can see how that would be an issue, yes?', message)
             }
 
             // For each person thanked, increment their thanks counter.

@@ -56,7 +56,7 @@ export const reputationCommand = {
         const reputation = (await getThanks(member.user.id)).length
 
         // Create the initial embed.
-        embed.title = `${repCoin ? `${repCoin} ` : ''}${getName(member)} has ${reputation} reputation.`
+        embed.title = `${repCoin ? `${repCoin} ` : ''}${getName(member, member.id)} has ${reputation} reputation.`
         embed.footer = {
           text: 'Use "thanks @user" to give someone rep!'
         }

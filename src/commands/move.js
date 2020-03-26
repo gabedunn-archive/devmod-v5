@@ -106,7 +106,7 @@ export const moveCommand = {
             author: getAuthor(memberTagged),
             footer: {
               icon_url: message.member.user.avatarURL(),
-              text: `${getName(message.member)} has moved your message${messagesToQuote.length === 1 ? '' : 's'} to the proper channel.`
+              text: `${getName(message.member, message.member.id)} has moved your message${messagesToQuote.length === 1 ? '' : 's'} to the proper channel.`
             },
             timestamp: new Date()
           }
