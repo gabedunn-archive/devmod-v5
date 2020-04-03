@@ -19,7 +19,7 @@
 const helpRoles = {
   id: 'help',
   name: 'Help Roles',
-  message: 'These are roles that you can add to yourself to say that you\'re able and willing to help in the specified area.',
+  message: 'These are **pingable roles** that you can add to yourself to say that you\'re able and willing to help in the specified area.',
   roles: {
     helper: { name: 'Helper', emoji: '🚁' },
     'help-javascript': { name: 'JavaScript Helper', emoji: '🖥' },
