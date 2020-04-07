@@ -22,6 +22,25 @@ export const tags = {
       ' have some help?"\n\n' +
       '[How do I ask a good question?](https://stackoverflow.com/help/how-to-ask)'
   },
+  ideas: {
+    title: 'Project Ideas',
+    color: blue,
+    description: [
+      'Personal Blog',
+      'IRC bot',
+      'Echo Server',
+      'Network proxy',
+      'Read CPU fan sensors',
+      'Make a Hackernews/reddit client (they have a nice JSON API)',
+      'Rendering something in a window (Animated Sprite for example)',
+      'Making a desktop app with GTK or QT',
+      'Make a JSON editor GUI',
+      'Create a pokedev with the Pokemon API',
+      'Headless CMS',
+      'Build an Interpreter',
+      'Weather App'
+    ].map(idea => '- ' + idea).join('\n')
+  },
   jobs: {
     title: 'Jobs',
     color: blue,
