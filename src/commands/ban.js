@@ -13,7 +13,7 @@ const { banMsgDelete, channels: { ban } } = require('../utils/config').default
 // Export an object with command info and the function to execute.
 export const banCommand = {
   name: 'Ban',
-  aliases: ['ban'],
+  aliases: ['ban', 'yeet'],
   category: 'moderation',
   description: 'Bans a user and removes their messages from a specified number of days previous.',
   permissions: ['BAN_MEMBERS'],
