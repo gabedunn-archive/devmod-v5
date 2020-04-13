@@ -32,6 +32,7 @@ import { unmuteCommand } from './unmute'
 import { usersCommand } from './users'
 import { warnCommand } from './warn'
 import { warnsCommand } from './warns'
+import { yeetCommand } from './yeet'
 
 // Export an array with all of the commands.
 export const commandsArray = [
@@ -61,7 +62,8 @@ export const commandsArray = [
   unmuteCommand,
   usersCommand,
   warnCommand,
-  warnsCommand
+  warnsCommand,
+  yeetCommand
 ]
 
 // Export an array with all of the commands' aliases as keys.
