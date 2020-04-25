@@ -10,6 +10,19 @@ import { getAuthor, getName } from '../utils/user'
 
 const { banMsgDelete, channels: { ban } } = require('../utils/config').default
 
+const yeetIds = [
+  'J1ABRhlfvQNwIOiAas'
+  'YnBthdanxDqhB99BGU',
+  'M9aM4NXS8q29W6Ia6S',
+  '11HkufsiNrBXK8',
+  '5PhDdJQd2yG1MvHzJ6',
+  'Izi543BvWEbAVXZLG6',
+  '4EEIsDmNJCiNcvAERef',
+  'KzoZUrq40MaazLgHsg',
+  'DvMHwFYLVHlZe',
+]
+  
+
 // Export an object with command info and the function to execute.
 export const yeetCommand = {
   name: 'Yeet',
@@ -20,9 +33,9 @@ export const yeetCommand = {
   usage: '<user> [<days> <reason>]',
   exec: async (args, message) => {
     try {
-      // If there aren't any args, send an error message stating a member wasn't specified and terminate the command.
+      // If there aren't any args, send a random yeet gif and terminate the command.
       if (args.length < 1) {
-        return await sendErrorMessage('https://giphy.com/search/yeet-'+Math.random())
+        return await message.channel.send('https://media.giphy.com/media/'+yeetIds[Math.floor(Math.random()*yeetIds.length)]+'/giphy.gif')
       }
 
       // Get the member tagged in the args.
