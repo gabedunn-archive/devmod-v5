@@ -22,7 +22,7 @@ export const yeetCommand = {
     try {
       // If there aren't any args, send an error message stating a member wasn't specified and terminate the command.
       if (args.length < 1) {
-        return await sendErrorMessage('User Not Specified', 'You didn\'t specify a user to yeet.', message)
+        return await sendErrorMessage('https://giphy.com/search/yeet-'+Math.random())
       }
 
       // Get the member tagged in the args.
