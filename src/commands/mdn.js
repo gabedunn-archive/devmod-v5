@@ -13,7 +13,7 @@ import { sendErrorMessage } from '../utils/sendErrorMessage'
 // Function to query mdn and return the result
 const queryMDN = query => new Promise((resolve, reject) => {
   https.get(
-    `https://developer.mozilla.org/api/v1/${query}`,
+    `https://developer.mozilla.org/api/v1/search/en-US?q=${query}&highlight=false`,
 
     res => {
       const chunks = []
@@ -49,7 +49,7 @@ export const mdnCommand = {
 
     try {
       // Query the MDN search API
-      const { documents } = await queryMDN(`search/en-US?q=${query}&highlight=false`)
+      const { documents } = await queryMDN(query)
       const [result] = documents
 
       try {
