@@ -10,6 +10,19 @@ import { logError } from '../utils/log'
 import { getAuthor } from '../utils/user'
 import { sendErrorMessage } from '../utils/sendErrorMessage'
 
+const emotes = [
+  '0️⃣',
+  '1️⃣',
+  '2️⃣',
+  '3️⃣',
+  '4️⃣',
+  '5️⃣',
+  '6️⃣',
+  '7️⃣',
+  '8️⃣',
+  '9️⃣'
+]
+
 // Function to query mdn and return the result
 const queryMDN = query => new Promise((resolve, reject) => {
   https.get(
@@ -73,6 +86,10 @@ export const mdnCommand = {
             author: getAuthor(message.member),
             url: `https://developer.mozilla.org/en-US/${result.slug}`
           }
+        }).then(message=>{
+          emotes.forEach(emote=>{
+            message.react(emote)
+          })
         })
       } catch (err) {
         await logError('MDN', 'Failed to send message', err, message)
