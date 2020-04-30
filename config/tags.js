@@ -12,7 +12,6 @@ export const tags = {
     description: `Contributing to reputable open-source projects is a great way to build experience in the tech industry without doing free work for clients.\n\n
 https://yourfirstpr.github.io/
 https://www.firsttimersonly.com/
-https://make.wordpress.org/cli/good-first-issues/
 `
   },
   bot: {
