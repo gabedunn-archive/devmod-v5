@@ -9,10 +9,11 @@ export const tags = {
   oss: {
     title: 'First Time Contributors',
     color: blue,
-    description: `Contributing to reputable open-source projects is a great way to build experience in the tech industry without doing free work for clients.\n\n
-https://yourfirstpr.github.io/
-https://www.firsttimersonly.com/
-`
+    description: [
+      'Contributing to reputable open-source projects is a great way to build experience in the tech industry without doing free work for clients.',
+      'https://yourfirstpr.github.io/',
+      'https://www.firsttimersonly.com/'
+    ].join('\n')
   },
   bot: {
     title: 'Bot Channel',
