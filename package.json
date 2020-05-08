@@ -27,7 +27,7 @@
     "discord.js": "^12.1.1",
     "esm": "^3.2.25",
     "husky": "^4.2.5",
-    "moment": "^2.24.0",
+    "moment": "^2.25.3",
     "nedb-async-await": "^0.1.2"
   },
   "devDependencies": {
