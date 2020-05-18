@@ -10,7 +10,7 @@ import { initCommandListener } from './processes/commandListener'
 import { initActivityChanger } from './processes/activityChanger'
 import { initReactionListener } from './processes/roleReactionListener'
 import { initTorielsAntiBotCrusade } from './processes/torielsAntiBotCrusade'
-import { initThanksListener } from './processes/thanksListener'
+// import { initThanksListener } from './processes/thanksListener'
 import { testChannelsAndRoles } from './utils/testChannelsAndRoles'
 
 const { botToken } = require('./utils/config').default
@@ -40,8 +40,8 @@ export const devmod = async () => {
     initCommandListener,
     initReactionListener,
     initActivityChanger,
-    initTorielsAntiBotCrusade,
-    initThanksListener
+    initTorielsAntiBotCrusade
+    // initThanksListener
   ]
 
   // For each process, run it asynchronously.
