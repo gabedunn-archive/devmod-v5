@@ -8,7 +8,7 @@ import { sendErrorMessage } from '../utils/sendErrorMessage'
 import { logError } from '../utils/log'
 import { getAuthor } from '../utils/user'
 
-const { approvedRoles } = require('../utils/config')['default']
+const { approvedRoles } = require('../utils/config').default
 
 // Export an object with command info and the function to execute.
 export const roleCommand = {
@@ -54,7 +54,7 @@ export const roleCommand = {
       const guild = message.guild
 
       // Grab the role from the server.
-      const guildRole = guild.roles.find(r => r.name === role)
+      const guildRole = guild.roles.cache.find(r => r.name === role)
 
       // If the role doesn't exist, send an error message and terminate the command.
       if (guildRole === undefined) {
@@ -99,7 +99,7 @@ export const roleCommand = {
         case 'rm':
           try {
             // Remove the role from the member.
-            await member.removeRole(guildRole)
+            await member.roles.remove(guildRole)
 
             try {
               // Delete the user's message.

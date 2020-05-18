@@ -8,7 +8,7 @@ import { sendErrorMessage } from '../utils/sendErrorMessage'
 import { logError } from '../utils/log'
 import { getAuthor, getName } from '../utils/user'
 
-const { channels: { warn }, roles: { muted } } = require('../utils/config')['default']
+const { channels: { warn }, roles: { muted } } = require('../utils/config').default
 
 // Export an object with command info and the function to execute.
 export const muteCommand = {
@@ -37,7 +37,7 @@ export const muteCommand = {
       const guild = message.guild
 
       // Fetch the muted role from the server.
-      const mutedRole = guild.roles.find(r => r.name === muted)
+      const mutedRole = guild.roles.cache.find(r => r.name === muted)
 
       // If the muted role doesn't exist, send an error message and terminate the command.
       if (mutedRole === undefined) {
@@ -53,7 +53,7 @@ export const muteCommand = {
 
       try {
         // Add the muted role to the member.
-        await member.addRole(mutedRole)
+        await member.roles.add(mutedRole)
       } catch (err) {
         await logError('Mute', 'Failed to add muted role', err, message)
       }
@@ -62,7 +62,7 @@ export const muteCommand = {
       const staffMember = message.member
 
       // Save the warnings channel.
-      const warnChannel = guild.channels.find(c => c.name === warn)
+      const warnChannel = guild.channels.cache.find(c => c.name === warn)
 
       try {
         // Log the mute to the warnings channel.
@@ -70,7 +70,7 @@ export const muteCommand = {
           embed: {
             color: orange,
             title: 'Mute',
-            description: `${getName(member)} (${member.user.tag} - ${member}) has been muted.`,
+            description: `${getName(member, member.id)} (${member.user.tag} - ${member}) has been muted.`,
             author: getAuthor(staffMember),
             timestamp: new Date()
           }

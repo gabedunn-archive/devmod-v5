@@ -9,6 +9,8 @@ import { getThanks, getTopThanks } from '../db'
 import { logError } from '../utils/log'
 import { getAuthor, getName } from '../utils/user'
 
+const { repCoin } = require('../utils/config').default
+
 // Export an object with command info and the function to execute.
 export const reputationCommand = {
   name: 'Reputation',
@@ -31,14 +33,15 @@ export const reputationCommand = {
         const topReputation = await getTopThanks()
 
         // Create the initial embed.
-        embed.title = `Top ${topReputation.length} Thanked Users`
+        embed.title = `${repCoin ? `${repCoin} ` : ''}Top ${topReputation.length} Thanked Users`
 
         // Save the server.
         const guild = message.guild
 
-        // Map the array of users to each be a string and join it with a new line.
+        // Map the array of users to each be a string and join it with
+        // a new line.
         embed.description = topReputation
-          .map((user, i) => `${i + 1})  **${getName(guild.members.find(m => m.id === user[0]))}** has ${user[1].length} reputation.`)
+          .map((user, i) => `${i + 1})  **${getName(guild.members.cache.find(m => m.id === user[0]), user[0])}** has ${user[1].length} reputation.`)
           .join('\n')
       } else {
         // Save the user object of the member to show reputation for.
@@ -53,9 +56,9 @@ export const reputationCommand = {
         const reputation = (await getThanks(member.user.id)).length
 
         // Create the initial embed.
-        embed.title = `${getName(member)} has ${reputation} reputation.`
+        embed.title = `${repCoin ? `${repCoin} ` : ''}${getName(member, member.id)} has ${reputation} reputation.`
         embed.footer = {
-          text: `Use "thanks @user" to give someone rep!`
+          text: 'Use "thanks @user" to give someone rep!'
         }
       }
 

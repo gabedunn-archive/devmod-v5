@@ -9,7 +9,7 @@ import { red } from './colours'
 import { capitalize } from './capitalize'
 import { sendErrorMessage } from './sendErrorMessage'
 
-const { botToken, channels: { errors } } = require('./config')['default']
+const { botToken, channels: { errors } } = require('./config').default
 
 // Given an area and a message, log a nice looking message to the console.
 export const log = (area, message) => {
@@ -46,13 +46,13 @@ const logErrorToChannel = (area, message, err) => {
     // Add a listener to run when the client is ready.
     client.on('ready', async () => {
       // Grab the guild object.
-      const guild = client.guilds.first()
+      const guild = client.guilds.cache.first()
 
       // Save the errors channel
-      const errorChannel = guild.channels.find(c => c.name === errors)
+      const errorChannel = guild.channels.cache.find(c => c.name === errors)
 
       if (errorChannel === undefined) {
-        return await sendErrorMessage('No Error Channel', 'The errors channel either isn\'t set or doesn\'t exist.')
+        return sendErrorMessage('No Error Channel', 'The errors channel either isn\'t set or doesn\'t exist.')
       }
 
       // Convert the error to an iterable object using a custom replacer function.
@@ -93,7 +93,7 @@ const errorReplacer = (key, value) => {
       ...value,
       // Explicitly pull Error's non-enumerable properties
       name: value.name,
-      message: value.message,
+      message: value.message
     }
     delete errorObject.stack
     return errorObject

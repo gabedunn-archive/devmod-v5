@@ -10,7 +10,7 @@ import { banCommand } from './ban'
 import { logError } from '../utils/log'
 import { getAuthor, getName } from '../utils/user'
 
-const { autoBan, autoBanWarns, banMsgDelete, channels: { warn } } = require('../utils/config')['default']
+const { autoBan, autoBanWarns, banMsgDelete, channels: { warn } } = require('../utils/config').default
 
 // Export an object with command info and the function to execute.
 export const warnCommand = {
@@ -74,17 +74,17 @@ export const warnCommand = {
       try {
         // Log the warn to the current channel.
         // noinspection JSUnresolvedFunction
-        await message.guild.channels
+        await message.guild.channels.cache
           .find(c => c.name === warn)
           .send({
             embed: {
               color: colour,
               title: `Warning #${currentWarnings.length + 1}`,
-              description: `${getName(member)} (${member.user.tag} - ${member}) has been warned for: ${reason}.`,
+              description: `${getName(member, member.id)} (${member.user.tag} - ${member}) has been warned for: ${reason}.`,
               author: getAuthor(staffMember),
               footer: {
-                icon_url: member.user.avatarURL,
-                text: `${getName(member)}'s (${member.user.tag}'s) has been warned.`
+                icon_url: member.user.avatarURL(),
+                text: `${getName(member, member.id)}'s (${member.user.tag}'s) has been warned.`
               },
               timestamp: new Date()
             }
@@ -104,7 +104,7 @@ export const warnCommand = {
             color: colour,
             author: getAuthor(member.client.user),
             thumbnail: {
-              url: message.guild.iconURL
+              url: message.guild.iconURL()
             },
             fields: [
               {

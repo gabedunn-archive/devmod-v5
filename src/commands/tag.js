@@ -7,7 +7,7 @@ import { sendErrorMessage } from '../utils/sendErrorMessage'
 import { logError } from '../utils/log'
 import { getAuthor } from '../utils/user'
 
-const { tags } = require('../utils/config')['default']
+const { tags } = require('../utils/config').default
 
 // Export an object with command info and the function to execute.
 export const tagCommand = {
@@ -31,7 +31,7 @@ export const tagCommand = {
       const taggedMember = message.mentions.members.first()
 
       // If the tag doesn't exist, send an error message and terminate the command.
-      if (!tags.hasOwnProperty(tag)) {
+      if (!Object.prototype.hasOwnProperty.call(tags, tag)) {
         return await sendErrorMessage('Tag Not Found', 'No tag with that name exists.', message)
       }
 

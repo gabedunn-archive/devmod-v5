@@ -6,7 +6,7 @@
 import { getSetting } from '../db'
 import { log, logError } from '../utils/log'
 
-const { approvedRoles } = require('../utils/config')['default']
+const { approvedRoles } = require('../utils/config').default
 
 // Applied an action to either add a remove a role from a user based on the action provided and the approved roles list.
 const roleAction = async ({ client, guildId, messageId, userId, emojiName }, remove = false) => {
@@ -15,19 +15,19 @@ const roleAction = async ({ client, guildId, messageId, userId, emojiName }, rem
     const reactionMessageIDs = await getSetting('reactions_message_ids')
 
     // Save some details about the reaction event to constants.
-    const guild = client.guilds.get(guildId)
+    const guild = client.guilds.cache.get(guildId)
 
     if (guild === undefined || guild === null) {
       return await logError('InfoListener', 'The guild is invalid')
     }
 
-    const member = await guild.fetchMember(userId)
+    const member = await guild.members.fetch(userId)
 
     if (member === undefined || member === null) {
       return await logError('InfoListener', 'The member is invalid')
     }
 
-    const roles = guild.roles
+    const roles = guild.roles.cache
 
     // Run a function for each message ID in the list of reaction role messages.
     for (const key of Object.keys(reactionMessageIDs)) {
@@ -47,7 +47,7 @@ const roleAction = async ({ client, guildId, messageId, userId, emojiName }, rem
                   const role = roles.find(r => r.name === roleEntry)
                   try {
                     // If remove is true, remove the role from the user. Otherwise, add the role to the user.
-                    remove ? await member.removeRole(role) : await member.addRole(role)
+                    remove ? await member.roles.remove(role) : await member.roles.add(role)
                   } catch (err) {
                     await logError('RoleListener', 'Failed to add or remove role', err)
                   }

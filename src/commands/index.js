@@ -14,6 +14,7 @@ import { helpCommand } from './help'
 import { killCommand } from './kill'
 import { lmgtfyCommand } from './lmgtfy'
 import { lockCommand } from './lock'
+import { mdnCommand } from './mdn'
 import { moveCommand } from './move'
 import { muteCommand } from './mute'
 import { pingCommand } from './ping'
@@ -31,6 +32,7 @@ import { unmuteCommand } from './unmute'
 import { usersCommand } from './users'
 import { warnCommand } from './warn'
 import { warnsCommand } from './warns'
+import { yeetCommand } from './yeet'
 
 // Export an array with all of the commands.
 export const commandsArray = [
@@ -43,6 +45,7 @@ export const commandsArray = [
   killCommand,
   lmgtfyCommand,
   lockCommand,
+  mdnCommand,
   moveCommand,
   muteCommand,
   pingCommand,
@@ -59,7 +62,8 @@ export const commandsArray = [
   unmuteCommand,
   usersCommand,
   warnCommand,
-  warnsCommand
+  warnsCommand,
+  yeetCommand
 ]
 
 // Export an array with all of the commands' aliases as keys.

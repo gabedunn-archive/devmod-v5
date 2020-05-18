@@ -10,6 +10,8 @@ import { green } from '../utils/colours'
 import { sendErrorMessage } from '../utils/sendErrorMessage'
 import { getName } from '../utils/user'
 
+const { repCoin } = require('../utils/config').default
+
 export const initThanksListener = async client => {
   try {
     // For each message run a function.
@@ -27,7 +29,7 @@ export const initThanksListener = async client => {
 
             // If the thanker is in the list of thankees, send an error message.
             if (thankees.map(thankee => thankee.user.id).includes(thanker.user.id)) {
-              return await sendErrorMessage(`You Can't Thank Yourself, ${getName(thanker)}!`, 'You can see how that would be an issue, yes?', message)
+              return await sendErrorMessage(`You Can't Thank Yourself, ${getName(thanker, thanker.id)}!`, 'You can see how that would be an issue, yes?', message)
             }
 
             // For each person thanked, increment their thanks counter.
@@ -65,12 +67,12 @@ export const initThanksListener = async client => {
               // Send a confirmation message.
               return message.channel.send({
                 embed: {
-                  title: 'Thanks received!',
+                  title: `${repCoin ? `${repCoin} ` : ''}Thanks received!`,
                   color: green,
                   description: `${thankeesString} ${thankeesArray.length === 1 ? 'has' : 'have'} been thanked by ${thanker}!`,
                   footer: {
-                    text: `Use "thanks @user" to give someone rep, and ".rep @user" to see how much they have!`
-                  },
+                    text: 'Use "thanks @user" to give someone rep, and ".rep @user" to see how much they have!'
+                  }
                 }
               })
             } catch (err) {

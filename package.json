@@ -1,6 +1,6 @@
 {
   "name": "devmod",
-  "version": "5.0.1",
+  "version": "5.1.0",
   "description": "A bot for moderating discord servers. Written by and for developers with modularity in mind.",
   "main": "src/main.js",
   "types": "module",
@@ -16,20 +16,27 @@
     "start": "node src/esm.js",
     "verify": "node src/utils/verify/esm.js"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm run lint --fix"
+    }
+  },
   "dependencies": {
-    "chalk": "^3.0.0",
-    "discord.js": "^11.5.1",
+    "chalk": "^4.0.0",
+    "discord.js": "^12.1.1",
     "esm": "^3.2.25",
+    "husky": "^4.2.5",
     "moment": "^2.24.0",
     "nedb-async-await": "^0.1.2"
   },
   "devDependencies": {
-    "eslint": "^6.7.2",
-    "eslint-config-standard": "^14.1.0",
-    "eslint-plugin-import": "^2.19.1",
-    "eslint-plugin-node": "^10.0.0",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.3"
   }
 }

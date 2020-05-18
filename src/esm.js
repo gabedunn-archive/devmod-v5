@@ -3,7 +3,7 @@
  * File to run the main bot through ESM compatibility.
  */
 
-require = require('esm')(module)
+const r = require('esm')(module)
 
 // Import the main module.
-module.exports = require('./main.js')
+module.exports = r('./main.js')

@@ -6,7 +6,7 @@
 import { getSetting } from '../db'
 import { log, logError } from '../utils/log'
 
-const { roles: { verified } } = require('../utils/config')['default']
+const { roles: { verified } } = require('../utils/config').default
 
 // Applied an action to either add a remove a role from a user based on the action provided.
 const roleAction = async ({ client, guildId, messageId, userId, emojiName }, remove = false) => {
@@ -27,7 +27,7 @@ const roleAction = async ({ client, guildId, messageId, userId, emojiName }, rem
       return await logError('InfoListener', 'The member is invalid')
     }
 
-    const guildRoles = guild.roles
+    const guildRoles = guild.roles.cache
 
     // Grab the verified role from the server.
     const role = guildRoles.find(r => r.name === verified)
@@ -40,7 +40,7 @@ const roleAction = async ({ client, guildId, messageId, userId, emojiName }, rem
           // If the emoji is the right one, continue.
           if (emojiName === '✅') {
             // Add or remove the role.
-            remove ? await member.removeRole(role) : await member.addRole(role)
+            remove ? await member.roles.remove(role) : await member.roles.add(role)
           }
         }
       }

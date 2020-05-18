@@ -6,6 +6,15 @@
 import { blue, green, orange, purple, red, yellow } from '../src/utils/colours'
 
 export const tags = {
+  oss: {
+    title: 'First Time Contributors',
+    color: blue,
+    description: [
+      'Contributing to reputable open-source projects is a great way to build experience in the tech industry without doing free work for clients.',
+      'https://yourfirstpr.github.io/',
+      'https://www.firsttimersonly.com/'
+    ].join('\n')
+  },
   bot: {
     title: 'Bot Channel',
     color: blue,
@@ -21,6 +30,25 @@ export const tags = {
       ' JS?" => "I\'m having trouble adding a class to a div using JS. Can I' +
       ' have some help?"\n\n' +
       '[How do I ask a good question?](https://stackoverflow.com/help/how-to-ask)'
+  },
+  ideas: {
+    title: 'Project Ideas',
+    color: blue,
+    description: [
+      'Personal Blog',
+      'IRC bot',
+      'Echo Server',
+      'Network proxy',
+      'Read CPU fan sensors',
+      'Make a Hackernews/reddit client (they have a nice JSON API)',
+      'Rendering something in a window (Animated Sprite for example)',
+      'Making a desktop app with GTK or QT',
+      'Make a JSON editor GUI',
+      'Create a pokedev with the Pokemon API',
+      'Headless CMS',
+      'Build an Interpreter',
+      'Weather App'
+    ].map(idea => '- ' + idea).join('\n')
   },
   jobs: {
     title: 'Jobs',
@@ -64,7 +92,7 @@ export const tags = {
     fields: [
       {
         name: 'To directly post code into Discord, type:',
-        value: '\\`\\`\\`lang\n// code\nconsole.log(\'I have no' +
+        value: '\\`\\`\\`\n// code\nconsole.log(\'I have no' +
           ' language.\')\n\\`\\`\\`'
       }, {
         name: 'For syntax highlighting replace lang with the language (js,' +
@@ -76,7 +104,11 @@ export const tags = {
       }, {
         name: 'How it will look with highlighting:',
         value: '```js\nconsole.log(\'hello this is js\')\n```'
-      }]
+      }, {
+        name: 'More Information',
+        value: 'You can find more information on code blocks from [Discord Support](https://support.discordapp.com/hc/en-us/articles/210298617-Markdown-Text-101-Chat-Formatting-Bold-Italic-Underline-)'
+      }
+    ]
   },
   pen: {
     title: 'Post Your Code',
@@ -410,19 +442,19 @@ export const tags = {
         name: '[7 Tips for Cheating at Design](https://medium.com/refactoring-ui/7-practical-tips-for-cheating-at-design-40c736799886)'
       },
       {
-        name: '[10 Design Rules for Programmers](https://thoughtspile.github.io/2018/12/17/design-crash-course/)',
+        name: '[10 Design Rules for Programmers](https://thoughtspile.github.io/2018/12/17/design-crash-course/)'
       },
       {
-        name: '[The Secret Heroes of UX Design](https://link.medium.com/XrKhnmTAsT)',
+        name: '[The Secret Heroes of UX Design](https://link.medium.com/XrKhnmTAsT)'
       },
       {
-        name: '[Color Pallete](https://refactoringui.com/previews/building-your-color-palette/)',
+        name: '[Color Pallete](https://refactoringui.com/previews/building-your-color-palette/)'
       },
       {
-        name: '[Color Usage](https://www.smashingmagazine.com/2017/09/vibrant-colors-apps-websites/)',
+        name: '[Color Usage](https://www.smashingmagazine.com/2017/09/vibrant-colors-apps-websites/)'
       },
       {
-        name: '[Using Gradients](https://www.smashingmagazine.com/2018/01/gradients-user-experience-design/)',
+        name: '[Using Gradients](https://www.smashingmagazine.com/2018/01/gradients-user-experience-design/)'
       }
     ]
   },
@@ -431,6 +463,6 @@ export const tags = {
     title: 'Research before asking',
     description: 'Search, research, and keep track of what you find. Even if you ' +
       'don\'t find a useful answer elsewhere, including links to related questions ' +
-      'that haven\'t helped can help others better understand your question. '
+      'that haven\'t helped can help others better understand your question.'
   }
 }

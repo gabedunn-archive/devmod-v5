@@ -9,7 +9,7 @@ import { capitalize } from '../utils/capitalize'
 import { logError } from '../utils/log'
 import { getAuthor } from '../utils/user'
 
-const { msgDeleteTime, prefix } = require('../utils/config')['default']
+const { msgDeleteTime, prefix } = require('../utils/config').default
 
 // Export an object with command info and the function to execute.
 export const helpCommand = {
@@ -40,7 +40,7 @@ export const helpCommand = {
           // If the user has the permissions to run the command, add it to the array.
           if (await message.member.hasPermission(command.permissions)) {
             // If the category exists, push the field. Otherwise, initialize the category with the field as it's first element.
-            if (categories.hasOwnProperty(command.category)) {
+            if (Object.prototype.hasOwnProperty.call(categories, command.category)) {
               categories[command.category].push(field)
             } else {
               categories[command.category] = [field]
@@ -94,7 +94,8 @@ export const helpCommand = {
             setTimeout(async () => {
               try {
                 // Delete the message.
-                sent.delete(1)
+                // BUG: Not deleting
+                sent.delete()
               } catch (err) {
                 await logError('Tags', 'Failed to delete message', err, message)
               }

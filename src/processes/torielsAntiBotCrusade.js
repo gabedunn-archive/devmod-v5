@@ -7,7 +7,7 @@
 import { orange } from '../utils/colours'
 import { log, logError } from '../utils/log'
 
-const { channels: { crusade } } = require('../utils/config')['default']
+const { channels: { crusade } } = require('../utils/config').default
 
 export const initTorielsAntiBotCrusade = async client => {
   try {
@@ -31,7 +31,7 @@ export const initTorielsAntiBotCrusade = async client => {
                   color: orange,
                   author: {
                     name: `${client.user.username}'s (${client.user.tag})`,
-                    icon_url: client.user.avatarURL
+                    icon_url: client.user.avatarURL()
                   },
                   fields: [{
                     name: `**Deleted message from ${message.author.username}#${message.author.discriminator}** *(ID ${message.author.id})*`,

@@ -8,7 +8,7 @@ import { green } from '../utils/colours'
 import { logError } from '../utils/log'
 import { getAuthor, getName } from '../utils/user'
 
-const { channels: { ban } } = require('../utils/config')['default']
+const { channels: { ban } } = require('../utils/config').default
 
 // Export an object with command info and the function to execute.
 export const unbanCommand = {
@@ -49,7 +49,7 @@ export const unbanCommand = {
       const reason = memberToUnban.reason
 
       // Save the ban channel.
-      const channel = guild.channels.find(c => c.name === ban)
+      const channel = guild.channels.cache.find(c => c.name === ban)
 
       try {
         // Log the unban to the current channel.
@@ -58,11 +58,11 @@ export const unbanCommand = {
           embed: {
             color: green,
             title: 'Unban',
-            description: `${getName(memberToUnban)} has been unbanned.\nThey were previously banned for reason: ${reason}`,
+            description: `${getName(memberToUnban, memberToUnban.id)} has been unbanned.\nThey were previously banned for reason: ${reason}`,
             author: getAuthor(message.member),
             footer: {
-              icon_url: memberToUnban.user.avatarURL,
-              text: `${getName(memberToUnban)} has been unbanned.`
+              icon_url: memberToUnban.user.avatarURL(),
+              text: `${getName(memberToUnban, memberToUnban.id)} has been unbanned.`
             },
             timestamp: new Date()
           }

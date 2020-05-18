@@ -1,4 +1,6 @@
 # devmod
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fredxtech%2Fdevmod.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fredxtech%2Fdevmod?ref=badge_shield)
+
 > v5.1.0
 
 > A bot for moderating discord servers. Written by and for developers with modularity in mind.
@@ -55,6 +57,7 @@ Option | Default | Description
 `autoBanWarns` | `3` | Amount of warnings to warrant an auto-ban if enabled.
 `banMsgDelete` | `0` | Number of days of messages to delete when user is banned.
 `thanks` | `['thank', 'kudos']` | List of triggers for thanking users.
+`repCoin` | `undefined` | The emoji to prefix the thanks received message. `<:name:id>`.
 `channels.warn` | `'warnings'` | Channel to forward all warning confirmation messages.
 `channels.bans` | `'bans'` | Channel to forward all ban confirmation messages.
 `channels.reports` | `'reports'` | Channel to forward all user report messages.
@@ -94,3 +97,7 @@ The usage of this bot is described and documented on the [usage page](docs/usage
 
 ## Author
 **devmod** © [RedXTech](https://github.com/redxtech), Released under the [MIT](./LICENSE.md) License.
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fredxtech%2Fdevmod.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fredxtech%2Fdevmod?ref=badge_large)

@@ -15,6 +15,7 @@ export default {
   autoBanWarns: 3, // Amount of warnings to warrant an auto-ban if enabled.
   banMsgDelete: 0, // Number of days of messages to delete when user is banned.
   thanks: ['thank', 'kudos'], // List of triggers for thanking users.
+  repCoin: undefined, // The emoji to prefix the thanks received message with.
   channels: {
     warn: 'warnings', // Channel to forward all warning confirmation messages.
     ban: 'bans', // Channel to forward all ban confirmation messages.
@@ -51,5 +52,5 @@ export default {
     'Promoting VUE!'
   ], // List of activities for the bot to show as a status.
   tags: [], // List of tags for the .tag command. Each one is a discord embed object. Can be imported from a different file.
-  approvedRoles: [], // List of lists of roles the reaction roles channel. Can be imported from a different file.
+  approvedRoles: [] // List of lists of roles the reaction roles channel. Can be imported from a different file.
 }

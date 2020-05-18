@@ -45,7 +45,7 @@ export const moveCommand = {
       }
 
       // Fetch the last 20 of messages form the current channel.
-      const messages = await message.channel.fetchMessages({ limit: 20 })
+      const messages = await message.channel.messages.fetch({ limit: 20 })
 
       // Filter through the grabbed IDs for message by the tagged used and grab the most recent.
       const recentMessage = messages.filter(m => m.member.user.id === memberTagged.user.id).first()
@@ -56,7 +56,7 @@ export const moveCommand = {
       }
 
       // Select the first 10 messages before the most recent message.
-      const messagesBefore = await message.channel.fetchMessages({
+      const messagesBefore = await message.channel.messages.fetch({
         before: recentMessage.id,
         limit: 10
       })
@@ -75,14 +75,15 @@ export const moveCommand = {
       }
 
       // Fetch all messages again.
-      const messagesToDelete = await message.channel.fetchMessages({
+      const messagesToDelete = await message.channel.messages.fetch({
         before: recentMessage.id,
         limit: messagesToQuote.length - 1
       })
 
       try {
         // Delete all of the users quoted messages.
-        await messagesToDelete.deleteAll()
+        // BUG: Does not work
+        await messagesToDelete.clear()
       } catch (err) {
         await logError('Move', 'Failed to delete quoted messages', err, message)
       }
@@ -104,8 +105,8 @@ export const moveCommand = {
             description: messagesToQuote.map(m => m.content).reverse().join('\n'),
             author: getAuthor(memberTagged),
             footer: {
-              icon_url: message.member.user.avatarURL,
-              text: `${getName(message.member)} has moved your message${messagesToQuote.length === 1 ? '' : 's'} to the proper channel.`
+              icon_url: message.member.user.avatarURL(),
+              text: `${getName(message.member, message.member.id)} has moved your message${messagesToQuote.length === 1 ? '' : 's'} to the proper channel.`
             },
             timestamp: new Date()
           }

@@ -1,6 +1,6 @@
 /*
 * Gabe Dunn 2018
-* Command that bans a member.
+* Command that yeets a member.
 */
 
 import { sendErrorMessage } from '../utils/sendErrorMessage'
@@ -11,18 +11,18 @@ import { getAuthor, getName } from '../utils/user'
 const { banMsgDelete, channels: { ban } } = require('../utils/config').default
 
 // Export an object with command info and the function to execute.
-export const banCommand = {
-  name: 'Ban',
-  aliases: ['ban'],
+export const yeetCommand = {
+  name: 'Yeet',
+  aliases: ['yeet', 'Yeet', 'yeeted'],
   category: 'moderation',
-  description: 'Bans a user and removes their messages from a specified number of days previous.',
+  description: 'Yeets a user and removes their messages from a specified number of days previous.',
   permissions: ['BAN_MEMBERS'],
   usage: '<user> [<days> <reason>]',
   exec: async (args, message) => {
     try {
       // If there aren't any args, send an error message stating a member wasn't specified and terminate the command.
       if (args.length < 1) {
-        return await sendErrorMessage('User Not Specified', 'You didn\'t specify a user to ban.', message)
+        return await sendErrorMessage('User Not Specified', 'You didn\'t specify a user to yeet.', message)
       }
 
       // Get the member tagged in the args.
@@ -36,8 +36,8 @@ export const banCommand = {
       // If the specified user is able to kick members (read: moderator) terminate the command.
       if (member.hasPermission('KICK_MEMBERS')) {
         return await sendErrorMessage(
-          'Can\'t Ban Member',
-          `${member} cannot be banned.`,
+          'Can\'t Yeet Member',
+          `${member} cannot be yeeted.`,
           message
         )
       }
@@ -55,14 +55,14 @@ export const banCommand = {
       }
 
       // Save the args remaining after the first. If there isn't more than one arg, default to 'banned by devmod.'.
-      const reason = args.length > 1 ? args.slice(1).join(' ') : 'banned by devmod.'
+      const reason = args.length > 1 ? args.slice(1).join(' ') : 'yeeted by devmod.'
 
       try {
         // Send the user a DM letting them know they've been banned.
         // noinspection JSUnresolvedFunction
         await member.user.send({
           embed: {
-            title: `You have been banned from ${message.guild.name}.`,
+            title: `You have been yeeted from ${message.guild.name}.`,
             color: red,
             thumbnail: {
               url: message.guild.iconURL()
@@ -79,7 +79,7 @@ export const banCommand = {
           }
         })
       } catch (err) {
-        await logError('Ban', 'Failed to send member message', err, message)
+        await logError('Yeet', 'Failed to send member message', err, message)
       }
 
       // Save some info about the staff member.
@@ -92,8 +92,8 @@ export const banCommand = {
           .send({
             embed: {
               color: red,
-              title: 'Ban',
-              description: `${getName(member, member.id)} (${member.user.tag} - ${member}) has been banned.`,
+              title: 'Yeet',
+              description: `${getName(member, member.id)} (${member.user.tag} - ${member}) has been yeeted.`,
               author: getAuthor(staffMember),
               fields: [
                 {
@@ -109,14 +109,14 @@ export const banCommand = {
             }
           })
       } catch (err) {
-        await logError('Ban', 'Failed to log ban to channel', err, message)
+        await logError('Yeet', 'Failed to log yeet to channel', err, message)
       }
 
       try {
         // Ban the member.
         await member.ban({ days, reason })
       } catch (err) {
-        await logError('Ban', 'Failed to ban the member', err, message)
+        await logError('Yeet', 'Failed to yeet the member', err, message)
       }
 
       try {
@@ -124,11 +124,11 @@ export const banCommand = {
         await message.delete()
       } catch (err) {
         if (err.message !== 'Unknown Message') {
-          await logError('Ban', 'Failed to delete message', err, message)
+          await logError('Yeet', 'Failed to delete message', err, message)
         }
       }
     } catch (err) {
-      await logError('Ban', 'Failed to run command', err, message)
+      await logError('Yeet', 'Failed to run command', err, message)
     }
   }
 }

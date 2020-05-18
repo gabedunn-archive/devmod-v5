@@ -8,7 +8,7 @@ import { sendErrorMessage } from '../utils/sendErrorMessage'
 import { logError } from '../utils/log'
 import { getAuthor } from '../utils/user'
 
-const { channels: { reports } } = require('../utils/config')['default']
+const { channels: { reports } } = require('../utils/config').default
 
 // Export an object with command info and the function to execute.
 export const reportCommand = {
@@ -61,7 +61,7 @@ export const reportCommand = {
       const guild = message.guild
 
       // Save the reports channel.
-      const reportsChannel = guild.channels.find(c => c.name === reports)
+      const reportsChannel = guild.channels.cache.find(c => c.name === reports)
 
       try {
         // Remove the user's message.
@@ -92,7 +92,7 @@ export const reportCommand = {
             ],
             author: getAuthor(message.member),
             footer: {
-              icon_url: memberReported.user.avatarURL,
+              icon_url: memberReported.user.avatarURL(),
               text: `${memberReported.user.tag} reported from #${message.channel.name} by ${message.member.user.tag}.`
             },
             timestamp: new Date()

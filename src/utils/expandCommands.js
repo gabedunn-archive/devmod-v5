@@ -4,7 +4,9 @@
  */
 
 // Given an array of commands, returns an object with all aliases as keys.
-import { logError } from './log'
+import {
+  logError
+} from './log'
 
 export const expandCommands = commands => {
   try {
@@ -15,7 +17,7 @@ export const expandCommands = commands => {
       // For each alias in the current command, add a key to the expanded object.
       for (const alias of current.aliases) {
         // If the alias isn't already used, add it to the object.
-        if (!newCommands.hasOwnProperty(alias)) {
+        if (!Object.prototype.hasOwnProperty.call(newCommands, alias)) {
           newCommands[alias] = current
         }
       }
