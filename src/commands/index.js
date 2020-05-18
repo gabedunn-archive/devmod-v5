@@ -20,7 +20,7 @@ import { muteCommand } from './mute'
 import { pingCommand } from './ping'
 import { pruneCommand } from './prune'
 import { reportCommand } from './report'
-import { reputationCommand } from './reputation'
+// import { reputationCommand } from './reputation'
 import { roleCommand } from './role'
 import { rolesCommand } from './roles'
 import { statsCommand } from './stats'
@@ -51,7 +51,7 @@ export const commandsArray = [
   pingCommand,
   pruneCommand,
   reportCommand,
-  reputationCommand,
+  // reputationCommand,
   roleCommand,
   rolesCommand,
   statsCommand,
