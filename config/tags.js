@@ -6,6 +6,12 @@
 import { blue, green, orange, purple, red, yellow } from '../src/utils/colours'
 
 export const tags = {
+  lighthouse: {
+    title: 'Website Performance and Accessibility Test',
+    color: red,
+    description: 'A Lighthouse Audit is an industry standard performance and accessibility test developed by Google.' +
+      'https://web.dev/measure'
+  },
   oss: {
     title: 'First Time Contributors',
     color: blue,
