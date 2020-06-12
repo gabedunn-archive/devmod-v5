@@ -23,7 +23,7 @@
     }
   },
   "dependencies": {
-    "chalk": "^4.0.0",
+    "chalk": "^4.1.0",
     "discord.js": "^12.2.0",
     "esm": "^3.2.25",
     "husky": "^4.2.5",
